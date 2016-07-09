@@ -12,7 +12,7 @@ public class CadastroController {
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("teste/cadastro");
-		model.addObject("titulo", "Cadastro de Clientes!");
+		model.addObject("titulo", "Cadastro de Clientes 2");
 		return model;
 	}
 
