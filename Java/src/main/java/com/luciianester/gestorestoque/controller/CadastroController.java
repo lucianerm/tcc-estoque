@@ -22,14 +22,21 @@ public class CadastroController {
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(Model model) {
 		
-		Usuario usuario = new Usuario();
+		try {
+			
+			Usuario usuario = new Usuario();
+			
+			List<Usuario> listPersons = dao.getSession().createCriteria(Usuario.class).list();
+			
+			model.addAttribute("person", usuario);
+			model.addAttribute("listPersons", listPersons);
+			
+			return "teste/cadastro";
+			
+		} catch (Exception e) {
+			throw e;
+		}
 		
-		List<Usuario> listPersons = dao.getSession().createCriteria(Usuario.class).list();
-		
-		model.addAttribute("person", usuario);
-		model.addAttribute("listPersons", listPersons);
-		
-		return "teste/cadastro";
 		
 	}
 	
