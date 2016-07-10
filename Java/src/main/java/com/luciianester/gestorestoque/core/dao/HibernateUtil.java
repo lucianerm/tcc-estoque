@@ -1,4 +1,4 @@
-package com.luciianester.gestorestoque.dao;
+package com.luciianester.gestorestoque.core.dao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

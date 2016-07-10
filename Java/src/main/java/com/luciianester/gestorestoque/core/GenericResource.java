@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.criterion.Restrictions;
 
-import com.luciianester.gestorestoque.dao.DAO;
+import com.luciianester.gestorestoque.core.dao.DAO;
 
 public class GenericResource<T> {
 

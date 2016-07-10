@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public abstract class GenericController<T> {
 
@@ -31,7 +32,13 @@ public abstract class GenericController<T> {
 	}
 	
 	@RequestMapping("/cadastro")
-	public String cadastro(Model model) throws Exception {
+	public String cadastro(@RequestParam(required=false) String tipo, Model model) throws Exception {
+		
+		if (tipo!=null) {
+			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
+				new ModelUtils(model).setMensagemSalvouSucesso();;
+			}
+		}
 		
 		T objeto = this.getRes().newInstance();
 		model.addAttribute("objeto", objeto);
@@ -41,20 +48,49 @@ public abstract class GenericController<T> {
 	}
 	
 	@RequestMapping("/gravar")
-	public String gravar(@ModelAttribute("objeto") T objeto) throws Exception {
+	public String gravar(@ModelAttribute("objeto") T objeto, Model model) throws Exception {
 		
-		if (this.ehNovo(objeto)) {
-			this.getRes().salvar(objeto);
-		} else {
-			this.getRes().alterar(objeto);
+		try {
+		
+			Long id = this.getId(objeto);
+			
+			if (this.ehNovo(objeto)) {
+				if (this.validacaoGravar(objeto, model)) {
+					this.getRes().salvar(objeto);
+				} else {
+					return this.caminho+"/cadastro";
+				}
+			} else {
+				if (this.validacaoAlterar(objeto, model)) {
+					this.getRes().alterar(objeto);
+				} else {
+					return this.caminho+"/cadastro";
+				}
+			}
+			
+			return "redirect:/"+this.caminho+"/"+this.getId(objeto)+"?tipo="+MensagemTipo.SALVOU_SUCESSO;
+			
+		} catch (Exception e) {
+			
+			model.addAttribute("tipo", MensagemTipo.ERRO);
+			model.addAttribute("mensagem", e.getMessage());
+			
+			model.addAttribute("objeto", objeto);
+			
+			return this.caminho+"/cadastro";
+			
 		}
-		
-		return "redirect:/"+this.caminho+"/cadastro";
-		
+			
 	}
 	
 	@RequestMapping("/{id}")
-	public String editar(@PathVariable("id") Long id, Model model) throws Exception {
+	public String editar(@RequestParam(required=false) String tipo, @PathVariable("id") Long id, Model model) throws Exception {
+		
+		if (tipo!=null) {
+			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
+				new ModelUtils(model).setMensagemSalvouSucesso();;
+			}
+		}
 		
 		T objeto = this.getRes().listById(id);
 		model.addAttribute("objeto", objeto);
@@ -64,14 +100,33 @@ public abstract class GenericController<T> {
 	}
 	
 	@RequestMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Long id) throws Exception {
+	public String excluir(@PathVariable("id") Long id, Model model) throws Exception {
 		
-		this.getRes().deletar(id);
-		
-		return "redirect:/"+this.caminho+"/pesquisa";
+		if (this.validacaoExcluir(id, model)) {
+			this.getRes().deletar(id);
+			return "redirect:/"+this.caminho+"/pesquisa";
+		} else {
+			return this.caminho+"/pesquisa";
+		}
 		
 	}
 	
-	public abstract boolean ehNovo(T objeto);
+	public abstract Long getId(T objeto);
+	
+	private boolean ehNovo(T objeto) {
+		
+		Long id = this.getId(objeto);
+		
+		if (id==null || id.equals(0)) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public abstract boolean validacaoGravar(T objeto, Model model);
+	public abstract boolean validacaoAlterar(T objeto, Model model);
+	public abstract boolean validacaoExcluir(Long id, Model model);
 	
 }

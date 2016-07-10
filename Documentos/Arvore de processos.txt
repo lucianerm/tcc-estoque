@@ -1,0 +1,30 @@
+
+	
+- Cadastro Usuários
+	- Perfil
+		- Privilégios
+
+- Cadastro Cliente
+	- Endereco
+	- Contato
+	
+- Cadastro Fornecedor
+	- Endereco
+	- Contato
+	
+- Cadastro Produtos
+	- Unidade De Medida
+	- Marca
+	- Categoria
+
+- Movimentação Entrada
+	- Cabeçalho 
+		
+	- Corpo 
+		
+- Movimentação Saida
+	- Cabeçalho 
+		
+	- Corpo 
+
+- Estoque

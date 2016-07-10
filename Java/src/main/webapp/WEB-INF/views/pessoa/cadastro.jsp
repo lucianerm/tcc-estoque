@@ -3,7 +3,11 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page session="false" %>
-<%Pessoa pessoa = (Pessoa) request.getAttribute("objeto");%>
+<%
+
+	Pessoa pessoa = (Pessoa) request.getAttribute("objeto");
+	
+%>
 <html>
 <head>
 	<title>Cadastro Pessoa </title>
@@ -17,8 +21,15 @@
 	  Cadastro Pessoa
 </h1>
 
-<form:form action="gravar" commandName="objeto">
+<c:if test="${!empty mensagem}">
 
+	<label>${mensagem }</label>
+	
+</c:if>
+
+<form:form action="gravar" commandName="objeto">
+	
+	<br/>
 	<label>Código:</label>
 	<br/>
 	<form:input path="pessoaId" readonly="true" size="8"  disabled="true" />
@@ -29,7 +40,9 @@
 	<form:input path="nome" />
 	<br/>
 	<br/>
+	
 	<input type="submit" value="Salvar" />
+	<td><a href="<c:url value='/pessoa/${objeto.pessoaId}'/>" >Cancelar</a></td>
 
 </form:form>
 

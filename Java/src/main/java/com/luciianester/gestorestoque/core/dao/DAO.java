@@ -1,4 +1,4 @@
-package com.luciianester.gestorestoque.dao;
+package com.luciianester.gestorestoque.core.dao;
 
 //import static br.com.helloworld.hibernate.HibernateUtil.getSessionFactory;
 
