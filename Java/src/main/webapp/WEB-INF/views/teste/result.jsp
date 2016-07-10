@@ -1,1 +1,1 @@
-<label id="result">Resultado</label>
+<label id="result">Resultado ${parametro}</label>
