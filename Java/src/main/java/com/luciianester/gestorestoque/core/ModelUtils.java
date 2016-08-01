@@ -24,7 +24,7 @@ public class ModelUtils {
 	}
 	
 	public void setMensagemSalvouSucesso() {
-		this.setMensagem(MensagemTipo.SALVOU_SUCESSO, "Resgistro gravado com sucesso");
+		this.setMensagem(MensagemTipo.SALVOU_SUCESSO, "Resgistro gravado com sucesso.");
 	}
 	
 }

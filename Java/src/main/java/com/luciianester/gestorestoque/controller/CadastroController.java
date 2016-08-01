@@ -26,7 +26,7 @@ public class CadastroController {
 			
 			Usuario usuario = new Usuario();
 			
-			List<Usuario> listPersons = dao.getSession().createCriteria(Usuario.class).list();
+			List<Usuario> listPersons = dao.getSessao().createCriteria(Usuario.class).list();
 			
 			model.addAttribute("person", usuario);
 			model.addAttribute("listPersons", listPersons);
@@ -45,10 +45,10 @@ public class CadastroController {
 		
 		if (p.getId()==null || p.getId().equals(0)) {
 			//new person, add it
-			dao.save(p);
+			dao.gravar(p);
 		}else{
 			//existing person, call update
-			dao.update(p);
+			dao.alterar(p);
 		}
 		
 		return "redirect:/cadastro/index";
@@ -59,11 +59,11 @@ public class CadastroController {
 	public String removePerson(@PathVariable("id") Long id){
 		
         
-		Usuario usuario = (Usuario) dao.getSession().createCriteria(Usuario.class)
+		Usuario usuario = (Usuario) dao.getSessao().createCriteria(Usuario.class)
 				.add(Restrictions.idEq(id))
 				.uniqueResult();
 		
-		dao.delete(usuario);
+		dao.remover(usuario);
 		
         return "redirect:/cadastro/index";
     }
@@ -71,11 +71,11 @@ public class CadastroController {
 	@RequestMapping("/edit/{id}")
     public String editPerson(@PathVariable("id") Long id, Model model){
 
-		Usuario usuario = (Usuario) dao.getSession().createCriteria(Usuario.class)
+		Usuario usuario = (Usuario) dao.getSessao().createCriteria(Usuario.class)
 				.add(Restrictions.idEq(id))
 				.uniqueResult();
 		
-		List<Usuario> listPersons = dao.getSession().createCriteria(Usuario.class).list();
+		List<Usuario> listPersons = dao.getSessao().createCriteria(Usuario.class).list();
 		
 		model.addAttribute("person", usuario);
 		model.addAttribute("listPersons", listPersons);

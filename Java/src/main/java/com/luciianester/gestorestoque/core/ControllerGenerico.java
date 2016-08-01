@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-public abstract class GenericController<T> {
+public abstract class ControllerGenerico<T> {
 
 	private String caminho;
-	private GenericResource<T> resource;
+	private ResourceGenerico<T> resource;
 
-	public GenericResource<T> getRes() {
+	public ResourceGenerico<T> getRes() {
 		return resource;
 	}
 	
-	public GenericController(String caminho, GenericResource<T> resource) {
+	public ControllerGenerico(String caminho, ResourceGenerico<T> resource) {
 		this.caminho = caminho;
 		this.resource = resource;
 	}
@@ -25,7 +25,7 @@ public abstract class GenericController<T> {
 	@RequestMapping("/pesquisa")
 	public String pesquisar(Model model) {
 		
-		List<T> lista = this.getRes().listAll();
+		List<T> lista = this.getRes().listarTodos();
 		model.addAttribute("lista", lista);
 		
 		return this.caminho+"/pesquisa";
@@ -36,7 +36,7 @@ public abstract class GenericController<T> {
 		
 		if (tipo!=null) {
 			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
-				new ModelUtils(model).setMensagemSalvouSucesso();;
+				new ModelUtils(model).setMensagemSalvouSucesso();
 			}
 		}
 		
@@ -52,11 +52,9 @@ public abstract class GenericController<T> {
 		
 		try {
 		
-			Long id = this.getId(objeto);
-			
 			if (this.ehNovo(objeto)) {
 				if (this.validacaoGravar(objeto, model)) {
-					this.getRes().salvar(objeto);
+					this.getRes().gravar(objeto);
 				} else {
 					return this.caminho+"/cadastro";
 				}
@@ -88,11 +86,11 @@ public abstract class GenericController<T> {
 		
 		if (tipo!=null) {
 			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
-				new ModelUtils(model).setMensagemSalvouSucesso();;
+				new ModelUtils(model).setMensagemSalvouSucesso();
 			}
 		}
 		
-		T objeto = this.getRes().listById(id);
+		T objeto = this.getRes().listarPeloId(id);
 		model.addAttribute("objeto", objeto);
 		
 		return this.caminho+"/cadastro";
@@ -103,7 +101,7 @@ public abstract class GenericController<T> {
 	public String excluir(@PathVariable("id") Long id, Model model) throws Exception {
 		
 		if (this.validacaoExcluir(id, model)) {
-			this.getRes().deletar(id);
+			this.getRes().remover(id);
 			return "redirect:/"+this.caminho+"/pesquisa";
 		} else {
 			return this.caminho+"/pesquisa";

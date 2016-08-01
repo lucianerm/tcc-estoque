@@ -5,6 +5,12 @@
 <html>
 <head>
 	<title>Pessoa</title>
+	<style type="text/css">
+		.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
+		.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
+		.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
+		.tg .tg-4eph{background-color:#f9f9f9}
+	</style>
 	
 </head>
 <body>
@@ -18,14 +24,14 @@
 	<table class="tg">
 	<tr>
 		<th width="80">Código</th>
-		<th width="120">Nome</th>
+		<th width="200">Nome</th>
+		<th width="80">Ações</th>
 	</tr>
 	<c:forEach items="${lista}" var="objeto">
 		<tr>
 			<td>${objeto.pessoaId}</td>
 			<td>${objeto.nome}</td>
-			<td><a href="<c:url value='/pessoa/${objeto.pessoaId}' />" >Edit</a></td>
-			<td><a href="<c:url value='/pessoa/excluir/${objeto.pessoaId}' />" >Delete</a></td>
+			<td><a href="<c:url value='/pessoa/${objeto.pessoaId}' />" >Editar</a> <a href="<c:url value='/pessoa/excluir/${objeto.pessoaId}' />" >Excluir</a></td>
 		</tr>
 	</c:forEach>
 	</table>

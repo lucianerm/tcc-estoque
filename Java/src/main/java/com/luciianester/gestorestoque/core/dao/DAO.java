@@ -1,76 +1,61 @@
 package com.luciianester.gestorestoque.core.dao;
 
-//import static br.com.helloworld.hibernate.HibernateUtil.getSessionFactory;
-
-import java.util.List;
-
 import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DAO<T> {
 
-	private Session session;
+	private Session sessao;
 
 	public DAO() {
 	}
 
-	public T save(T entity) {
+	public T gravar(T entity) {
 		try {
-			getSession().beginTransaction();
-			getSession().save(entity);
-			getSession().getTransaction().commit();
-			getSession().close();
+			getSessao().beginTransaction();
+			getSessao().save(entity);
+			getSessao().getTransaction().commit();
+			getSessao().close();
 			return entity;
 		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			getSession().close();
+			getSessao().getTransaction().rollback();
+			getSessao().close();
 			return null;
 		}
 	}
 
-	public T update(T entity) {
+	public T alterar(T entity) {
 		try {
-			getSession().beginTransaction();
-			getSession().merge(entity);
-			getSession().getTransaction().commit();
-			getSession().close();
+			getSessao().beginTransaction();
+			getSessao().merge(entity);
+			getSessao().getTransaction().commit();
+			getSessao().close();
 			return entity;
 		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			getSession().close();
+			getSessao().getTransaction().rollback();
+			getSessao().close();
 			return null;
 		}
 	}
 
-	public void delete(T entity) {
+	public void remover(T entity) {
 		try {
-			getSession().beginTransaction();
-			getSession().delete(entity);
-			getSession().getTransaction().commit();
+			getSessao().beginTransaction();
+			getSessao().delete(entity);
+			getSessao().getTransaction().commit();
 		} catch (Exception e) {
-			getSession().getTransaction().rollback();
+			getSessao().getTransaction().rollback();
 		} finally {
-			getSession().close();
+			getSessao().close();
 		}
 	}
-
-	@SuppressWarnings("unchecked")
-	public T searchModel(DetachedCriteria query) {
-		T model = (T) query.getExecutableCriteria(getSession()).uniqueResult();
-		return model;
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<T> searchModels(DetachedCriteria query) {
-		List<T> models = query.getExecutableCriteria(getSession()).list();
-		return models;
-	}
-
-	public Session getSession() {
-		if (session == null || !session.isOpen()) session = HibernateUtil.getSessionFactory().openSession();
-		return session;
+	
+	public Session getSessao() {
+		if (sessao == null || !sessao.isOpen()) {
+			sessao = HibernateUtil.getSessionFactory().openSession();
+		}
+		return sessao;
 	}
 
 }

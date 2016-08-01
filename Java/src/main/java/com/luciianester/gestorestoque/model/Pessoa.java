@@ -14,7 +14,7 @@ public class Pessoa {
 	@Id
 	private Long pessoaId;
 	
-	private String nome;
+	private String nome = "";
 
 	public Long getPessoaId() {
 		return pessoaId;
