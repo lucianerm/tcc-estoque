@@ -24,6 +24,7 @@
 		 
 		<mapping class="com.luciianester.gestorestoque.model.Usuario" />
 		<mapping class="com.luciianester.gestorestoque.model.Pessoa" />
+		<mapping class="com.luciianester.gestorestoque.model.Produto" />
 		
 	</session-factory>
 </hibernate-configuration>

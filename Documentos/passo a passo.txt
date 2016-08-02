@@ -1,0 +1,35 @@
+Primeiro:
+
+SERVIDOR
+
+	1 - Criar Classe da Entidade de banco (Ex.: Pessoa.java) no caminho "com/luciianester/gestorestoque/model"
+		Atentar para as sequence
+
+	2 - Adicionar Classe no mapeamento hibernate.cfg.xml
+		ex.: <mapping class="com.luciianester.gestorestoque.model.Pessoa" />
+		
+	3 - Criar o Controller da classe no caminho "com/luciianester/gestorestoque/controller"
+		Ex.: PessoaController.java
+		
+		3.1 - Atentar para o caminho das tags @Controller e @RequestMapping("/pessoa")
+		
+		3.2 - No contrutor, informar o caminho padrão (ex.: "pessoa") e o Resource (ex.: new ResourceGenerico<Pessoa>(Pessoa.class))
+		
+		3.3 - Reescrever a função getId para buscar o campo que é a Chave Primaria da entidade
+		
+		3.4 = Reescrever as funções de valdiação do CRUD:
+			public abstract boolean validacaoGravar(T objeto, Model model);
+			public abstract boolean validacaoAlterar(T objeto, Model model);
+			public abstract boolean validacaoExcluir(Long id, Model model);
+			Caso não ira fazer nenhum validação retornar true (ex.: validacaoExcluir do PessoaController)
+		
+VISUAL
+
+	1 - Copiar o conteudo da pasta "src\main\webapp\WEB-INF\views\pessoa" para a pasta da tela a ser criada (ex.: "src\main\webapp\WEB-INF\views\produto")
+	
+	2 - Alterar arquivos com a referencia a nova tela
+	
+		2.1 - pesquisa.jsp - Alterar titulo (<h1>), alterar tabela com os campos e alterar caminho das hrefs
+		
+		
+URL: http://localhost:8080/GestorEstoque/pessoa/pesquisa
