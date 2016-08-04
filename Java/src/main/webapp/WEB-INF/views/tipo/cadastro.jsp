@@ -1,24 +1,22 @@
-<%@page import="com.luciianester.gestorestoque.model.Pessoa"%>
+<%@page import="com.luciianester.gestorestoque.model.Tipo"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page session="false" %>
 <%
 
-	Pessoa pessoa = (Pessoa) request.getAttribute("objeto");
+Tipo tipo = (Tipo) request.getAttribute("objeto");
 	
 %>
 <html>
 <head>
-	<title>Cadastro Pessoa </title>
-
-	
+	<title>Cadastro da Tipo </title>
 	
 </head>
 <body>
 <div><a href="pesquisa">Voltar</a></div>
 <h1>
-	  Cadastro Pessoa
+	  Cadastro Tipo
 </h1>
 
 <c:if test="${!empty mensagem}">
@@ -27,27 +25,31 @@
 	
 </c:if>
 
+
 <form:form action="gravar" commandName="objeto">
 	
 	<br/>
 	<label>Código:</label>
 	<br/>
-	<form:input path="pessoaId" readonly="true" size="8"  disabled="true" />
-	<form:hidden path="pessoaId" />
+	<form:input path="tipoId" readonly="true" size="8"  disabled="true" />
+	<form:hidden path="tipoId" />
 	<br/>
-	<label>Nome:</label>
+	<label>Tipo:</label>
 	<br/>
-	<form:input path="nome" />
+	<form:input path="tipo" />
 	<br/>
+	<label>Quantidade:</label>
 	<br/>
-	
+	<form:input path="quantidade" />
+	<br/>
 	
 	<input type="submit" value="Salvar" />
-	<c:if test="${!empty objeto.pessoaId}">
-		<td><a href="<c:url value='/pessoa/cadastro'/>" >Novo</a></td><td><a href="<c:url value='/pessoa/${objeto.pessoaId}'/>" >Cancelar</a></td>
+	<c:if test="${!empty objeto.tipoId}">
+		<td><a href="<c:url value='/tipo/cadastro'/>" >Novo</a></td>
+		<td><a href="<c:url value='/tipo/${objeto.tipoId}'/>" >Cancelar</a></td>
 	</c:if>
-	
-		
+
+
 </form:form>
 
 </body>

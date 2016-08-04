@@ -10,7 +10,7 @@
 %>
 <html>
 <head>
-	<title>Cadastro Produto </title>
+	<title>Cadastro do Produto </title>
 
 	
 	

@@ -4,7 +4,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Pessoa</title>
+	<title>Tipo</title>
 	<style type="text/css">
 		.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
 		.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
@@ -15,7 +15,7 @@
 </head>
 <body>
 <h1>
-	Pesquisa a Pessoa
+	Pesquisa a Tipo
 </h1>
 
 <div><a href="cadastro">Cadastrar</a></div>
@@ -24,16 +24,16 @@
 	<table class="tg">
 	<tr>
 		<th width="80">Código</th>
-		<th width="200">Nome</th>
+		<th width="200">Tipo</th>
+		<th width="200">Quatidade</th>
 		<th width="80">Ações</th>
 	</tr>
 	<c:forEach items="${lista}" var="objeto">
 		<tr>
-			<td>${objeto.pessoaId}</td>
-			<td>${objeto.nome}</td>
-
-			<td>
-			<a href="<c:url value='/pessoa/${objeto.pessoaId}' />" >Editar</a><a href="<c:url value='/pessoa/excluir/${objeto.pessoaId}' />" >Excluir</a></td>
+			<td>${objeto.tipoId}</td>
+			<td>${objeto.tipo}</td>
+			<td>${objeto.quantidade}</td>
+			<td><a href="<c:url value='/tipo/${objeto.tipoId}' />" >Editar</a><a href="<c:url value='/tipo/excluir/${objeto.tipoId}' />" >Excluir</a></td>
 		</tr>
 	</c:forEach>
 	</table>

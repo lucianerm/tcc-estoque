@@ -29,7 +29,11 @@ public class ProdutoController extends ControllerGenerico<Produto>{
 		if(objeto.getDescricao() == null || objeto.getDescricao().equals("") ){
 			modelUtils.setMensagemErro("Campo descrição é obrigatório.");
 			return false;
-		}
+		}else if (objeto.getDescricao().length() <3){
+				modelUtils.setMensagemErro("Campo descrição deve ser maior que três caracteres.");
+				return false;
+			}
+					
 		return true;
 	}
 
