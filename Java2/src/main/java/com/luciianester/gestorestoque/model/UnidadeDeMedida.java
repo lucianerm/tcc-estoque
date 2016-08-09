@@ -48,5 +48,11 @@ public class UnidadeDeMedida {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	public Produto getProduto() {
+		return produto;
+	}
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
 	
 }

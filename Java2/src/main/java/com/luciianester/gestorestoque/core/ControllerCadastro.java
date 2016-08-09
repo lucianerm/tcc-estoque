@@ -25,6 +25,8 @@ public abstract class ControllerCadastro<T> extends ControllerBase<T> {
 	@RequestMapping("/cadastro")
 	public String cadastro(@RequestParam(required=false) String tipo, Model model) throws Exception {
 		
+		this.model = model;
+		
 		if (tipo!=null) {
 			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
 				new ModelUtils(model).setMensagemSalvouSucesso();
@@ -40,13 +42,14 @@ public abstract class ControllerCadastro<T> extends ControllerBase<T> {
 	@RequestMapping("/{id}")
 	public String edita(@RequestParam(required=false) String tipo, @PathVariable("id") Long id, Model model) throws Exception {
 		
+		this.model = model;
+		
 		if (tipo!=null) {
 			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
 				new ModelUtils(model).setMensagemSalvouSucesso();
 			}
 		}
 		
-		this.model = model;
 		this.editar(id);
 		
 		return this.getCaminho()+"/cadastro";

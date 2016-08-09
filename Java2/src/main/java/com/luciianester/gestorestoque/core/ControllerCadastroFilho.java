@@ -25,7 +25,7 @@ public abstract class ControllerCadastroFilho<T> extends ControllerBase<T> {
 		this.model = model;
 		this.pesquisar();
 		
-		return this.getCaminho()+"/pesquisa";
+		return this.getCaminho()+"/cadastro";
 		
 	}
 	

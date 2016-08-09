@@ -18,7 +18,7 @@
 	Pesquisa o Produto
 </h1>
 
-<div><a href="cadastro">Cadastrar</a></div>
+<div><a href="produto/cadastro">Cadastrar</a></div>
 
 <c:if test="${!empty lista}">
 	<table class="tg">
