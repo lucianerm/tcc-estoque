@@ -28,6 +28,7 @@
 		<mapping class="com.luciianester.gestorestoque.model.Produto" />
 		<mapping class="com.luciianester.gestorestoque.model.Categoria" />
 		<mapping class="com.luciianester.gestorestoque.model.Tipo" />
+		<mapping class="com.luciianester.gestorestoque.model.UnidadeDeMedida" />
 		
 	</session-factory>
 </hibernate-configuration>

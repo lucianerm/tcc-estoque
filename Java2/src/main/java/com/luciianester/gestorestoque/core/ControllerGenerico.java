@@ -2,109 +2,78 @@ package com.luciianester.gestorestoque.core;
 
 import java.util.List;
 
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+public abstract class ControllerGenerico<T> extends ControllerCadastro<T> {
 
-public abstract class ControllerGenerico<T> {
-
-	private String caminho;
-	private ResourceGenerico<T> resource;
-
-	public ResourceGenerico<T> getRes() {
-		return resource;
-	}
-	
 	public ControllerGenerico(String caminho, ResourceGenerico<T> resource) {
-		this.caminho = caminho;
-		this.resource = resource;
+		super(caminho, resource);
 	}
-	
-	@RequestMapping("/pesquisa")
-	public String pesquisar(Model model) {
-		
+
+	@Override
+	public void pesquisar() throws Exception {
+
 		List<T> lista = this.getRes().listarTodos();
-		model.addAttribute("lista", lista);
+		this.setLista(lista);
 		
-		return this.caminho+"/pesquisa";
 	}
 	
-	@RequestMapping("/cadastro")
-	public String cadastro(@RequestParam(required=false) String tipo, Model model) throws Exception {
-		
-		if (tipo!=null) {
-			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
-				new ModelUtils(model).setMensagemSalvouSucesso();
-			}
-		}
+	@Override
+	public void cadastrar() throws Exception {
 		
 		T objeto = this.getRes().newInstance();
-		model.addAttribute("objeto", objeto);
-		
-		return this.caminho+"/cadastro";
+		this.setObjeto(objeto);
 		
 	}
 	
-	@RequestMapping("/gravar")
-	public String gravar(@ModelAttribute("objeto") T objeto, Model model) throws Exception {
+	@Override
+	public void editar(Long id) throws Exception {
+		
+		T objeto = this.getRes().listarPeloId(id);
+		this.setObjeto(objeto);
+		
+	}
+	
+	@Override
+	public String salvar(T objeto) throws Exception {
 		
 		try {
 		
 			if (this.ehNovo(objeto)) {
-				if (this.validacaoGravar(objeto, model)) {
+				if (this.validacaoGravar(objeto)) {
 					this.getRes().gravar(objeto);
 				} else {
-					return this.caminho+"/cadastro";
+					return this.getCaminho()+"/cadastro";
 				}
 			} else {
-				if (this.validacaoAlterar(objeto, model)) {
+				if (this.validacaoAlterar(objeto)) {
 					this.getRes().alterar(objeto);
 				} else {
-					return this.caminho+"/cadastro";
+					return this.getCaminho()+"/cadastro";
 				}
 			}
 			
-			return "redirect:/"+this.caminho+"/"+this.getId(objeto)+"?tipo="+MensagemTipo.SALVOU_SUCESSO;
+			return "redirect:/"+this.getCaminho()+"/"+this.getId(objeto)+"?tipo="+MensagemTipo.SALVOU_SUCESSO;
 			
 		} catch (Exception e) {
 			
-			model.addAttribute("tipo", MensagemTipo.ERRO);
-			model.addAttribute("mensagem", e.getMessage());
+			this.getModel().addAttribute("tipo", MensagemTipo.ERRO);
+			this.getModel().addAttribute("mensagem", e.getMessage());
 			
-			model.addAttribute("objeto", objeto);
+			this.setObjeto(objeto);
 			
-			return this.caminho+"/cadastro";
+			return this.getCaminho()+"/cadastro";
 			
 		}
 			
 	}
 	
-	@RequestMapping("/{id}")
-	public String editar(@RequestParam(required=false) String tipo, @PathVariable("id") Long id, Model model) throws Exception {
+	@Override
+	public String excluir(Long id) throws Exception {
 		
-		if (tipo!=null) {
-			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
-				new ModelUtils(model).setMensagemSalvouSucesso();
-			}
-		}
-		
-		T objeto = this.getRes().listarPeloId(id);
-		model.addAttribute("objeto", objeto);
-		
-		return this.caminho+"/cadastro";
-		
-	}
-	
-	@RequestMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Long id, Model model) throws Exception {
-		
-		if (this.validacaoExcluir(id, model)) {
+		if (this.validacaoExcluir(id)) {
 			this.getRes().remover(id);
-			return "redirect:/"+this.caminho+"/pesquisa";
+			return "redirect:/"+this.getCaminho()+"/pesquisa";
 		} else {
-			return this.caminho+"/pesquisa";
+			return this.getCaminho()+"/pesquisa";
 		}
 		
 	}
@@ -123,8 +92,8 @@ public abstract class ControllerGenerico<T> {
 		
 	}
 	
-	public abstract boolean validacaoGravar(T objeto, Model model);
-	public abstract boolean validacaoAlterar(T objeto, Model model);
-	public abstract boolean validacaoExcluir(Long id, Model model);
+	public abstract boolean validacaoGravar(T objeto);
+	public abstract boolean validacaoAlterar(T objeto);
+	public abstract boolean validacaoExcluir(Long id);
 	
 }

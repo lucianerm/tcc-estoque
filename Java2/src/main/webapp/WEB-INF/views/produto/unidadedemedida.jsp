@@ -10,7 +10,7 @@
 %>
 <%@include file="../../base/top.jsp" %>
  
-<div><a href="<c:url value='/produto'/>">Voltar</a></div>
+<div><a href="pesquisa">Voltar</a></div>
 <h1>
 	  Cadastro Produto
 </h1>
@@ -22,13 +22,8 @@
 </c:if>
 
 <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a>Cadastro</a></li>
-  <c:if test="${empty objeto.produtoId}">
-  	<li class="disabled disabledTab" role="presentation"><a>Unidade de Medida</a></li>
-  </c:if>
-  <c:if test="${!empty objeto.produtoId}">
-  	<li role="presentation"><a href="<c:url value='/produto/${objeto.produtoId}/unidadedemedida'/>">Unidade de Medida</a></li>
-  </c:if>
+  <li role="presentation"><a href="cadastro">Cadastro</a></li>
+  <li role="presentation" class="active"><a>Unidade de Medida</a></li>
 </ul>
 
 <form:form action="gravar" commandName="objeto">

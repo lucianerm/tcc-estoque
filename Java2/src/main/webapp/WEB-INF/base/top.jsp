@@ -69,7 +69,7 @@
             <div class="col-md-3">
                 <p class="lead">Shop Name</p>
                 <div class="list-group">
-                    <a href="${pageContext.request.contextPath}/produto/pesquisa" class="list-group-item">Produto</a>
+                    <a href="${pageContext.request.contextPath}/produto" class="list-group-item">Produto</a>
                     <a href="#" class="list-group-item">Category 2</a>
                     <a href="#" class="list-group-item">Category 3</a>
                 </div>
