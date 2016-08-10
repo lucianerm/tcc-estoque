@@ -18,7 +18,7 @@ public class UnidadeDeMedida {
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="unidadedemedida_pk")
 	private Long unidadeDeMedidaId;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="produtoId")
 	private Produto produto;
 	
@@ -27,6 +27,9 @@ public class UnidadeDeMedida {
 	
 	@Column(length = 200)
 	private String descricao;
+	
+	@Column
+	private Integer quantidade;
 
 	public Long getUnidadeDeMedidaId() {
 		return unidadeDeMedidaId;
@@ -48,11 +51,19 @@ public class UnidadeDeMedida {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
 	public Produto getProduto() {
 		return produto;
 	}
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+	
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
 	}
 	
 }

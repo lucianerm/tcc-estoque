@@ -39,6 +39,15 @@ public abstract class ControllerBase<T> {
 		this.addAttribute("objeto", objeto);
 	}
 	
+	public void setMensagem(MensagemTipo tipo, String texto) {
+		this.model.addAttribute("mensagemTipo", tipo);
+		this.model.addAttribute("mensagem", texto);
+	}
+	
+	public void setMensagemErro(String texto) {
+		this.setMensagem(MensagemTipo.ERRO, texto);
+	}
+	
 	abstract
 	public Long getId(T objeto);
 

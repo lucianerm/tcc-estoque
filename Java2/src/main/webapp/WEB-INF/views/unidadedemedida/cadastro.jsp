@@ -16,9 +16,9 @@
 
 
  
-<div><a href="pesquisa">Voltar</a></div>
+<div><a href="<c:url value='/produto'/>">Voltar</a></div>
 <h1>
-	  Cadastro de Unidade de Medida
+	  Cadastro Produto
 </h1>
 
 <ul class="nav nav-tabs">
@@ -50,8 +50,11 @@
 	<br/>
 	<form:input path="descricao" />
 	<br/>
+	<label>Quantidade:</label>
 	<br/>
-	
+	<form:input path="quantidade" /> Informar valor 1 caso for a medida padrão 
+	<br/>
+	<br/>
 	
 	<input type="submit" value="Salvar" />
 	<c:if test="${!empty objeto.unidadeDeMedidaId}">
@@ -63,8 +66,6 @@
 
 <br/>
 <br/>
-<br/>
-<br/>
 
 <c:if test="${!empty lista}">
 	<table class="tg">
@@ -72,6 +73,7 @@
 		<th width="80">Código</th>
 		<th width="80">Sigla</th>
 		<th width="200">Descrição</th>
+		<th width="80">Quantidade</th>
 		<th width="100">Ações</th>
 	</tr>
 	<c:forEach items="${lista}" var="item">
@@ -79,6 +81,7 @@
 			<td>${item.unidadeDeMedidaId}</td>
 			<td>${item.sigla}</td>
 			<td>${item.descricao}</td>
+			<td>${item.quantidade}</td>
 			<td><a href="<c:url value='/produto/${produto.produtoId}/unidadedemedida/${item.unidadeDeMedidaId}' />" >Editar</a> <a href="<c:url value='/produto/${produto.produtoId}/unidadedemedida/excluir/${item.unidadeDeMedidaId}' />" >Excluir</a></td>
 		</tr>
 	</c:forEach>
