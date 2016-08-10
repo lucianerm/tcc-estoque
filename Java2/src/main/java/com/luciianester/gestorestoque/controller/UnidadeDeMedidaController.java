@@ -66,8 +66,11 @@ public class UnidadeDeMedidaController extends ControllerCadastroFilho<UnidadeDe
 	@Override
 	public String salvar(UnidadeDeMedida objeto) throws Exception {
 		
+		this.pesquisar();
+		
 		this.produto = new ResourceGenerico<Produto>(Produto.class).listarPeloId(this.getPaiId());
 		objeto.setProduto(this.produto);
+		this.setObjeto(objeto);
 		
 		if (objeto.getQuantidade()==null || objeto.getQuantidade()<=0) {
 			
@@ -98,7 +101,7 @@ public class UnidadeDeMedidaController extends ControllerCadastroFilho<UnidadeDe
 			
 			if (!temPadrao) {
 				
-				this.setMensagemErro("Não tem uma Unidade de Medida padrão.\nDeve-se criar uma unidade de Medida pradrão primeiro");
+				this.setMensagemErro("Não tem uma Unidade de Medida padrão.\nDeve-se criar uma unidade de Medida padrão primeiro");
 				
 				return this.getCaminho()+"/cadastro";
 				

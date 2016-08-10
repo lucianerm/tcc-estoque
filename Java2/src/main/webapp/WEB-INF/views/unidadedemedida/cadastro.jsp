@@ -7,10 +7,10 @@
 <%
 	Produto produto = (Produto) request.getAttribute("produto");
 	UnidadeDeMedida objeto = (UnidadeDeMedida) request.getAttribute("objeto");
-	String acao = "gravar";
-	if (objeto.getUnidadeDeMedidaId()==null) {
-		acao = "unidadedemedida/gravar";
-	}
+	String acao = "/GestorEstoque/produto/"+produto.getProdutoId()+"/unidadedemedida/gravar";
+	//if (objeto.getUnidadeDeMedidaId()==null) {
+	//	acao = "/produto/""/unidadedemedida/gravar";
+	//}
 %>
 <%@include file="../../base/top.jsp" %>
 
@@ -18,7 +18,7 @@
  
 <div><a href="<c:url value='/produto'/>">Voltar</a></div>
 <h1>
-	  Cadastro Produto
+	  Cadastro Produto 
 </h1>
 
 <ul class="nav nav-tabs">
@@ -29,7 +29,7 @@
 
 <c:if test="${!empty mensagem}">
 
-	<label>${mensagem }</label>
+	<label>${mensagem } </label>
 	
 </c:if>
 
