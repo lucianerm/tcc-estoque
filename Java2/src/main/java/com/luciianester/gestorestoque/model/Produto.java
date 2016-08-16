@@ -19,13 +19,13 @@ public class Produto {
 	@Column(length = 200)
 	private String descricao;
 	
-	
 	public Long getProdutoId() {
 		return produtoId;
 	}
 	public void setProdutoId(Long produtoId) {
 		this.produtoId = produtoId;
 	}
+	
 	public String getDescricao() {
 		return descricao;
 	}
@@ -33,8 +33,4 @@ public class Produto {
 		this.descricao = descricao;
 	}
 	
-	
-	
-	
-
 }

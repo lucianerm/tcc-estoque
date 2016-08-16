@@ -1,12 +1,22 @@
 package com.luciianester.gestorestoque.controller;
 
+import java.util.List;
+
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.luciianester.gestorestoque.core.ControllerGenerico;
 import com.luciianester.gestorestoque.core.ModelUtils;
 import com.luciianester.gestorestoque.core.ResourceGenerico;
 import com.luciianester.gestorestoque.model.Produto;
+import com.luciianester.gestorestoque.model.UnidadeDeMedida;
+import com.luciianester.gestorestoque.resources.unidadedemedida.UnidadeDeMedidaDoProduto;
 
 @Controller
 @RequestMapping("/produto")
@@ -63,4 +73,27 @@ public class ProdutoController extends ControllerGenerico<Produto>{
 		
 	}
 	*/
+	
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/{id}/unidades", method = RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public @ResponseBody UnidadeDeMedidaDoProduto unidades(@PathVariable("id") Long id) throws Exception {
+		
+		UnidadeDeMedidaDoProduto unidadeDeMedidaDoProduto = new UnidadeDeMedidaDoProduto();
+		
+		Produto produto = new ResourceGenerico<Produto>(Produto.class).listarPeloId(id);
+		
+		List<UnidadeDeMedida> lista = this.getRes().getDao().getSessao()
+				.createCriteria(UnidadeDeMedida.class)
+				.add(Restrictions.eq("produto", produto))
+				.addOrder(Order.asc("quantidade"))
+				.list();
+		
+		unidadeDeMedidaDoProduto.setLista(lista);
+		
+		return unidadeDeMedidaDoProduto;
+		
+	}
+	
+	
 }

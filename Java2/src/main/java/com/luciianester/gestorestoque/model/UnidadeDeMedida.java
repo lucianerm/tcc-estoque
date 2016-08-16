@@ -18,7 +18,7 @@ public class UnidadeDeMedida {
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="unidadedemedida_pk")
 	private Long unidadeDeMedidaId;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="produtoId")
 	private Produto produto;
 	

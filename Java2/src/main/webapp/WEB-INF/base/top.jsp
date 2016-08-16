@@ -25,6 +25,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     
+    
+    
     <style type="text/css">
 		.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
 		.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
@@ -32,6 +34,11 @@
 		.tg .tg-4eph{background-color:#f9f9f9}
 	</style>
 	    
+
+	<link href="${pageContext.request.contextPath}/resources/css/select2.min.css" rel="stylesheet"/>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.1.10.2.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/select2.min.js"></script>
+
 
 </head>
 
@@ -78,7 +85,7 @@
                 <p class="lead">Shop Name</p>
                 <div class="list-group">
                     <a href="${pageContext.request.contextPath}/produto" class="list-group-item">Produto</a>
-                    <a href="#" class="list-group-item">Category 2</a>
+                    <a href="${pageContext.request.contextPath}/entrada" class="list-group-item">Entrada</a>
                     <a href="#" class="list-group-item">Category 3</a>
                 </div>
             </div>
