@@ -1,30 +1,127 @@
+﻿
 
-	
-- Cadastro Usuários
-	- Perfil
-		- Privilégios
+Informações do Estoque
 
-- Cadastro Cliente
-	- Endereco
-	- Contato
-	
-- Cadastro Fornecedor
-	- Endereco
-	- Contato
-	
-- Cadastro Produtos
-	- Unidade De Medida
-	- Marca
 	- Categoria
+		- Código
+		- Descrição
 
-- Movimentação Entrada
-	- Cabeçalho 
-		
-	- Corpo 
-		
-- Movimentação Saida
-	- Cabeçalho 
-		
-	- Corpo 
+	- Marca
+		- Código
+		- Descrição
 
-- Estoque
+	- Produto
+		- Codigo
+		- Descrição
+		+ Categoria 
+		+ Marca 
+		* Unidade De Medida
+		
+	- Unidade de Medida
+		- Codigo
+		- Sigla
+		- Descrição
+		- Quantidade
+		- Codigo Barras
+		- Valor de Venda
+
+	- Telefone
+		- Código
+		- Descrição
+		- Número
+
+	- Estado
+		- Código
+		- UF
+		- Descrição
+
+	- Município
+		- Código
+		+ Estado
+		- Descrição
+
+	- Bairro
+		- Código
+		+ Município
+		- Descrição
+
+	- Rua
+		- Código
+		+ Município
+		- Descrição
+	
+
+	- Endereço
+		- Código
+		- CEP
+		+ Estado
+		+ Município
+		+ Bairro
+		+ Rua
+		- Número (Obs.: String)
+
+	- Pessoa
+		- Código 
+		- Nome
+		- Nome Fantasia
+		- Tipo: Física, Jurídica
+		- CNPJ
+		- CPF
+		* Telefone
+		* Endereço
+	
+	- Entrada
+		- Código
+		+ Usuário
+		- Data Hora
+		+ Fornecedor
+		* Itens da Entrada
+
+	- Itens da Entrada
+		- Código
+		+ Produto
+		+ Unidade de Medida
+		- Lote de Fabricate
+		- Quantidade
+		- Custo
+
+	- Saidas
+		- Código
+		+ Usuário
+		- Data Hora
+		+ Cliente
+		* Itens da Saida
+
+	- Itens da Saida
+		- Código
+		+ Produto
+		+ Unidade de Medida
+		+ Item da Entrada
+		- Quantidade
+		- Valor (Busca valor de Venda autoamticamente sem alteração)
+
+
+Informações do Sistema
+
+	- Tela
+		- Código
+		- Descrição
+
+	- Privilégios
+		+ Tela - Vizualizar (Implicito)
+		- Incluir
+		- Alterar
+		- Excluir
+
+	- Perfil
+		- Código
+		- Descrição
+		* Privilégios
+
+	- Usuário
+		- Código
+		- Nome
+		- Nome de Acesso
+		- Senha
+		- Situação (Inativo, Ativo)
+		+ Perfil
