@@ -72,6 +72,11 @@
 	<form:input path="quantidade" /> 
 	<br/>
 	<br/>
+	<label>Valor:</label>
+	<br/>
+	<form:input path="valor" /> 
+	<br/>
+	<br/>
 	
 	<input type="submit" value="Salvar" />
 	<c:if test="${!empty objeto.entradaItemId}">
