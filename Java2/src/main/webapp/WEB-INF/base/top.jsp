@@ -84,6 +84,7 @@
             <div class="col-md-3">
                 <p class="lead">Shop Name</p>
                 <div class="list-group">
+                    <a href="${pageContext.request.contextPath}/perfil" class="list-group-item">Perfil</a>
                     <a href="${pageContext.request.contextPath}/produto" class="list-group-item">Produto</a>
                     <a href="${pageContext.request.contextPath}/entrada" class="list-group-item">Entrada</a>
                     <a href="#" class="list-group-item">Category 3</a>

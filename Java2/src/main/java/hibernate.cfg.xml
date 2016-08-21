@@ -23,6 +23,9 @@
 		<property name="hibernate.show_sql">true</property> 
 		<property name="hibernate.format_sql">true</property>
 		 
+		<mapping class="com.luciianester.gestorestoque.model.Perfil" />
+		
+		
 		<mapping class="com.luciianester.gestorestoque.model.Produto" />
 		<mapping class="com.luciianester.gestorestoque.model.UnidadeDeMedida" />
 		<mapping class="com.luciianester.gestorestoque.model.Entrada" />

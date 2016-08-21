@@ -116,6 +116,7 @@ Informações do Sistema
 	- Perfil
 		- Código
 		- Descrição
+		- Tipo: (Administrador, Usuario)
 		* Privilégios
 
 	- Usuário

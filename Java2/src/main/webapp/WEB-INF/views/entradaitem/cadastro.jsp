@@ -171,8 +171,3 @@
 	}
 
 </script>
-<!-- 
-  document.getElementById("edit").action =
-            "http://www.example.co.uk/different.php";
-            document.getElementById("edit").submit();
- -->
