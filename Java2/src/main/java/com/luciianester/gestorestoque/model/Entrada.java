@@ -33,6 +33,10 @@ public class Entrada {
 	@JoinColumn(name="fornecedorId")
 	private Pessoa fornecedor;
 	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="usuarioId")
+	private Usuario usuario;
+	
 	public Long getEntradaId() {
 		return entradaId;
 	}
@@ -59,6 +63,14 @@ public class Entrada {
 
 	public void setFornecedor(Pessoa fornecedor) {
 		this.fornecedor = fornecedor;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 }

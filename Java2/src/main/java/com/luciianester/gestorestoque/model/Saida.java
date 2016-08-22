@@ -33,6 +33,10 @@ public class Saida {
 	@JoinColumn(name="clienteId")
 	private Pessoa cliente;
 
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="usuarioId")
+	private Usuario usuario;
+	
 	public Long getSaidaId() {
 		return saidaId;
 	}
@@ -55,6 +59,14 @@ public class Saida {
 
 	public void setCliente(Pessoa cliente) {
 		this.cliente = cliente;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 }

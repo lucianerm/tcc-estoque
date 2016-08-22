@@ -2,6 +2,9 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page session="false" %>
+<%
+	response.setHeader("usuario", "teste sdofiu");
+%>
 <head>
 	<style type="text/css">
 		.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
