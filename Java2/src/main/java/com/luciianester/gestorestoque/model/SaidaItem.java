@@ -33,7 +33,7 @@ public class SaidaItem {
 	private UnidadeDeMedida unidadeDeMedida;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="unidadeDeMedidaId")
+	@JoinColumn(name="entradaItemId")
 	private EntradaItem entradaItem;
 	
 	@Column

@@ -32,7 +32,6 @@ public class Entrada {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="fornecedorId")
 	private Pessoa fornecedor;
-
 	
 	public Long getEntradaId() {
 		return entradaId;
