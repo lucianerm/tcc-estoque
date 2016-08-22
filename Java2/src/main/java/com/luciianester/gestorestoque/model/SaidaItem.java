@@ -13,16 +13,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-@SequenceGenerator(name="entradaitem_pk", sequenceName="entradaitem_pk", initialValue=1)
-public class EntradaItem {
+@SequenceGenerator(name="saidaitem_pk", sequenceName="saidaitem_pk", initialValue=1)
+public class SaidaItem {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="entradaitem_pk")
-	private Long entradaItemId;
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="saidaitem_pk")
+	private Long saidaItemId;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="entradaId")
-	private Entrada entrada;
+	@JoinColumn(name="saidaId")
+	private Saida saida;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="produtoId")
@@ -32,8 +32,9 @@ public class EntradaItem {
 	@JoinColumn(name="unidadeDeMedidaId")
 	private UnidadeDeMedida unidadeDeMedida;
 	
-	@Column(length=50)
-	private String loteFabricante;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="unidadeDeMedidaId")
+	private EntradaItem entradaItem;
 	
 	@Column
 	private BigDecimal quantidade;
@@ -41,20 +42,20 @@ public class EntradaItem {
 	@Column
 	private BigDecimal valor;
 
-	public Long getEntradaItemId() {
-		return entradaItemId;
+	public Long getSaidaItemId() {
+		return saidaItemId;
 	}
 
-	public void setEntradaItemId(Long entradaItemId) {
-		this.entradaItemId = entradaItemId;
+	public void setSaidaItemId(Long saidaItemId) {
+		this.saidaItemId = saidaItemId;
 	}
 
-	public Entrada getEntrada() {
-		return entrada;
+	public Saida getSaida() {
+		return saida;
 	}
 
-	public void setEntrada(Entrada entrada) {
-		this.entrada = entrada;
+	public void setSaida(Saida saida) {
+		this.saida = saida;
 	}
 
 	public Produto getProduto() {
@@ -73,6 +74,14 @@ public class EntradaItem {
 		this.unidadeDeMedida = unidadeDeMedida;
 	}
 
+	public EntradaItem getEntradaItem() {
+		return entradaItem;
+	}
+
+	public void setEntradaItem(EntradaItem entradaItem) {
+		this.entradaItem = entradaItem;
+	}
+
 	public BigDecimal getQuantidade() {
 		return quantidade;
 	}
@@ -87,14 +96,6 @@ public class EntradaItem {
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
-	}
-
-	public String getLoteFabricante() {
-		return loteFabricante;
-	}
-
-	public void setLoteFabricante(String loteFabricante) {
-		this.loteFabricante = loteFabricante;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.luciianester.gestorestoque.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,7 +32,13 @@ public class UnidadeDeMedida {
 	
 	@Column
 	private Integer quantidade;
-
+	
+	@Column(length = 100)
+	private String codigoDeBarras;
+	
+	@Column
+	private BigDecimal valorDeVenda;
+	
 	public Long getUnidadeDeMedidaId() {
 		return unidadeDeMedidaId;
 	}
@@ -64,6 +72,18 @@ public class UnidadeDeMedida {
 	}
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+	public String getCodigoDeBarras() {
+		return codigoDeBarras;
+	}
+	public void setCodigoDeBarras(String codigoDeBarras) {
+		this.codigoDeBarras = codigoDeBarras;
+	}
+	public BigDecimal getValorDeVenda() {
+		return valorDeVenda;
+	}
+	public void setValorDeVenda(BigDecimal valorDeVenda) {
+		this.valorDeVenda = valorDeVenda;
 	}
 	
 }

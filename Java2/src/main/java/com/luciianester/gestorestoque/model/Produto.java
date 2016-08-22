@@ -2,9 +2,12 @@ package com.luciianester.gestorestoque.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 
@@ -19,6 +22,14 @@ public class Produto {
 	@Column(length = 200)
 	private String descricao;
 	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="categoriaId")
+	private Categoria categoria;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="marcaId")
+	private Marca marca;
+	
 	public Long getProdutoId() {
 		return produtoId;
 	}
@@ -31,6 +42,18 @@ public class Produto {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	public Marca getMarca() {
+		return marca;
+	}
+	public void setMarca(Marca marca) {
+		this.marca = marca;
 	}
 	
 }

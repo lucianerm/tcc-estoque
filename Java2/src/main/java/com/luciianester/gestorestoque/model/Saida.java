@@ -17,12 +17,12 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@SequenceGenerator(name="entrada_pk", sequenceName="entrada_pk", initialValue=1)
-public class Entrada {
+@SequenceGenerator(name="saida_pk", sequenceName="saida_pk", initialValue=1)
+public class Saida {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="entrada_pk")
-	private Long entradaId;
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="saida_pk")
+	private Long saidaId;
 	
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
@@ -30,16 +30,15 @@ public class Entrada {
 	private Date data;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="fornecedorId")
-	private Pessoa fornecedor;
+	@JoinColumn(name="clienteId")
+	private Pessoa cliente;
 
-	
-	public Long getEntradaId() {
-		return entradaId;
+	public Long getSaidaId() {
+		return saidaId;
 	}
 
-	public void setEntradaId(Long entradaId) {
-		this.entradaId = entradaId;
+	public void setSaidaId(Long saidaId) {
+		this.saidaId = saidaId;
 	}
 
 	public Date getData() {
@@ -49,17 +48,13 @@ public class Entrada {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
-	public Entrada() {
-		this.data = new Date();
+
+	public Pessoa getCliente() {
+		return cliente;
 	}
 
-	public Pessoa getFornecedor() {
-		return fornecedor;
-	}
-
-	public void setFornecedor(Pessoa fornecedor) {
-		this.fornecedor = fornecedor;
+	public void setCliente(Pessoa cliente) {
+		this.cliente = cliente;
 	}
 	
 }
