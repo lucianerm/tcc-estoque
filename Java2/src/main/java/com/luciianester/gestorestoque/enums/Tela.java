@@ -1,13 +1,13 @@
 package com.luciianester.gestorestoque.enums;
 
-public enum PessoaTipo {
+public enum Tela {
 
-	FISICA("Física"),
-	JURIDICA("Jurídica");
+	PRODUTO("Produto"),
+	ENTRADA("Entrada");
 	
 	private String nome;
 	
-	private PessoaTipo(String nome) {
+	private Tela(String nome) {
 		this.nome = nome;
 	}
 	
