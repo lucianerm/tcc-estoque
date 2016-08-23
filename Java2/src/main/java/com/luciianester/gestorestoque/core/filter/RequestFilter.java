@@ -28,6 +28,8 @@ public class RequestFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
+		boolean login = false;
+		
 		try {
 			
 			HttpServletRequest req = (HttpServletRequest) request;
@@ -36,11 +38,25 @@ public class RequestFilter implements Filter {
 			
 			String metodo = req.getRequestURI().replaceAll(req.getContextPath(), "");
 			
-			if (!(metodo.indexOf("resources")>=0)) {
+			if (!(metodo.indexOf("resources")>=0) && !(metodo.indexOf("login")>=0)) {
 				
 				HttpSession session = req.getSession();
 				
 				Object usuario = session.getAttribute("usuario");
+				
+				
+				if (usuario==null) {
+					
+					req.getRequestDispatcher("/login").forward(request, response);
+					login = true;
+					
+				}
+				
+				/*
+				HttpSession session = req.getSession();
+				
+				Object usuario = session.getAttribute("usuario");
+				
 				
 				if (usuario==null) {
 					usuario = "user " + new Date().getTime();
@@ -49,6 +65,9 @@ public class RequestFilter implements Filter {
 				session.setAttribute("usuario", usuario);
 				
 				System.out.println("usuario: " + usuario);
+				System.out.println("getRequestedSessionId: " + req.getRequestedSessionId());
+				System.out.println("fim ");
+				
 				
 		        
 				
@@ -72,12 +91,14 @@ public class RequestFilter implements Filter {
 			System.out.println(e.getMessage());
 		}
 		
-		try {
-			chain.doFilter(request, response);
-		} catch (Exception ex) {
-			request.setAttribute("errorMessage", ex);
-			request.getRequestDispatcher("/WEB-INF/views/jsp/error.jsp")
-                               .forward(request, response);
+		if (!login) {
+			try {
+				chain.doFilter(request, response);
+			} catch (Exception ex) {
+				request.setAttribute("errorMessage", ex);
+				request.getRequestDispatcher("/WEB-INF/views/jsp/error.jsp")
+	                               .forward(request, response);
+			}
 		}
 
 	}
