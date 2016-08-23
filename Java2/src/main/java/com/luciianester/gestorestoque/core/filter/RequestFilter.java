@@ -1,7 +1,9 @@
 package com.luciianester.gestorestoque.core.filter;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -12,6 +14,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.luciianester.gestorestoque.enums.PerfilTipo;
+import com.luciianester.gestorestoque.enums.Tela;
 
 public class RequestFilter implements Filter {
 
@@ -35,12 +40,15 @@ public class RequestFilter implements Filter {
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpServletResponse res = (HttpServletResponse) response; 
 			
+			HttpSession session = req.getSession();
+			
+			List<Tela> telas = new ArrayList<Tela>(Arrays.asList(Tela.values()));
+			session.setAttribute("telas", telas);
 			
 			String metodo = req.getRequestURI().replaceAll(req.getContextPath(), "");
 			
 			if (!(metodo.indexOf("resources")>=0) && !(metodo.indexOf("login")>=0)) {
 				
-				HttpSession session = req.getSession();
 				
 				Object usuario = session.getAttribute("usuario");
 				

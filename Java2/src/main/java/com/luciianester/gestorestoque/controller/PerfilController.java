@@ -48,10 +48,6 @@ public class PerfilController extends ControllerGenerico<Perfil>{
 		super.cadastrar();
 
 		List<PerfilTipo> tipos = new ArrayList<PerfilTipo>(Arrays.asList(PerfilTipo.values()));
-		for (PerfilTipo tipo : tipos) {
-			System.out.println("aqui");
-		}
-		
 		this.addAttribute("tipos", tipos);
 		
 	}
