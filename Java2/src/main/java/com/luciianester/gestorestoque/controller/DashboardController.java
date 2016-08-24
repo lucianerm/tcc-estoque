@@ -12,7 +12,7 @@ public class DashboardController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getData() {
 
-		ModelAndView model = new ModelAndView("dashboard");
+		ModelAndView model = new ModelAndView("dashboard/dashboard");
 	
 		return model;
 

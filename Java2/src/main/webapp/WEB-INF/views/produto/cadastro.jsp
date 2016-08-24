@@ -2,18 +2,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page session="false" %>
 <%
 
 	Produto produto = (Produto) request.getAttribute("objeto");
 	
 %>
 <%@include file="../../base/top.jsp" %>
- 
-<div><a href="<c:url value='/produto'/>">Voltar</a></div>
-<h1>
-	  Cadastro Produto
-</h1>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+	<ol class="breadcrumb">
+	 
+	  <li><a href="<c:url value='/produto'/>">Voltar</a></li>
+	  <li class="active panel-title" >Cadastro Produto</li>
+	 
+	</ol>
+  </div>
+  
+  <div class="panel-body">
+   
 
 <c:if test="${!empty mensagem}">
 
@@ -39,19 +46,25 @@
 	<form:input path="produtoId" readonly="true" size="8"  disabled="true" />
 	<form:hidden path="produtoId" />
 	<br/>
+	<br/>
 	<label>Descrição:</label>
 	<br/>
-	<form:input path="descricao" />
+	<form:input path="descricao" size="50"/>
 	<br/>
 	<br/>
 	
 	
-	<input type="submit" value="Salvar" />
+	<input type="submit" value="Salvar" class="btn btn-primary" />
 	<c:if test="${!empty objeto.produtoId}">
-		<td><a href="<c:url value='/produto/cadastro'/>" >Novo</a></td>
-		<td><a href="<c:url value='/produto/${objeto.produtoId}'/>" >Cancelar</a></td>
+		<td><a href="<c:url value='/produto/cadastro'/>" class="btn btn-default" >Novo</a></td>
+		<td><a href="<c:url value='/produto/${objeto.produtoId}'/>" class="btn btn-default" >Cancelar</a></td>
 	</c:if>
 	
 </form:form>
+
+
+   
+  </div>
+</div>
 
 <%@include file="../../base/bottom.jsp" %>

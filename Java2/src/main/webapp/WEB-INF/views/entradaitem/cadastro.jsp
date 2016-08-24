@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page session="false" %>
 <%
 	Entrada entrada = (Entrada) request.getAttribute("entrada");
 	EntradaItem objeto = (EntradaItem) request.getAttribute("objeto");

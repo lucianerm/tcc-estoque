@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page session="false" %>
 <%
 	response.setHeader("usuario", "teste sdofiu");
 %>
@@ -17,9 +16,17 @@
 
 <%@include file="../../base/top.jsp" %>
 
+
+
 <h1>
 	Pesquisa o Produto
 </h1>
+
+<nav aria-label="...">
+  <ul class="pager">
+    <li class="previous"><a href="produto/cadastro">Cadastrar <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>
 
 <div><a href="produto/cadastro">Cadastrar</a></div>
 
