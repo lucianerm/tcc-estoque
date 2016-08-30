@@ -15,6 +15,8 @@ import com.luciianester.gestorestoque.enums.PerfilTipo;
 import com.luciianester.gestorestoque.model.Perfil;
 import com.luciianester.gestorestoque.model.Usuario;
 import com.luciianester.gestorestoque.resources.login.Login;
+import com.luciianester.gestorestoque.resources.perfil.PerfilResources;
+import com.luciianester.gestorestoque.resources.usuario.UsuarioResources;
 
 @Controller
 @RequestMapping(value="/login")
@@ -32,8 +34,8 @@ public class LoginController {
 	@RequestMapping("/logar")
 	public String gravar(@ModelAttribute("objeto") Login objeto, Model model, HttpServletRequest request) throws Exception {
 		
-		ResourceGenerico<Usuario> res = new ResourceGenerico<>(Usuario.class);
-		ResourceGenerico<Perfil> resPerfil = new ResourceGenerico<>(Perfil.class);
+		ResourceGenerico<Usuario> res = new UsuarioResources();
+		ResourceGenerico<Perfil> resPerfil = new PerfilResources();
 		
 		Usuario usuario1 = (Usuario) res.getDao().getSessao().createCriteria(Usuario.class)
 			.add(Restrictions.eq("usuarioId", 1l))

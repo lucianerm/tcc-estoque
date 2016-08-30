@@ -6,17 +6,18 @@ import java.util.List;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.luciianester.gestorestoque.core.ControllerCadastroFilho;
 import com.luciianester.gestorestoque.core.MensagemTipo;
-import com.luciianester.gestorestoque.core.ResourceGenerico;
 import com.luciianester.gestorestoque.model.Entrada;
 import com.luciianester.gestorestoque.model.EntradaItem;
 import com.luciianester.gestorestoque.model.Produto;
 import com.luciianester.gestorestoque.model.UnidadeDeMedida;
+import com.luciianester.gestorestoque.resources.entrada.EntradaResources;
+import com.luciianester.gestorestoque.resources.entrada.item.EntradaItemResources;
+import com.luciianester.gestorestoque.resources.produto.ProdutoResources;
+import com.luciianester.gestorestoque.resources.unidadedemedida.UnidadeDeMedidaResources;
 
 @Controller
 @RequestMapping("/entrada/{paiId}/entradaitem")
@@ -25,19 +26,14 @@ public class EntradaItemController extends ControllerCadastroFilho<EntradaItem>{
 	private Entrada entrada = null;
 	
 	public EntradaItemController() {
-		super("entradaitem", new ResourceGenerico<EntradaItem>(EntradaItem.class));
+		super("entradaitem", new EntradaItemResources());
 	}
 
-	@Override
-	public Long getId(EntradaItem objeto) {
-		return objeto.getEntradaItemId();
-	}
-	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void pesquisar() throws Exception {
 
-		this.entrada = new ResourceGenerico<Entrada>(Entrada.class).listarPeloId(this.getPaiId());
+		this.entrada = new EntradaResources().listarPeloId(this.getPaiId());
 		this.addAttribute("entrada", entrada);
 
 		EntradaItem entradaItem = new EntradaItem();
@@ -53,7 +49,7 @@ public class EntradaItemController extends ControllerCadastroFilho<EntradaItem>{
 		this.setLista(lista);
 
 		
-		List<Produto> listProdutos = new ResourceGenerico<Produto>(Produto.class).listarTodos();
+		List<Produto> listProdutos = new ProdutoResources().listarTodos();
 		this.addAttribute("listProdutos", listProdutos);
 		
 		List<UnidadeDeMedida> listUnidadeDeMedida = new ArrayList<>();
@@ -78,7 +74,7 @@ public class EntradaItemController extends ControllerCadastroFilho<EntradaItem>{
 		List<UnidadeDeMedida> listUnidadeDeMedida = new ArrayList<>();
 		
 		if (entradaItem.getProduto()!=null && entradaItem.getProduto().getProdutoId()!=null) {
-			listUnidadeDeMedida = new ResourceGenerico<UnidadeDeMedida>(UnidadeDeMedida.class).getDao().getSessao()
+			listUnidadeDeMedida = new UnidadeDeMedidaResources().getDao().getSessao()
 				.createCriteria(UnidadeDeMedida.class)
 				.add(Restrictions.eq("produto", entradaItem.getProduto()))
 				.addOrder(Order.asc("descricao"))
@@ -89,11 +85,10 @@ public class EntradaItemController extends ControllerCadastroFilho<EntradaItem>{
 		
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public String salvar(EntradaItem objeto) throws Exception {
 		
-		this.entrada = new ResourceGenerico<Entrada>(Entrada.class).listarPeloId(this.getPaiId());
+		this.entrada = new EntradaResources().listarPeloId(this.getPaiId());
 		objeto.setEntrada(this.entrada);
 		this.setObjeto(objeto);
 		
@@ -103,7 +98,7 @@ public class EntradaItemController extends ControllerCadastroFilho<EntradaItem>{
 			this.getRes().alterar(objeto);
 		}
 		
-		return "redirect:/entrada/"+this.getPaiId()+"/"+this.getCaminho()+"/"+this.getId(objeto)+"?tipo="+MensagemTipo.SALVOU_SUCESSO;
+		return "redirect:/entrada/"+this.getPaiId()+"/"+this.getCaminho()+"/"+this.getRes().getId(objeto)+"?tipo="+MensagemTipo.SALVOU_SUCESSO;
 		
 	}
 

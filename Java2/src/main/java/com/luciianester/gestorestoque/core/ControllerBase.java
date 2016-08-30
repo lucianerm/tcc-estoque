@@ -15,6 +15,7 @@ public abstract class ControllerBase<T> {
 	}
 	
 	public ResourceGenerico<T> getRes() {
+		this.resource.setModel(this.model);
 		return resource;
 	}
 	
@@ -48,9 +49,6 @@ public abstract class ControllerBase<T> {
 		this.setMensagem(MensagemTipo.ERRO, texto);
 	}
 	
-	abstract
-	public Long getId(T objeto);
-
 	abstract 
 	public void pesquisar() throws Exception;
 	

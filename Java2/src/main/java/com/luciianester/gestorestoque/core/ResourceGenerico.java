@@ -3,11 +3,14 @@ package com.luciianester.gestorestoque.core;
 import java.util.List;
 
 import org.hibernate.criterion.Restrictions;
+import org.springframework.ui.Model;
 
 import com.luciianester.gestorestoque.core.dao.DAO;
 
-public class ResourceGenerico<T> {
+public abstract class ResourceGenerico<T> {
 
+	private Model model;
+	
 	private Class<T> classe;
 	
 	private DAO<T> dao = new DAO<>();
@@ -40,23 +43,62 @@ public class ResourceGenerico<T> {
 		
 	}
 	
-	public void gravar(T objeto) {
+	public boolean gravar(T objeto) {
 		
-		this.getDao().gravar(objeto);
-		
-	}
-	
-	public void alterar(T objeto) {
-		
-		this.getDao().alterar(objeto);
+		if (this.validacaoGravar(objeto)) {
+			this.getDao().gravar(objeto);
+			return true;
+		}
+		return false;
 		
 	}
 	
-	public void remover(Long codigo) {
+	public boolean alterar(T objeto) {
+		
+		if (this.validacaoAlterar(objeto)) {
+			this.getDao().alterar(objeto);
+			return true;
+		}
+		return false;
+		
+	}
+	
+	public boolean remover(Long codigo) {
 		
 		T objeto = this.listarPeloId(codigo);
-		this.getDao().remover(objeto);
+		if (this.validacaoExcluir(objeto)) {
+			this.getDao().remover(objeto);
+			return true;
+		}
+		return false;
 		
+	}
+	
+
+	public abstract Long getId(T objeto);
+	
+	public boolean ehNovo(T objeto) {
+		
+		Long id = this.getId(objeto);
+		
+		if (id==null || id.equals(0)) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public abstract boolean validacaoGravar(T objeto);
+	public abstract boolean validacaoAlterar(T objeto);
+	public abstract boolean validacaoExcluir(T objeto);
+
+	public Model getModel() {
+		return model;
+	}
+
+	public void setModel(Model model) {
+		this.model = model;
 	}
 	
 }

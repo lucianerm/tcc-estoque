@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.luciianester.gestorestoque.core.ControllerCadastroFilho;
 import com.luciianester.gestorestoque.core.MensagemTipo;
-import com.luciianester.gestorestoque.core.ResourceGenerico;
 import com.luciianester.gestorestoque.model.Produto;
 import com.luciianester.gestorestoque.model.UnidadeDeMedida;
+import com.luciianester.gestorestoque.resources.produto.ProdutoResources;
+import com.luciianester.gestorestoque.resources.unidadedemedida.UnidadeDeMedidaResources;
 
 @Controller
 @RequestMapping("/produto/{paiId}/unidadedemedida")
@@ -21,20 +22,16 @@ public class UnidadeDeMedidaController extends ControllerCadastroFilho<UnidadeDe
 	private Produto produto = null;
 	
 	public UnidadeDeMedidaController() {
-		super("unidadedemedida", new ResourceGenerico<UnidadeDeMedida>(UnidadeDeMedida.class));
+		super("unidadedemedida", new UnidadeDeMedidaResources());
 	}
 
-	@Override
-	public Long getId(UnidadeDeMedida objeto) {
-		return objeto.getUnidadeDeMedidaId();
-	}
-	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void pesquisar() throws Exception {
 		
 		this.setObjeto(new UnidadeDeMedida());
 		
-		this.produto = new ResourceGenerico<Produto>(Produto.class).listarPeloId(this.getPaiId());
+		this.produto = new ProdutoResources().listarPeloId(this.getPaiId());
 		this.addAttribute("produto", produto);
 		
 		List<UnidadeDeMedida> lista = this.getRes().getDao().getSessao()
@@ -68,7 +65,7 @@ public class UnidadeDeMedidaController extends ControllerCadastroFilho<UnidadeDe
 		
 		this.pesquisar();
 		
-		this.produto = new ResourceGenerico<Produto>(Produto.class).listarPeloId(this.getPaiId());
+		this.produto = new ProdutoResources().listarPeloId(this.getPaiId());
 		objeto.setProduto(this.produto);
 		this.setObjeto(objeto);
 		
@@ -130,7 +127,7 @@ public class UnidadeDeMedidaController extends ControllerCadastroFilho<UnidadeDe
 			this.getRes().alterar(objeto);
 		}
 		
-		return "redirect:/produto/"+this.getPaiId()+"/"+this.getCaminho()+"/"+this.getId(objeto)+"?tipo="+MensagemTipo.SALVOU_SUCESSO;
+		return "redirect:/produto/"+this.getPaiId()+"/"+this.getCaminho()+"/"+this.getRes().getId(objeto)+"?tipo="+MensagemTipo.SALVOU_SUCESSO;
 		
 	}
 

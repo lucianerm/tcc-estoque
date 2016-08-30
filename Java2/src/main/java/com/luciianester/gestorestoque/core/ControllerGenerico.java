@@ -37,21 +37,17 @@ public abstract class ControllerGenerico<T> extends ControllerCadastro<T> {
 		
 		try {
 		
-			if (this.ehNovo(objeto)) {
-				if (this.validacaoGravar(objeto)) {
-					this.getRes().gravar(objeto);
-				} else {
+			if (this.getRes().ehNovo(objeto)) {
+				if (!this.getRes().gravar(objeto)) {
 					return this.getCaminho()+"/cadastro";
 				}
 			} else {
-				if (this.validacaoAlterar(objeto)) {
-					this.getRes().alterar(objeto);
-				} else {
+				if (!this.getRes().alterar(objeto)) {
 					return this.getCaminho()+"/cadastro";
 				}
 			}
 			
-			return "redirect:/"+this.getCaminho()+"/"+this.getId(objeto)+"?tipo="+MensagemTipo.SALVOU_SUCESSO;
+			return "redirect:/"+this.getCaminho()+"/"+this.getRes().getId(objeto)+"?tipo="+MensagemTipo.SALVOU_SUCESSO;
 			
 		} catch (Exception e) {
 			
@@ -69,31 +65,12 @@ public abstract class ControllerGenerico<T> extends ControllerCadastro<T> {
 	@Override
 	public String excluir(Long id) throws Exception {
 		
-		if (this.validacaoExcluir(id)) {
-			this.getRes().remover(id);
+		if (this.getRes().remover(id)) {
 			return "redirect:/"+this.getCaminho()+"/pesquisa";
 		} else {
 			return this.getCaminho()+"/pesquisa";
 		}
 		
 	}
-	
-	public abstract Long getId(T objeto);
-	
-	private boolean ehNovo(T objeto) {
-		
-		Long id = this.getId(objeto);
-		
-		if (id==null || id.equals(0)) {
-			return true;
-		} else {
-			return false;
-		}
-		
-	}
-	
-	public abstract boolean validacaoGravar(T objeto);
-	public abstract boolean validacaoAlterar(T objeto);
-	public abstract boolean validacaoExcluir(Long id);
 	
 }
