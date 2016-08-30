@@ -60,7 +60,7 @@
 		<br/>
 		
 		
-		<input type="submit" value="Salvar" class="btn btn-primary" />
+		<input type="submit" value="Salvar" class="btn btn-success" />
 		<c:if test="${!empty objeto.produtoId}">
 			<td><a href="<c:url value='/produto/cadastro'/>" class="btn btn-default" >Novo</a></td>
 			<td><a href="<c:url value='/produto/${objeto.produtoId}'/>" class="btn btn-default" >Cancelar</a></td>

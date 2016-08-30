@@ -103,6 +103,7 @@ public class RequestFilter implements Filter {
 			try {
 				chain.doFilter(request, response);
 			} catch (Exception ex) {
+				ex.printStackTrace();
 				request.setAttribute("errorMessage", ex);
 				request.getRequestDispatcher("/WEB-INF/views/jsp/error.jsp")
 	                               .forward(request, response);

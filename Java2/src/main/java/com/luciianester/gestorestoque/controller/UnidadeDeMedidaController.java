@@ -72,11 +72,26 @@ public class UnidadeDeMedidaController extends ControllerCadastroFilho<UnidadeDe
 		objeto.setProduto(this.produto);
 		this.setObjeto(objeto);
 		
+		String caminhoReturno = this.getCaminho()+"/cadastro";;
+		
+		if (objeto.getSigla()==null) {
+			
+			this.setMensagemErro("Sigla é Obrigatório.");
+			return caminhoReturno;
+			
+		}
+		
+		if (objeto.getSigla().length()<2 || objeto.getSigla().length()>4) {
+			
+			this.setMensagemErro("Sigla deve ter entre 2 e 4 caracteres.");
+			return caminhoReturno;
+			
+		}
+		
 		if (objeto.getQuantidade()==null || objeto.getQuantidade()<=0) {
 			
 			this.setMensagemErro("Quantidade deve ser maior que zero");
-			
-			return this.getCaminho()+"/cadastro";
+			return caminhoReturno;
 			
 		} 
 		
