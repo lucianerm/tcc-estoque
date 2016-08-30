@@ -7,20 +7,21 @@ import org.springframework.ui.Model;
 
 import com.luciianester.gestorestoque.core.dao.DAO;
 
-public abstract class ResourceGenerico<T> {
+public abstract class ResourceGenerico<T> implements AutoCloseable {
 
 	private Model model;
 	
 	private Class<T> classe;
 	
-	private DAO<T> dao = new DAO<>();
+	private DAO dao;
 
-	public DAO<T> getDao() {
+	public DAO getDao() {
 		return dao;
 	}
 	
-	public ResourceGenerico(Class<T> classe) {
+	public ResourceGenerico(Class<T> classe, DAO dao) {
 		this.classe = classe;
+		this.dao = dao;
 	}
 	
 	public T newInstance() throws Exception {
@@ -28,22 +29,22 @@ public abstract class ResourceGenerico<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<T> listarTodos() {
+	public List<T> listarTodos() throws Exception {
 		
-		List<T> list = this.getDao().getSessao().createCriteria(classe).list();
+		List<T> list = this.getDao().createCriteria(classe).list();
 		return list;
 		
 	}
 	
 	@SuppressWarnings("unchecked")
-	public T listarPeloId(Long codigo) {
+	public T listarPeloId(Long codigo) throws Exception {
 		
-		T objeto = (T) this.getDao().getSessao().createCriteria(classe).add(Restrictions.idEq(codigo)).uniqueResult();
+		T objeto = (T) this.getDao().createCriteria(classe).add(Restrictions.idEq(codigo)).uniqueResult();
 		return objeto;
 		
 	}
 	
-	public boolean gravar(T objeto) {
+	public boolean gravar(T objeto) throws Exception {
 		
 		if (this.validacaoGravar(objeto)) {
 			this.getDao().gravar(objeto);
@@ -53,7 +54,7 @@ public abstract class ResourceGenerico<T> {
 		
 	}
 	
-	public boolean alterar(T objeto) {
+	public boolean alterar(T objeto) throws Exception {
 		
 		if (this.validacaoAlterar(objeto)) {
 			this.getDao().alterar(objeto);
@@ -63,7 +64,7 @@ public abstract class ResourceGenerico<T> {
 		
 	}
 	
-	public boolean remover(Long codigo) {
+	public boolean remover(Long codigo) throws Exception {
 		
 		T objeto = this.listarPeloId(codigo);
 		if (this.validacaoExcluir(objeto)) {
@@ -99,6 +100,11 @@ public abstract class ResourceGenerico<T> {
 
 	public void setModel(Model model) {
 		this.model = model;
+	}
+	
+	@Override
+	public void close() throws Exception {
+		this.getDao().close();
 	}
 	
 }

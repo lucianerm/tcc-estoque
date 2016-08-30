@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.luciianester.gestorestoque.core.ControllerCadastroFilho;
 import com.luciianester.gestorestoque.core.MensagemTipo;
+import com.luciianester.gestorestoque.core.ResourceGenerico;
+import com.luciianester.gestorestoque.core.dao.DAO;
 import com.luciianester.gestorestoque.model.Produto;
 import com.luciianester.gestorestoque.model.UnidadeDeMedida;
 import com.luciianester.gestorestoque.resources.produto.ProdutoResources;
@@ -22,19 +24,19 @@ public class UnidadeDeMedidaController extends ControllerCadastroFilho<UnidadeDe
 	private Produto produto = null;
 	
 	public UnidadeDeMedidaController() {
-		super("unidadedemedida", new UnidadeDeMedidaResources());
+		super("unidadedemedida");
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "resource" })
 	@Override
-	public void pesquisar() throws Exception {
+	public void pesquisar(ResourceGenerico<UnidadeDeMedida> resource) throws Exception {
 		
 		this.setObjeto(new UnidadeDeMedida());
 		
-		this.produto = new ProdutoResources().listarPeloId(this.getPaiId());
+		this.produto = new ProdutoResources(resource.getDao()).listarPeloId(this.getPaiId());
 		this.addAttribute("produto", produto);
 		
-		List<UnidadeDeMedida> lista = this.getRes().getDao().getSessao()
+		List<UnidadeDeMedida> lista = resource.getDao()
 				.createCriteria(UnidadeDeMedida.class)
 				.add(Restrictions.eq("produto", this.produto))
 				.addOrder(Order.asc("quantidade"))
@@ -45,27 +47,27 @@ public class UnidadeDeMedidaController extends ControllerCadastroFilho<UnidadeDe
 	}
 
 	@Override
-	public void cadastrar() throws Exception {
-		this.pesquisar();
+	public void cadastrar(ResourceGenerico<UnidadeDeMedida> resource) throws Exception {
+		this.pesquisar(resource);
 	}
 
 	@Override
-	public void editar(Long id) throws Exception {
+	public void editar(ResourceGenerico<UnidadeDeMedida> resource, Long id) throws Exception {
 		
-		this.pesquisar();
+		this.pesquisar(resource);
 		
-		UnidadeDeMedida objeto = this.getRes().listarPeloId(id);
+		UnidadeDeMedida objeto = resource.listarPeloId(id);
 		this.setObjeto(objeto);
 		
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "resource" })
 	@Override
-	public String salvar(UnidadeDeMedida objeto) throws Exception {
+	public String salvar(ResourceGenerico<UnidadeDeMedida> resource, UnidadeDeMedida objeto) throws Exception {
 		
-		this.pesquisar();
+		this.pesquisar(resource);
 		
-		this.produto = new ProdutoResources().listarPeloId(this.getPaiId());
+		this.produto = new ProdutoResources(resource.getDao()).listarPeloId(this.getPaiId());
 		objeto.setProduto(this.produto);
 		this.setObjeto(objeto);
 		
@@ -94,7 +96,7 @@ public class UnidadeDeMedidaController extends ControllerCadastroFilho<UnidadeDe
 		
 		if (!objeto.getQuantidade().equals(1)) {
 			
-			Criteria listarItens = this.getRes().getDao().getSessao()
+			Criteria listarItens = resource.getDao()
 					.createCriteria(UnidadeDeMedida.class)
 					.add(Restrictions.eq("produto", this.produto));
 			
@@ -122,21 +124,26 @@ public class UnidadeDeMedidaController extends ControllerCadastroFilho<UnidadeDe
 		}
 			
 		if (objeto.getUnidadeDeMedidaId()==null) {
-			this.getRes().gravar(objeto);
+			resource.gravar(objeto);
 		} else {
-			this.getRes().alterar(objeto);
+			resource.alterar(objeto);
 		}
 		
-		return "redirect:/produto/"+this.getPaiId()+"/"+this.getCaminho()+"/"+this.getRes().getId(objeto)+"?tipo="+MensagemTipo.SALVOU_SUCESSO;
+		return "redirect:/produto/"+this.getPaiId()+"/"+this.getCaminho()+"/"+resource.getId(objeto)+"?tipo="+MensagemTipo.SALVOU_SUCESSO;
 		
 	}
 
 	@Override
-	public String excluir(Long id) throws Exception {
+	public String excluir(ResourceGenerico<UnidadeDeMedida> resource, Long id) throws Exception {
 		
-		this.getRes().remover(id);
+		resource.remover(id);
 		return "redirect:/produto/"+this.getPaiId()+"/"+this.getCaminho();
 		
+	}
+	
+	@Override
+	public ResourceGenerico<UnidadeDeMedida> newResource() {
+		return new UnidadeDeMedidaResources(new DAO());
 	}
 	
 }

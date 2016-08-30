@@ -2,12 +2,13 @@ package com.luciianester.gestorestoque.resources.produto;
 
 import com.luciianester.gestorestoque.core.ModelUtils;
 import com.luciianester.gestorestoque.core.ResourceGenerico;
+import com.luciianester.gestorestoque.core.dao.DAO;
 import com.luciianester.gestorestoque.model.Produto;
 
 public class ProdutoResources extends ResourceGenerico<Produto> {
 
-	public ProdutoResources() {
-		super(Produto.class);
+	public ProdutoResources(DAO dao) {
+		super(Produto.class, dao);
 	}
 
 	@Override

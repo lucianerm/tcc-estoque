@@ -1,12 +1,13 @@
 package com.luciianester.gestorestoque.resources.perfil;
 
 import com.luciianester.gestorestoque.core.ResourceGenerico;
+import com.luciianester.gestorestoque.core.dao.DAO;
 import com.luciianester.gestorestoque.model.Perfil;
 
 public class PerfilResources extends ResourceGenerico<Perfil> {
 
-	public PerfilResources() {
-		super(Perfil.class);
+	public PerfilResources(DAO dao) {
+		super(Perfil.class, dao);
 	}
 
 	@Override

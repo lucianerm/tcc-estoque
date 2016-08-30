@@ -7,25 +7,30 @@ import org.springframework.ui.Model;
 public abstract class ControllerBase<T> {
 
 	private String caminho;
-	private ResourceGenerico<T> resource;
+	
 	protected Model model;
 
 	public String getCaminho() {
+		
 		return caminho;
+		
 	}
 	
-	public ResourceGenerico<T> getRes() {
-		this.resource.setModel(this.model);
+	public ResourceGenerico<T> createResource() {
+		
+		ResourceGenerico<T> resource = newResource();
+		resource.setModel(this.model);
+		
 		return resource;
+		
 	}
 	
 	public Model getModel() {
 		return model;
 	}
 	
-	public ControllerBase(String caminho, ResourceGenerico<T> resource) {
+	public ControllerBase(String caminho) {
 		this.caminho = caminho;
-		this.resource = resource;
 	}
 
 	protected void addAttribute(String nome, Object objeto) {
@@ -50,18 +55,21 @@ public abstract class ControllerBase<T> {
 	}
 	
 	abstract 
-	public void pesquisar() throws Exception;
+	public void pesquisar(ResourceGenerico<T> resource) throws Exception;
 	
 	abstract 
-	public void cadastrar() throws Exception;
+	public void cadastrar(ResourceGenerico<T> resource) throws Exception;
 	
 	abstract 
-	public void editar(Long id) throws Exception;
+	public void editar(ResourceGenerico<T> resource, Long id) throws Exception;
 	
 	abstract 
-	public String salvar(T objeto) throws Exception;
+	public String salvar(ResourceGenerico<T> resource, T objeto) throws Exception;
 	
 	abstract 
-	public String excluir(Long id) throws Exception;
+	public String excluir(ResourceGenerico<T> resource, Long id) throws Exception;
+	
+	abstract
+	public ResourceGenerico<T> newResource();
 	
 }

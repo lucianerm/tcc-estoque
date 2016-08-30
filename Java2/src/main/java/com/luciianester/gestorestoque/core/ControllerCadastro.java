@@ -8,66 +8,97 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public abstract class ControllerCadastro<T> extends ControllerBase<T> {
 
-	public ControllerCadastro(String caminho, ResourceGenerico<T> resource) {
-		super(caminho, resource);
+	public ControllerCadastro(String caminho) {
+		super(caminho);
 	}
 
 	@RequestMapping("")
 	public String pesquisa(Model model) throws Exception {
 		
-		this.model = model;
-		this.pesquisar();
-		
-		return this.getCaminho()+"/pesquisa";
+		try (ResourceGenerico<T> resource = this.createResource();) {
+			
+			this.model = model;
+			this.pesquisar(resource);
+			
+			return this.getCaminho()+"/pesquisa";
+			
+		} catch (Exception e) {
+			throw e;
+		}
 		
 	}
 	
 	@RequestMapping("/cadastro")
 	public String cadastro(@RequestParam(required=false) String tipo, Model model) throws Exception {
 		
-		this.model = model;
-		
-		if (tipo!=null) {
-			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
-				new ModelUtils(model).setMensagemSalvouSucesso();
+		try (ResourceGenerico<T> resource = this.createResource();) {
+			
+			this.model = model;
+			
+			if (tipo!=null) {
+				if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
+					new ModelUtils(model).setMensagemSalvouSucesso();
+				}
 			}
+			
+			this.cadastrar(resource);
+			
+			return this.getCaminho()+"/cadastro";
+			
+		} catch (Exception e) {
+			throw e;
 		}
-		
-		this.cadastrar();
-		
-		return this.getCaminho()+"/cadastro";
 		
 	}
 	
 	@RequestMapping("/{id}")
 	public String edita(@RequestParam(required=false) String tipo, @PathVariable("id") Long id, Model model) throws Exception {
-		
-		this.model = model;
-		
-		if (tipo!=null) {
-			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
-				new ModelUtils(model).setMensagemSalvouSucesso();
+
+		try (ResourceGenerico<T> resource = this.createResource();) {
+			
+			this.model = model;
+			
+			if (tipo!=null) {
+				if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
+					new ModelUtils(model).setMensagemSalvouSucesso();
+				}
 			}
+			
+			this.editar(resource, id);
+			
+			return this.getCaminho()+"/cadastro";
+			
+		} catch (Exception e) {
+			throw e;
 		}
-		
-		this.editar(id);
-		
-		return this.getCaminho()+"/cadastro";
 		
 	}
 	
 	@RequestMapping("/gravar")
 	public String gravar(@ModelAttribute("objeto") T objeto, Model model) throws Exception {
-		
-		this.model = model;
-		return salvar(objeto);
+
+		try (ResourceGenerico<T> resource = this.createResource();) {
+			
+			this.model = model;
+			return salvar(resource, objeto);
+			
+		} catch (Exception e) {
+			throw e;
+		}
 		
 	}
 	
 	@RequestMapping("/excluir/{id}")
 	public String exclui(@PathVariable("id") Long id, Model model) throws Exception {
+
+		try (ResourceGenerico<T> resource = this.createResource();) {
+			
+			return this.excluir(resource, id);
+			
+		} catch (Exception e) {
+			throw e;
+		}
 		
-		return this.excluir(id);
 		
 	}
 	

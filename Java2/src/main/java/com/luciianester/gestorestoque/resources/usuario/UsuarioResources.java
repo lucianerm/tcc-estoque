@@ -1,12 +1,13 @@
 package com.luciianester.gestorestoque.resources.usuario;
 
 import com.luciianester.gestorestoque.core.ResourceGenerico;
+import com.luciianester.gestorestoque.core.dao.DAO;
 import com.luciianester.gestorestoque.model.Usuario;
 
 public class UsuarioResources extends ResourceGenerico<Usuario> {
 
-	public UsuarioResources() {
-		super(Usuario.class);
+	public UsuarioResources(DAO dao) {
+		super(Usuario.class, dao);
 	}
 
 	@Override

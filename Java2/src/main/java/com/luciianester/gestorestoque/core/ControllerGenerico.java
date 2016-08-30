@@ -4,50 +4,50 @@ import java.util.List;
 
 public abstract class ControllerGenerico<T> extends ControllerCadastro<T> {
 
-	public ControllerGenerico(String caminho, ResourceGenerico<T> resource) {
-		super(caminho, resource);
+	public ControllerGenerico(String caminho) {
+		super(caminho);
 	}
 
 	@Override
-	public void pesquisar() throws Exception {
+	public void pesquisar(ResourceGenerico<T> resource) throws Exception {
 
-		List<T> lista = this.getRes().listarTodos();
+		List<T> lista = resource.listarTodos();
 		this.setLista(lista);
 		
 	}
 	
 	@Override
-	public void cadastrar() throws Exception {
+	public void cadastrar(ResourceGenerico<T> resource) throws Exception {
 		
-		T objeto = this.getRes().newInstance();
+		T objeto = resource.newInstance();
 		this.setObjeto(objeto);
 		
 	}
 	
 	@Override
-	public void editar(Long id) throws Exception {
+	public void editar(ResourceGenerico<T> resource, Long id) throws Exception {
 		
-		T objeto = this.getRes().listarPeloId(id);
+		T objeto = resource.listarPeloId(id);
 		this.setObjeto(objeto);
 		
 	}
 	
 	@Override
-	public String salvar(T objeto) throws Exception {
+	public String salvar(ResourceGenerico<T> resource, T objeto) throws Exception {
 		
 		try {
 		
-			if (this.getRes().ehNovo(objeto)) {
-				if (!this.getRes().gravar(objeto)) {
+			if (resource.ehNovo(objeto)) {
+				if (!resource.gravar(objeto)) {
 					return this.getCaminho()+"/cadastro";
 				}
 			} else {
-				if (!this.getRes().alterar(objeto)) {
+				if (!resource.alterar(objeto)) {
 					return this.getCaminho()+"/cadastro";
 				}
 			}
 			
-			return "redirect:/"+this.getCaminho()+"/"+this.getRes().getId(objeto)+"?tipo="+MensagemTipo.SALVOU_SUCESSO;
+			return "redirect:/"+this.getCaminho()+"/"+resource.getId(objeto)+"?tipo="+MensagemTipo.SALVOU_SUCESSO;
 			
 		} catch (Exception e) {
 			
@@ -63,9 +63,9 @@ public abstract class ControllerGenerico<T> extends ControllerCadastro<T> {
 	}
 	
 	@Override
-	public String excluir(Long id) throws Exception {
+	public String excluir(ResourceGenerico<T> resource, Long id) throws Exception {
 		
-		if (this.getRes().remover(id)) {
+		if (resource.remover(id)) {
 			return "redirect:/"+this.getCaminho()+"/pesquisa";
 		} else {
 			return this.getCaminho()+"/pesquisa";

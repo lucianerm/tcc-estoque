@@ -1,12 +1,13 @@
 package com.luciianester.gestorestoque.resources.entrada;
 
 import com.luciianester.gestorestoque.core.ResourceGenerico;
+import com.luciianester.gestorestoque.core.dao.DAO;
 import com.luciianester.gestorestoque.model.Entrada;
 
 public class EntradaResources extends ResourceGenerico<Entrada> {
 
-	public EntradaResources() {
-		super(Entrada.class);
+	public EntradaResources(DAO dao) {
+		super(Entrada.class, dao);
 	}
 
 	@Override

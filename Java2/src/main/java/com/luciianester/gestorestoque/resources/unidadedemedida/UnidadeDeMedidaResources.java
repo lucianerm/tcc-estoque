@@ -1,14 +1,14 @@
 package com.luciianester.gestorestoque.resources.unidadedemedida;
 
 import com.luciianester.gestorestoque.core.ResourceGenerico;
+import com.luciianester.gestorestoque.core.dao.DAO;
 import com.luciianester.gestorestoque.model.UnidadeDeMedida;
 
 public class UnidadeDeMedidaResources extends ResourceGenerico<UnidadeDeMedida> {
 
-	public UnidadeDeMedidaResources() {
-		super(UnidadeDeMedida.class);
+	public UnidadeDeMedidaResources(DAO dao) {
+		super(UnidadeDeMedida.class, dao);
 	}
-
 
 	@Override
 	public Long getId(UnidadeDeMedida objeto) {

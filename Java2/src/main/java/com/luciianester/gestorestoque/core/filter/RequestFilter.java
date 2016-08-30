@@ -12,10 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.luciianester.gestorestoque.enums.PerfilTipo;
 import com.luciianester.gestorestoque.enums.Tela;
 
 public class RequestFilter implements Filter {
@@ -38,7 +36,7 @@ public class RequestFilter implements Filter {
 		try {
 			
 			HttpServletRequest req = (HttpServletRequest) request;
-			HttpServletResponse res = (HttpServletResponse) response; 
+			//HttpServletResponse res = (HttpServletResponse) response; 
 			
 			HttpSession session = req.getSession();
 			

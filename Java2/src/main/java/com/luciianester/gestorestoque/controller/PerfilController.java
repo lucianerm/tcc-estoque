@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.luciianester.gestorestoque.core.ControllerGenerico;
+import com.luciianester.gestorestoque.core.ResourceGenerico;
+import com.luciianester.gestorestoque.core.dao.DAO;
 import com.luciianester.gestorestoque.enums.PerfilTipo;
 import com.luciianester.gestorestoque.model.Perfil;
 import com.luciianester.gestorestoque.resources.perfil.PerfilResources;
@@ -17,12 +19,12 @@ import com.luciianester.gestorestoque.resources.perfil.PerfilResources;
 public class PerfilController extends ControllerGenerico<Perfil>{
 
 	public PerfilController() {
-		super("perfil", new PerfilResources());
+		super("perfil");
 	}
 	
 	@Override
-	public void cadastrar() throws Exception {
-		super.cadastrar();
+	public void cadastrar(ResourceGenerico<Perfil> resource) throws Exception {
+		super.cadastrar(resource);
 
 		List<PerfilTipo> tipos = new ArrayList<PerfilTipo>(Arrays.asList(PerfilTipo.values()));
 		this.addAttribute("tipos", tipos);
@@ -30,12 +32,17 @@ public class PerfilController extends ControllerGenerico<Perfil>{
 	}
 	
 	@Override
-	public void editar(Long id) throws Exception {
-		super.editar(id);
+	public void editar(ResourceGenerico<Perfil> resource, Long id) throws Exception {
+		super.editar(resource, id);
 
 		List<PerfilTipo> tipos = new ArrayList<PerfilTipo>(Arrays.asList(PerfilTipo.values()));
 		this.addAttribute("tipos", tipos);
 		
+	}
+
+	@Override
+	public ResourceGenerico<Perfil> newResource() {
+		return new PerfilResources(new DAO());
 	}
 	
 }

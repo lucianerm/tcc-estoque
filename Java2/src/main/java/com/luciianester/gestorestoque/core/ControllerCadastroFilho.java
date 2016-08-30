@@ -14,72 +14,102 @@ public abstract class ControllerCadastroFilho<T> extends ControllerBase<T> {
 		return paiId;
 	}
 
-	public ControllerCadastroFilho(String caminho, ResourceGenerico<T> resource) {
-		super(caminho, resource);
+	public ControllerCadastroFilho(String caminho) {
+		super(caminho);
 	}
 
 	@RequestMapping("")
 	public String pesquisa(@PathVariable("paiId") Long paiId, Model model) throws Exception {
-		
-		this.paiId = paiId;
-		this.model = model;
-		this.pesquisar();
-		
-		return this.getCaminho()+"/cadastro";
+
+		try (ResourceGenerico<T> resource = this.createResource();) {
+			
+			this.paiId = paiId;
+			this.model = model;
+			this.pesquisar(resource);
+			
+			return this.getCaminho()+"/cadastro";
+			
+		} catch (Exception e) {
+			throw e;
+		}
 		
 	}
 	
 	@RequestMapping("/cadastro")
 	public String cadastro(@PathVariable("paiId") Long paiId, @RequestParam(required=false) String tipo, Model model) throws Exception {
-		
-		this.paiId = paiId;
-		
-		if (tipo!=null) {
-			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
-				new ModelUtils(model).setMensagemSalvouSucesso();
+
+		try (ResourceGenerico<T> resource = this.createResource();) {
+			
+			this.paiId = paiId;
+			
+			if (tipo!=null) {
+				if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
+					new ModelUtils(model).setMensagemSalvouSucesso();
+				}
 			}
+			
+			this.cadastrar(resource);
+			
+			return this.getCaminho()+"/cadastro";
+			
+		} catch (Exception e) {
+			throw e;
 		}
-		
-		this.cadastrar();
-		
-		return this.getCaminho()+"/cadastro";
 		
 	}
 	
 	@RequestMapping("/{id}")
 	public String edita(@PathVariable("paiId") Long paiId, @RequestParam(required=false) String tipo, @PathVariable("id") Long id, Model model) throws Exception {
-		
-		this.paiId = paiId;
-		
-		if (tipo!=null) {
-			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
-				new ModelUtils(model).setMensagemSalvouSucesso();
+
+		try (ResourceGenerico<T> resource = this.createResource();) {
+			
+			this.paiId = paiId;
+			
+			if (tipo!=null) {
+				if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
+					new ModelUtils(model).setMensagemSalvouSucesso();
+				}
 			}
+			
+			this.model = model;
+			this.editar(resource, id);
+			
+			return this.getCaminho()+"/cadastro";
+			
+		} catch (Exception e) {
+			throw e;
 		}
-		
-		this.model = model;
-		this.editar(id);
-		
-		return this.getCaminho()+"/cadastro";
 		
 	}
 	
 	@RequestMapping("/gravar")
 	public String gravar(@PathVariable("paiId") Long paiId, @ModelAttribute("objeto") T objeto, Model model) throws Exception {
-		
-		this.paiId = paiId;
-		
-		this.model = model;
-		return salvar(objeto);
+
+		try (ResourceGenerico<T> resource = this.createResource();) {
+			
+			this.paiId = paiId;
+			
+			this.model = model;
+			return salvar(resource, objeto);
+			
+		} catch (Exception e) {
+			throw e;
+		}
 		
 	}
 	
 	@RequestMapping("/excluir/{id}")
 	public String exclui(@PathVariable("paiId") Long paiId, @PathVariable("id") Long id, Model model) throws Exception {
-		
-		this.paiId = paiId;
-		
-		return this.excluir(id);
+
+		try (ResourceGenerico<T> resource = this.createResource();) {
+			
+			this.paiId = paiId;
+			
+			return this.excluir(resource, id);
+			
+		} catch (Exception e) {
+			throw e;
+		}
 		
 	}
 
