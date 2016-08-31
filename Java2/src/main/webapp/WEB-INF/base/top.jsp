@@ -20,25 +20,12 @@
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/shop-homepage.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-    
-    <!-- 
-    <style type="text/css">
-		.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
-		.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
-		.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
-		.tg .tg-4eph{background-color:#f9f9f9}
-	</style>
- -->
 	<link href="${pageContext.request.contextPath}/resources/css/select2.min.css" rel="stylesheet"/>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery.1.10.2.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/select2.min.js"></script>
+	
+	<!-- https://github.com/igorescobar/jQuery-Mask-Plugin  -->
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.mask.min.js"></script>
 
 </head>
 
@@ -88,10 +75,6 @@
 						<a href="${pageContext.request.contextPath}/${item.caminho}" class="list-group-item">${item.nome}</a>
 					</c:forEach>
                 
-                    <a href="${pageContext.request.contextPath}/perfil" class="list-group-item">Perfil</a>
-                    <a href="${pageContext.request.contextPath}/produto" class="list-group-item">Produto</a>
-                    <a href="${pageContext.request.contextPath}/entrada" class="list-group-item">Entrada</a>
-                    <a href="#" class="list-group-item">Category 3</a>
                 </div>
             </div>
 

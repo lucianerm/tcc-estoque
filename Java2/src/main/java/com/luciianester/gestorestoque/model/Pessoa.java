@@ -30,11 +30,8 @@ public class Pessoa {
 	private PessoaTipo tipo;
 	
 	@Column(length = 20)
-	private String cpf;
+	private String cpfoucnpj;
 	
-	@Column(length = 20)
-	private String cnpj;
-
 	public Long getPessoaId() {
 		return pessoaId;
 	}
@@ -67,20 +64,12 @@ public class Pessoa {
 		this.tipo = tipo;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getCpfoucnpj() {
+		return cpfoucnpj;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setCpfoucnpj(String cpfoucnpj) {
+		this.cpfoucnpj = cpfoucnpj;
 	}
 
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-	
 }
