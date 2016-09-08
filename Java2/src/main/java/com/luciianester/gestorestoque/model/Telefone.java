@@ -22,8 +22,8 @@ public class Telefone {
 	@Column(length = 200)
 	private String descricao;
 	
-	@Column
-	private Integer numero;
+	@Column(length = 20)
+	private String numero;
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="pessoaId")
@@ -45,11 +45,11 @@ public class Telefone {
 		this.descricao = descricao;
 	}
 
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

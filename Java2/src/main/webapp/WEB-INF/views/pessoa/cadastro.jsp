@@ -6,26 +6,15 @@
 <%@include file="../../base/top.jsp" %>
 
 <div class="panel panel-default">
-  <div class="panel-heading">
-	<ol class="breadcrumb">
-	 
-	  <li><a href="<c:url value='/pessoa'/>">Voltar</a></li>
-	  <li class="active panel-title" >Cadastro Pessoa</li>
-	 
-	</ol>
-  </div>
+  
+  <%@include file="cabecalho.jsp" %>
   
   <div class="panel-body">
    
-	<ul class="nav nav-tabs">
-	  <li role="presentation" class="active"><a>Cadastro</a></li>
-	  <c:if test="${empty objeto.pessoaId}">
-	  	<li class="disabled disabledTab" role="presentation"><a>Unidade de Medida</a></li>
-	  </c:if>
-	  <c:if test="${!empty objeto.pessoaId}">
-	  	<li role="presentation"><a href="<c:url value='/pessoa/${objeto.pessoaId}/unidadedemedida'/>">Unidade de Medida</a></li>
-	  </c:if>
-	</ul>
+	<jsp:include page="menu.jsp">
+		<jsp:param name="pessoa" value="active"/>
+		<jsp:param name="pessoaId" value="${objeto.pessoaId}"/>
+	</jsp:include>
 	
 	<%@include file="../../base/mensagem.jsp" %>
 	
