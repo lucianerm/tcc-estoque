@@ -52,10 +52,6 @@ public class Entrada {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
-	public Entrada() {
-		this.data = new Date();
-	}
 
 	public Pessoa getFornecedor() {
 		return fornecedor;
@@ -71,6 +67,11 @@ public class Entrada {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	
+	public Entrada() {
+		this.data = new Date();
 	}
 	
 }

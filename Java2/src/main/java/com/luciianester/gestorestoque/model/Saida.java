@@ -69,4 +69,7 @@ public class Saida {
 		this.usuario = usuario;
 	}
 	
+	public Saida() {
+		this.data = new Date();
+	}
 }

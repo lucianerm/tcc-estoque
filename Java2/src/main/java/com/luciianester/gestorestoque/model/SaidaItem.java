@@ -25,16 +25,12 @@ public class SaidaItem {
 	private Saida saida;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="produtoId")
-	private Produto produto;
+	@JoinColumn(name="entradaItemId")
+	private EntradaItem entradaItem;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="unidadeDeMedidaId")
 	private UnidadeDeMedida unidadeDeMedida;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="entradaItemId")
-	private EntradaItem entradaItem;
 	
 	@Column
 	private BigDecimal quantidade;
@@ -58,12 +54,12 @@ public class SaidaItem {
 		this.saida = saida;
 	}
 
-	public Produto getProduto() {
-		return produto;
+	public EntradaItem getEntradaItem() {
+		return entradaItem;
 	}
 
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setEntradaItem(EntradaItem entradaItem) {
+		this.entradaItem = entradaItem;
 	}
 
 	public UnidadeDeMedida getUnidadeDeMedida() {
@@ -72,14 +68,6 @@ public class SaidaItem {
 
 	public void setUnidadeDeMedida(UnidadeDeMedida unidadeDeMedida) {
 		this.unidadeDeMedida = unidadeDeMedida;
-	}
-
-	public EntradaItem getEntradaItem() {
-		return entradaItem;
-	}
-
-	public void setEntradaItem(EntradaItem entradaItem) {
-		this.entradaItem = entradaItem;
 	}
 
 	public BigDecimal getQuantidade() {
