@@ -5,12 +5,8 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.luciianester.gestorestoque.core.ControllerCadastroFilho;
 import com.luciianester.gestorestoque.core.MensagemTipo;
@@ -19,7 +15,6 @@ import com.luciianester.gestorestoque.core.dao.DAO;
 import com.luciianester.gestorestoque.model.Produto;
 import com.luciianester.gestorestoque.model.UnidadeDeMedida;
 import com.luciianester.gestorestoque.resources.produto.ProdutoResources;
-import com.luciianester.gestorestoque.resources.unidadedemedida.UnidadeDeMedidaDoProduto;
 import com.luciianester.gestorestoque.resources.unidadedemedida.UnidadeDeMedidaResources;
 
 @Controller
