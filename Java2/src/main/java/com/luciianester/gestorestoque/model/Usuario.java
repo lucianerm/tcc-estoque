@@ -33,7 +33,7 @@ public class Usuario {
 	private String senha;
 	
 	@Enumerated(EnumType.ORDINAL)
-	private Situacao situacao;
+	private Situacao situacao = Situacao.ATIVO;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="perfilId")
