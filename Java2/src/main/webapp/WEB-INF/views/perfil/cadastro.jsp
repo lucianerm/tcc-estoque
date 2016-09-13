@@ -14,6 +14,7 @@
 	<jsp:include page="menu.jsp">
 		<jsp:param name="perfil" value="active"/>
 		<jsp:param name="perfilId" value="${objeto.perfilId}"/>
+		<jsp:param name="tipo" value="${objeto.tipo}"/>
 	</jsp:include>
 	
 	<%@include file="../../base/mensagem.jsp" %>
