@@ -14,7 +14,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.luciianester.gestorestoque.core.dao.DAO;
+import com.luciianester.gestorestoque.enums.PerfilTipo;
 import com.luciianester.gestorestoque.enums.Tela;
+import com.luciianester.gestorestoque.model.Usuario;
+import com.luciianester.gestorestoque.resources.perfil.PerfilResources;
 
 public class RequestFilter implements Filter {
 
@@ -40,58 +44,39 @@ public class RequestFilter implements Filter {
 			
 			HttpSession session = req.getSession();
 			
-			List<Tela> telas = new ArrayList<Tela>(Arrays.asList(Tela.values()));
-			session.setAttribute("telas", telas);
-			
 			String metodo = req.getRequestURI().replaceAll(req.getContextPath(), "");
+			
+			List<Tela> telas = new ArrayList<>();
 			
 			if (!(metodo.indexOf("resources")>=0) && !(metodo.indexOf("login")>=0)) {
 				
 				
 				Object usuario = session.getAttribute("usuario");
 				
-				
 				if (usuario==null) {
 					
 					req.getRequestDispatcher("/login").forward(request, response);
 					login = true;
 					
+				} else {
+					
+					Usuario user = (Usuario) usuario;
+					
+					if (user.getPerfil().getTipo().equals(PerfilTipo.ADMINISTRADOR)) {
+						
+						telas = new ArrayList<Tela>(Arrays.asList(Tela.values()));
+						
+					} else {
+						
+						telas = new PerfilResources(new DAO()).listTelasByPerfil(user.getPerfil());
+						
+					}
+					
 				}
 				
-				/*
-				HttpSession session = req.getSession();
-				
-				Object usuario = session.getAttribute("usuario");
-				
-				
-				if (usuario==null) {
-					usuario = "user " + new Date().getTime();
-				}
-				
-				session.setAttribute("usuario", usuario);
-				
-				System.out.println("usuario: " + usuario);
-				System.out.println("getRequestedSessionId: " + req.getRequestedSessionId());
-				System.out.println("fim ");
-				
-				
-		        
-				
-				/*
-				System.out.println("metodo: " + metodo);
-				String usuario = req.getHeader("usuario");
-				String userAgent = req.getHeader("user-agent");
-				
-				System.out.println("usuario: " + usuario);
-				System.out.println("userAgent: " + userAgent);
-				
-				if (usuario==null) {
-					usuario = "user " + new Date().getTime();
-				}
-				
-				res.setHeader("usuario", usuario);
-				*/
 			}
+			
+			session.setAttribute("telasAcesso", telas);
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

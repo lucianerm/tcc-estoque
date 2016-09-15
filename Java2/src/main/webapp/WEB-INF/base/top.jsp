@@ -50,6 +50,9 @@
                     <li>
                         <a href="#"> ${usuario.nome}</a>
                     </li>
+                    <li>
+                        <a href="/GestorEstoque/login/deslogar"> Sair</a>
+                    </li>
                     <!-- li>
                         <a href="#">Services</a>
                     </li>
@@ -71,7 +74,7 @@
             <div class="col-md-3">
                 <div class="list-group">
                 
-                	<c:forEach items="${telas}" var="item">
+                	<c:forEach items="${telasAcesso}" var="item">
 						<a href="${pageContext.request.contextPath}/${item.caminho}" class="list-group-item">${item.nome}</a>
 					</c:forEach>
                 

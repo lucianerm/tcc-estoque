@@ -26,7 +26,6 @@ public class Privilegio {
 	@JoinColumn(name="perfilId")
 	private Perfil perfil;
 	
-	
 	@Enumerated(EnumType.ORDINAL)
 	private Tela tela;
 	
@@ -77,6 +76,14 @@ public class Privilegio {
 
 	public void setExcluir(boolean excluir) {
 		this.excluir = excluir;
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 	
 }

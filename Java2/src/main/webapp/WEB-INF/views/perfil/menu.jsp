@@ -9,7 +9,7 @@
 	<c:if test="${!empty param.perfilId}">
 	
 		<c:if test="${param.tipo=='USUARIO'}">
-			<li role="presentation" class="${param.item}"><a href="<c:url value='/perfil/${param.perfilId}/privilegios'/>">Privilégio</a></li>
+			<li role="presentation" class="${param.item}"><a href="<c:url value='/perfil/${param.perfilId}/privilegio'/>">Privilégio</a></li>
 		</c:if>
 			
 		<c:if test="${param.tipo=='ADMINISTRADOR'}">

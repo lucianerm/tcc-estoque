@@ -33,7 +33,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/logar")
-	public String gravar(@ModelAttribute("objeto") Login objeto, Model model, HttpServletRequest request) throws Exception {
+	public String logar(@ModelAttribute("objeto") Login objeto, Model model, HttpServletRequest request) throws Exception {
 		
 		DAO dao = new DAO();
 		
@@ -88,6 +88,12 @@ public class LoginController {
 			throw e;
 		}
 		
+	}
+	
+	@RequestMapping("/deslogar")
+	public String deslogar(HttpServletRequest request) throws Exception {
+		request.getSession().setAttribute("usuario", null);
+		return "redirect:/";
 	}
 
 }
