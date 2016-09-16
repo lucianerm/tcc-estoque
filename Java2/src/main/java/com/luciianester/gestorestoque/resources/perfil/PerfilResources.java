@@ -42,7 +42,7 @@ public class PerfilResources extends ResourceGenerico<Perfil> {
 		return true;
 	}
 	
-	public List<Tela> listTelasByPerfil(Perfil perfil) throws Exception {
+	public List<Privilegio> listPrivilegiosByPerfil(Perfil perfil) throws Exception {
 		
 		List<Tela> lista = new ArrayList<>();
 
@@ -52,13 +52,7 @@ public class PerfilResources extends ResourceGenerico<Perfil> {
 				.addOrder(Order.asc("privilegioId"))
 				.list();
 		
-		for (Privilegio privilegio : privilegios) {
-			if (!lista.contains(privilegio.getTela())) {
-				lista.add(privilegio.getTela());
-			}
-		}
-		
-		return lista;
+		return privilegios;
 		
 	}
 

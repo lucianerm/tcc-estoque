@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import com.luciianester.gestorestoque.core.dao.DAO;
 import com.luciianester.gestorestoque.enums.PerfilTipo;
 import com.luciianester.gestorestoque.enums.Tela;
+import com.luciianester.gestorestoque.model.Privilegio;
 import com.luciianester.gestorestoque.model.Usuario;
 import com.luciianester.gestorestoque.resources.perfil.PerfilResources;
 
@@ -64,11 +65,64 @@ public class RequestFilter implements Filter {
 					
 					if (user.getPerfil().getTipo().equals(PerfilTipo.ADMINISTRADOR)) {
 						
+						session.setAttribute("telaAcessoAlterar", true);
+						session.setAttribute("telaAcessoExcluir", true);
 						telas = new ArrayList<Tela>(Arrays.asList(Tela.values()));
+						for (Tela tela : telas) {
+							if (metodo.indexOf(tela.getCaminho())>=0) {
+								session.setAttribute("telaAcessoCaminho", tela.getCaminho());
+								session.setAttribute("telaAcessoNome", tela.getNome());
+								break;
+							}
+						}
 						
 					} else {
 						
-						telas = new PerfilResources(new DAO()).listTelasByPerfil(user.getPerfil());
+						List<Privilegio> privilegios = new PerfilResources(new DAO()).listPrivilegiosByPerfil(user.getPerfil());
+						for (Privilegio privilegio : privilegios) {
+							if (!telas.contains(privilegio.getTela())) {
+								telas.add(privilegio.getTela());
+							}
+						}
+						
+						boolean temAcesso = true;
+						if (!metodo.equals("/") && !metodo.equals("")) {
+							
+							System.out.println("method: " + req.getMethod());
+							
+							temAcesso = false;
+							for (Privilegio privilegio : privilegios) {
+								if (metodo.indexOf(privilegio.getTela().getCaminho())>=0) {
+									
+									session.setAttribute("telaAcessoCaminho", privilegio.getTela().getCaminho());
+									session.setAttribute("telaAcessoNome", privilegio.getTela().getNome());
+									
+									session.setAttribute("telaAcessoAlterar", privilegio.isAlterar());
+									session.setAttribute("telaAcessoExcluir", privilegio.isExcluir());
+									
+									if (req.getMethod().equals("GET")) {
+										
+										if (metodo.indexOf("excluir")>=0) {
+											temAcesso = privilegio.isExcluir();
+										} else {
+											temAcesso = true;
+										}
+										
+									} else if (req.getMethod().equals("POST")) {
+										
+										temAcesso = privilegio.isAlterar();
+										
+									}
+									
+									break;
+								}
+							}
+						}
+						
+						if (!temAcesso) {
+							request.setAttribute("errorMessage", "usuário sem acesso");
+							request.getRequestDispatcher("/WEB-INF/views/error/erro.jsp").forward(request, response);
+						}
 						
 					}
 					
@@ -88,7 +142,7 @@ public class RequestFilter implements Filter {
 			} catch (Exception ex) {
 				ex.printStackTrace();
 				request.setAttribute("errorMessage", ex);
-				request.getRequestDispatcher("/WEB-INF/views/jsp/error.jsp")
+				request.getRequestDispatcher("/WEB-INF/views/error/erro.jsp")
 	                               .forward(request, response);
 			}
 		}

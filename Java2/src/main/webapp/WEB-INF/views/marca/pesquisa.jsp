@@ -6,12 +6,14 @@
 <%@include file="../../base/top.jsp" %>
 
 <div class="panel panel-default">
-	<div class="panel-heading">
+	<!-- div class="panel-heading">
 		<ol class="breadcrumb">
 			<li class="active panel-title" >Marcas</li>
 			<li><a href="marca/cadastro" >Cadastrar</a></li>
 		</ol>
-	</div>
+	</div -->
+	
+	<%@include file="../../base/cabecalhopesquisa.jsp" %>
 
 	<table class="table">
 	<tr>

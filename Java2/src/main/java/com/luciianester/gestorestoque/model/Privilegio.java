@@ -30,9 +30,6 @@ public class Privilegio {
 	private Tela tela;
 	
 	@Column
-	private boolean incluir;
-	
-	@Column
 	private boolean alterar;
 	
 	@Column
@@ -52,14 +49,6 @@ public class Privilegio {
 
 	public void setTela(Tela tela) {
 		this.tela = tela;
-	}
-
-	public boolean isIncluir() {
-		return incluir;
-	}
-
-	public void setIncluir(boolean incluir) {
-		this.incluir = incluir;
 	}
 
 	public boolean isAlterar() {

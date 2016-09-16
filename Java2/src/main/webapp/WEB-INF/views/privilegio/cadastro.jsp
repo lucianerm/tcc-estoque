@@ -36,7 +36,6 @@
 		</select>
 		<br/>
 		<br/>
-		<form:checkbox path="incluir" /> Incluir 
 		<form:checkbox path="alterar" /> Alterar 
 		<form:checkbox path="excluir" /> Excluir 
 		<br/>
@@ -60,14 +59,12 @@
 		  <table  class="table">
 			<tr>
 				<th width="100">Nome</th>
-				<th width="80">Incluir</th>
 				<th width="80">Alterar</th>
 				<th width="80">Excluir</th>
 			</tr>
 			<c:forEach items="${lista}" var="item">
 				<tr>
 					<td>${item.tela.nome}</td>
-					<td>${item.incluir}</td>
 					<td>${item.alterar}</td>
 					<td>${item.excluir}</td>
 					<td><a href="<c:url value='/perfil/${perfil.perfilId}/privilegio/${item.privilegioId}' />" class="btn btn-primary" >Editar</a> <a href="<c:url value='/perfil/${perfil.perfilId}/privilegio/excluir/${item.privilegioId}' />" class="btn btn-danger" >Excluir</a></td>
