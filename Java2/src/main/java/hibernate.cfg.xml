@@ -24,20 +24,20 @@
 		<property name="hibernate.show_sql">true</property> 
 		<property name="hibernate.format_sql">true</property>
 		 
-		<mapping class="com.luciianester.gestorestoque.model.Categoria" />
-		<mapping class="com.luciianester.gestorestoque.model.Endereco" />
-		<mapping class="com.luciianester.gestorestoque.model.Entrada" />
-		<mapping class="com.luciianester.gestorestoque.model.EntradaItem" />
-		<mapping class="com.luciianester.gestorestoque.model.Marca" />
-		<mapping class="com.luciianester.gestorestoque.model.Perfil" />
-		<mapping class="com.luciianester.gestorestoque.model.Pessoa" />
-		<mapping class="com.luciianester.gestorestoque.model.Privilegio" />
-		<mapping class="com.luciianester.gestorestoque.model.Produto" />
-		<mapping class="com.luciianester.gestorestoque.model.Saida" />
-		<mapping class="com.luciianester.gestorestoque.model.SaidaItem" />
-		<mapping class="com.luciianester.gestorestoque.model.Telefone" />
-		<mapping class="com.luciianester.gestorestoque.model.UnidadeDeMedida" />
-		<mapping class="com.luciianester.gestorestoque.model.Usuario" />
+		<mapping class="com.luciianester.gestorestoque.entidades.Categoria" />
+		<mapping class="com.luciianester.gestorestoque.entidades.Endereco" />
+		<mapping class="com.luciianester.gestorestoque.entidades.Entrada" />
+		<mapping class="com.luciianester.gestorestoque.entidades.EntradaItem" />
+		<mapping class="com.luciianester.gestorestoque.entidades.Marca" />
+		<mapping class="com.luciianester.gestorestoque.entidades.Perfil" />
+		<mapping class="com.luciianester.gestorestoque.entidades.Pessoa" />
+		<mapping class="com.luciianester.gestorestoque.entidades.Privilegio" />
+		<mapping class="com.luciianester.gestorestoque.entidades.Produto" />
+		<mapping class="com.luciianester.gestorestoque.entidades.Saida" />
+		<mapping class="com.luciianester.gestorestoque.entidades.SaidaItem" />
+		<mapping class="com.luciianester.gestorestoque.entidades.Telefone" />
+		<mapping class="com.luciianester.gestorestoque.entidades.UnidadeDeMedida" />
+		<mapping class="com.luciianester.gestorestoque.entidades.Usuario" />
 		
 	</session-factory>
 	

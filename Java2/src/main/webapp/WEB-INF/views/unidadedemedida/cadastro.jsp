@@ -1,5 +1,5 @@
-<%@page import="com.luciianester.gestorestoque.model.UnidadeDeMedida"%>
-<%@page import="com.luciianester.gestorestoque.model.Produto"%>
+<%@page import="com.luciianester.gestorestoque.entidades.UnidadeDeMedida"%>
+<%@page import="com.luciianester.gestorestoque.entidades.Produto"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>

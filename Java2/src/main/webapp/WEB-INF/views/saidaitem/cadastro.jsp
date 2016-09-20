@@ -1,4 +1,4 @@
-<%@page import="com.luciianester.gestorestoque.model.Saida"%>
+<%@page import="com.luciianester.gestorestoque.entidades.Saida"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -42,7 +42,7 @@
 		<br/>
 		<select name="entradaItem.entradaItemId" onchange="onSelectedProduto(this);" class="cmbProduto js-example-basic-single js-states form-control">
 			<option value="null" ${objeto.entradaItem.entradaItemId == null ? 'selected' : ''}>Selecione um Produto</option>
-			<c:forEach items="${listProdutos}" var="item">
+			<c:forEach items="${listaProdutos}" var="item">
 				<option value="${item.entradaItemId}" ${item.entradaItemId == objeto.entradaItem.entradaItemId ? 'selected' : ''}>${item.entradaItemId} - ${item.produto.produtoId} - ${item.produto.descricao}</option>
 			</c:forEach>	
 		</select>
@@ -53,7 +53,7 @@
 		<br/>
 		<select id="cmbUnidadeDeMedida" name="unidadeDeMedida.unidadeDeMedidaId" class="cmbUnidadeDeMedida js-example-basic-single js-states form-control">
 			<option value="null" ${objeto.unidadeDeMedida.unidadeDeMedidaId == null ? 'selected' : ''}>Selecione uma Unidade de Medida</option>
-			<c:forEach items="${listUnidadeDeMedida}" var="item">
+			<c:forEach items="${listaUnidadeDeMedida}" var="item">
 				<option value="${item.unidadeDeMedidaId}" ${item.unidadeDeMedidaId == objeto.unidadeDeMedida.unidadeDeMedidaId ? 'selected' : ''}>${item.sigla} - ${item.descricao}</option>
 			</c:forEach>	
 		</select>

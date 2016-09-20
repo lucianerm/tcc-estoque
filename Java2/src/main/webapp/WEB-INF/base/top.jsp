@@ -1,4 +1,4 @@
-<%@page import="com.luciianester.gestorestoque.model.Usuario"%>
+<%@page import="com.luciianester.gestorestoque.entidades.Usuario"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>

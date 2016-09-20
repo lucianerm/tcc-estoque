@@ -1,4 +1,3 @@
-<%@page import="com.luciianester.gestorestoque.core.MensagemTipo"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -56,7 +55,7 @@
 			<br/>
 			<select name="perfil.perfilId" class="cmbPerfil js-example-basic-single js-states form-control">
 				<option value="null" ${objeto.perfil.perfilId == null ? 'selected' : ''}>Selecione um Perfil</option>
-				<c:forEach items="${listPerfil}" var="item">
+				<c:forEach items="${listaPerfil}" var="item">
 					<option value="${item.perfilId}" ${item.perfilId == objeto.perfil.perfilId ? 'selected' : ''}>${item.perfilId} - ${item.descricao}</option>
 				</c:forEach>	
 			</select>
