@@ -3,14 +3,11 @@ package com.luciianester.gestorestoque.base;
 import java.util.List;
 
 import org.hibernate.criterion.Restrictions;
-import org.springframework.ui.Model;
 
 import com.luciianester.gestorestoque.base.dao.DAO;
 
-public abstract class RecursoGenerico<T> implements AutoCloseable {
+public abstract class RecursoGenerico<T> extends UtilidadesDoModelo implements AutoCloseable {
 
-	private Model modelo;
-	
 	private Class<T> classe;
 	
 	private DAO dao;
@@ -94,14 +91,6 @@ public abstract class RecursoGenerico<T> implements AutoCloseable {
 	public abstract boolean validacaoAlterar(T objeto);
 	public abstract boolean validacaoExcluir(T objeto);
 
-	public Model getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(Model model) {
-		this.modelo = model;
-	}
-	
 	@Override
 	public void close() throws Exception {
 		this.getDao().fechar();

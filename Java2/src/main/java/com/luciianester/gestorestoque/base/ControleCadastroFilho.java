@@ -17,14 +17,22 @@ public abstract class ControleCadastroFilho<T> extends ControleBase<T> {
 	public ControleCadastroFilho(String caminho) {
 		super(caminho);
 	}
-
+	
+	private void verificaMensagemSucesso(String tipo) {
+		if (tipo!=null) {
+			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
+				this.setMensagemSalvouSucesso();
+			}
+		}
+	}
+	
 	@RequestMapping("")
 	public String pesquisa(@PathVariable("paiId") Long paiId, Model modelo) throws Exception {
 
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
 			this.paiId = paiId;
-			this.modelo = modelo;
+			this.setModelo(modelo);
 			this.pesquisar(recurso);
 			
 			return this.getCaminho()+"/cadastro";
@@ -41,13 +49,7 @@ public abstract class ControleCadastroFilho<T> extends ControleBase<T> {
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
 			this.paiId = paiId;
-			
-			if (tipo!=null) {
-				if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
-					new ModelUtils(modelo).setMensagemSalvouSucesso();
-				}
-			}
-			
+			this.verificaMensagemSucesso(tipo);
 			this.cadastrar(recurso);
 			
 			return this.getCaminho()+"/cadastro";
@@ -64,14 +66,8 @@ public abstract class ControleCadastroFilho<T> extends ControleBase<T> {
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
 			this.paiId = paiId;
-			
-			if (tipo!=null) {
-				if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
-					new ModelUtils(modelo).setMensagemSalvouSucesso();
-				}
-			}
-			
-			this.modelo = modelo;
+			this.verificaMensagemSucesso(tipo);
+			this.setModelo(modelo);
 			this.editar(recurso, id);
 			
 			return this.getCaminho()+"/cadastro";
@@ -89,7 +85,7 @@ public abstract class ControleCadastroFilho<T> extends ControleBase<T> {
 			
 			this.paiId = paiId;
 			
-			this.modelo = modelo;
+			this.setModelo(modelo);
 			return salvar(recurso, objeto);
 			
 		} catch (Exception e) {

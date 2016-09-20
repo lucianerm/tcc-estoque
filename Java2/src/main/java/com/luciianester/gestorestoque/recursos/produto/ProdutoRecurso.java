@@ -1,6 +1,5 @@
 package com.luciianester.gestorestoque.recursos.produto;
 
-import com.luciianester.gestorestoque.base.ModelUtils;
 import com.luciianester.gestorestoque.base.RecursoGenerico;
 import com.luciianester.gestorestoque.base.dao.DAO;
 import com.luciianester.gestorestoque.entidades.Produto;
@@ -19,12 +18,11 @@ public class ProdutoRecurso extends RecursoGenerico<Produto> {
 
 	@Override
 	public boolean validacaoGravar(Produto objeto) {
-		ModelUtils modelUtils = new ModelUtils(this.getModelo());
 		if(objeto.getDescricao() == null || objeto.getDescricao().equals("") ){
-			modelUtils.setMensagemErro("Campo descrição é obrigatório.");
+			this.setMensagemErro("Campo descrição é obrigatório.");
 			return false;
 		}else if (objeto.getDescricao().length() <3){
-				modelUtils.setMensagemErro("Campo descrição deve ser maior que três caracteres.");
+				this.setMensagemErro("Campo descrição deve ser maior que três caracteres.");
 				return false;
 			}
 					

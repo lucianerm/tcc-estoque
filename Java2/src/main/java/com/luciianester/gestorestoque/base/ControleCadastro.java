@@ -11,13 +11,21 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 	public ControleCadastro(String caminho) {
 		super(caminho);
 	}
-
+	
+	private void verificaMensagemSucesso(String tipo) {
+		if (tipo!=null) {
+			if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
+				this.setMensagemSalvouSucesso();
+			}
+		}
+	}
+	
 	@RequestMapping("")
 	public String pesquisa(Model modelo) throws Exception {
 		
 		try (RecursoGenerico<T> rescurso = this.criaRecurso();) {
 			
-			this.modelo = modelo;
+			this.setModelo(modelo);
 			this.pesquisar(rescurso);
 			
 			return this.getCaminho()+"/pesquisa";
@@ -33,14 +41,8 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 		
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
-			this.modelo = modelo;
-			
-			if (tipo!=null) {
-				if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
-					new ModelUtils(modelo).setMensagemSalvouSucesso();
-				}
-			}
-			
+			this.setModelo(modelo);
+			this.verificaMensagemSucesso(tipo);
 			this.cadastrar(recurso);
 			
 			return this.getCaminho()+"/cadastro";
@@ -56,14 +58,8 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
-			this.modelo = modelo;
-			
-			if (tipo!=null) {
-				if (tipo.equals(MensagemTipo.SALVOU_SUCESSO.toString())) {
-					new ModelUtils(modelo).setMensagemSalvouSucesso();
-				}
-			}
-			
+			this.setModelo(modelo);
+			this.verificaMensagemSucesso(tipo);
 			this.editar(recurso, id);
 			
 			return this.getCaminho()+"/cadastro";
@@ -79,7 +75,7 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
-			this.modelo = modelo;
+			this.setModelo(modelo);
 			return salvar(recurso, objeto);
 			
 		} catch (Exception e) {
