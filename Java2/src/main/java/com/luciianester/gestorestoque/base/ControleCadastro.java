@@ -23,9 +23,10 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 	@RequestMapping("")
 	public String pesquisa(Model modelo) throws Exception {
 		
+		this.setModelo(modelo);
+		
 		try (RecursoGenerico<T> rescurso = this.criaRecurso();) {
 			
-			this.setModelo(modelo);
 			this.pesquisar(rescurso);
 			
 			return this.getCaminho()+"/pesquisa";
@@ -39,9 +40,10 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 	@RequestMapping("/cadastro")
 	public String cadastro(@RequestParam(required=false) String tipo, Model modelo) throws Exception {
 		
+		this.setModelo(modelo);
+		
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
-			this.setModelo(modelo);
 			this.verificaMensagemSucesso(tipo);
 			this.cadastrar(recurso);
 			
@@ -55,10 +57,11 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 	
 	@RequestMapping("/{id}")
 	public String edita(@RequestParam(required=false) String tipo, @PathVariable("id") Long id, Model modelo) throws Exception {
+		
+		this.setModelo(modelo);
 
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
-			this.setModelo(modelo);
 			this.verificaMensagemSucesso(tipo);
 			this.editar(recurso, id);
 			
@@ -72,10 +75,11 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 	
 	@RequestMapping("/gravar")
 	public String gravar(@ModelAttribute("objeto") T objeto, Model modelo) throws Exception {
+		
+		this.setModelo(modelo);
 
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
-			this.setModelo(modelo);
 			return salvar(recurso, objeto);
 			
 		} catch (Exception e) {
@@ -87,6 +91,8 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 	@RequestMapping("/excluir/{id}")
 	public String exclui(@PathVariable("id") Long id, Model modelo) throws Exception {
 
+		this.setModelo(modelo);
+		
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
 			return this.excluir(recurso, id);

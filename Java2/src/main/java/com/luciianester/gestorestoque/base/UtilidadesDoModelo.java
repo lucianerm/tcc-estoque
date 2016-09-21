@@ -36,6 +36,10 @@ public class UtilidadesDoModelo {
 	public void setMensagemErro(String texto) {
 		this.setMensagem(MensagemTipo.ERRO, texto);
 	}
+
+	public void setMensagemObrigatorio(String texto) {
+		this.setMensagem(MensagemTipo.ERRO, texto+" é obrigatório");
+	}
 	
 	public void setMensagemSalvouSucesso() {
 		this.setMensagem(MensagemTipo.SALVOU_SUCESSO, "Resgistro gravado com sucesso.");

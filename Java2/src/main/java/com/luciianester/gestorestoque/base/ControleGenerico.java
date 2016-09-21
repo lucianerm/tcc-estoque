@@ -68,6 +68,7 @@ public abstract class ControleGenerico<T> extends ControleCadastro<T> {
 		if (recurso.remover(id)) {
 			return "redirect:/"+this.getCaminho()+"/pesquisa";
 		} else {
+			this.pesquisar(recurso);
 			return this.getCaminho()+"/pesquisa";
 		}
 		

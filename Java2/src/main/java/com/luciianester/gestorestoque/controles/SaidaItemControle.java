@@ -12,10 +12,12 @@ import com.luciianester.gestorestoque.base.ControleCadastroFilho;
 import com.luciianester.gestorestoque.base.RecursoGenerico;
 import com.luciianester.gestorestoque.base.dao.DAO;
 import com.luciianester.gestorestoque.entidades.EntradaItem;
+import com.luciianester.gestorestoque.entidades.Produto;
 import com.luciianester.gestorestoque.entidades.Saida;
 import com.luciianester.gestorestoque.entidades.SaidaItem;
 import com.luciianester.gestorestoque.entidades.UnidadeDeMedida;
 import com.luciianester.gestorestoque.recursos.entrada.item.EntradaItemRecurso;
+import com.luciianester.gestorestoque.recursos.produto.ProdutoRecurso;
 import com.luciianester.gestorestoque.recursos.saida.SaidaRecurso;
 import com.luciianester.gestorestoque.recursos.saida.item.SaidaItemRecurso;
 import com.luciianester.gestorestoque.recursos.unidadedemedida.UnidadeDeMedidaRecurso;
@@ -46,8 +48,11 @@ public class SaidaItemControle extends ControleCadastroFilho<SaidaItem> {
 				.list();
 		this.setLista(lista);
 		
-		List<EntradaItem> listaProdutos = new EntradaItemRecurso(recurso.getDao()).listarTodos();
+		List<Produto> listaProdutos = new ProdutoRecurso(recurso.getDao()).listarTodos();
 		this.addAtributo("listaProdutos", listaProdutos);
+		
+		List<EntradaItem> listaEntradaItem = new ArrayList<>();
+		this.addAtributo("listaEntradaItem", listaEntradaItem);
 		
 		List<UnidadeDeMedida> listaUnidadeDeMedida = new ArrayList<>();
 		this.addAtributo("listaUnidadeDeMedida", listaUnidadeDeMedida);

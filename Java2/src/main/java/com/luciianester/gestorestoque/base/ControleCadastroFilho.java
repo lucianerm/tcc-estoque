@@ -28,11 +28,12 @@ public abstract class ControleCadastroFilho<T> extends ControleBase<T> {
 	
 	@RequestMapping("")
 	public String pesquisa(@PathVariable("paiId") Long paiId, Model modelo) throws Exception {
+		
+		this.paiId = paiId;
+		this.setModelo(modelo);
 
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
-			this.paiId = paiId;
-			this.setModelo(modelo);
 			this.pesquisar(recurso);
 			
 			return this.getCaminho()+"/cadastro";
@@ -46,9 +47,11 @@ public abstract class ControleCadastroFilho<T> extends ControleBase<T> {
 	@RequestMapping("/cadastro")
 	public String cadastro(@PathVariable("paiId") Long paiId, @RequestParam(required=false) String tipo, Model modelo) throws Exception {
 
+		this.paiId = paiId;
+		this.setModelo(modelo);
+
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
-			this.paiId = paiId;
 			this.verificaMensagemSucesso(tipo);
 			this.cadastrar(recurso);
 			
@@ -63,11 +66,12 @@ public abstract class ControleCadastroFilho<T> extends ControleBase<T> {
 	@RequestMapping("/{id}")
 	public String edita(@PathVariable("paiId") Long paiId, @RequestParam(required=false) String tipo, @PathVariable("id") Long id, Model modelo) throws Exception {
 
+		this.paiId = paiId;
+		this.setModelo(modelo);
+
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
-			this.paiId = paiId;
 			this.verificaMensagemSucesso(tipo);
-			this.setModelo(modelo);
 			this.editar(recurso, id);
 			
 			return this.getCaminho()+"/cadastro";
@@ -80,12 +84,12 @@ public abstract class ControleCadastroFilho<T> extends ControleBase<T> {
 	
 	@RequestMapping("/gravar")
 	public String gravar(@PathVariable("paiId") Long paiId, @ModelAttribute("objeto") T objeto, Model modelo) throws Exception {
-
+		
+		this.paiId = paiId;
+		this.setModelo(modelo);
+		
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
-			this.paiId = paiId;
-			
-			this.setModelo(modelo);
 			return salvar(recurso, objeto);
 			
 		} catch (Exception e) {
@@ -97,9 +101,10 @@ public abstract class ControleCadastroFilho<T> extends ControleBase<T> {
 	@RequestMapping("/excluir/{id}")
 	public String exclui(@PathVariable("paiId") Long paiId, @PathVariable("id") Long id, Model modelo) throws Exception {
 
+		this.paiId = paiId;
+		this.setModelo(modelo);
+
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
-			
-			this.paiId = paiId;
 			
 			return this.excluir(recurso, id);
 			
@@ -108,6 +113,5 @@ public abstract class ControleCadastroFilho<T> extends ControleBase<T> {
 		}
 		
 	}
-
 		
 }

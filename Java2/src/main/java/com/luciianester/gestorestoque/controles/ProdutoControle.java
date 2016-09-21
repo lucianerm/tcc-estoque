@@ -11,6 +11,8 @@ import com.luciianester.gestorestoque.base.ControleGenerico;
 import com.luciianester.gestorestoque.base.RecursoGenerico;
 import com.luciianester.gestorestoque.base.dao.DAO;
 import com.luciianester.gestorestoque.entidades.Produto;
+import com.luciianester.gestorestoque.recursos.entrada.item.EntradaItemDoProduto;
+import com.luciianester.gestorestoque.recursos.entrada.item.EntradaItemRecurso;
 import com.luciianester.gestorestoque.recursos.produto.ProdutoRecurso;
 import com.luciianester.gestorestoque.recursos.unidadedemedida.UnidadeDeMedidaDoProduto;
 import com.luciianester.gestorestoque.recursos.unidadedemedida.UnidadeDeMedidaRecurso;
@@ -41,6 +43,14 @@ public class ProdutoControle extends ControleGenerico<Produto>{
 	public @ResponseBody UnidadeDeMedidaDoProduto unidadesPeloItemDaEntrada(@PathVariable("id") Long id) throws Exception {
 		
 		return new UnidadeDeMedidaRecurso(this.criaRecurso().getDao()).listarPeloItemDaEntrada(id);
+		 	
+	}
+	
+	@SuppressWarnings("resource")
+	@RequestMapping(value="/{id}/entradas", method = RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public @ResponseBody EntradaItemDoProduto entradasPeloProduto(@PathVariable("id") Long id) throws Exception {
+		
+		return new EntradaItemRecurso(this.criaRecurso().getDao()).listarPeloProduto(id);
 		 	
 	}
 

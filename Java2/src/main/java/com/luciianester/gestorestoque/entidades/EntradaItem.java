@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 @Entity
 @SequenceGenerator(name="entradaitem_pk", sequenceName="entradaitem_pk", initialValue=1)
@@ -40,7 +41,10 @@ public class EntradaItem {
 	
 	@Column
 	private BigDecimal valor;
-
+	
+	@Transient
+	private BigDecimal saldo = BigDecimal.ZERO;
+	
 	public Long getEntradaItemId() {
 		return entradaItemId;
 	}
@@ -95,6 +99,14 @@ public class EntradaItem {
 
 	public void setLoteFabricante(String loteFabricante) {
 		this.loteFabricante = loteFabricante;
+	}
+
+	public BigDecimal getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(BigDecimal saldo) {
+		this.saldo = saldo;
 	}
 	
 }

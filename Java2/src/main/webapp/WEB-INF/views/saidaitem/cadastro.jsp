@@ -38,11 +38,23 @@
 		<form:hidden path="saidaItemId" />
 		<br/>
 		<br/>
+		
 		<label>Produto:</label>
 		<br/>
-		<select name="entradaItem.entradaItemId" onchange="onSelectedProduto(this);" class="cmbProduto js-example-basic-single js-states form-control">
-			<option value="null" ${objeto.entradaItem.entradaItemId == null ? 'selected' : ''}>Selecione um Produto</option>
+		<select onchange="onSelectedProduto(this);" class="cmbProduto js-example-basic-single js-states form-control">
+			<option value="null">Selecione um Produto</option>
 			<c:forEach items="${listaProdutos}" var="item">
+				<option value="${item.produtoId}" >${item.produtoId} - ${item.descricao}</option>
+			</c:forEach>	
+		</select>
+		<br/>
+		<br/>
+		
+		<label>Entradas:</label>
+		<br/>
+		<select id="cmbEntradaItem" name="entradaItem.entradaItemId"  class="cmbEntradaItem js-example-basic-single js-states form-control">
+			<option value="null" ${objeto.entradaItem.entradaItemId == null ? 'selected' : ''}>Selecione uma Entrada</option>
+			<c:forEach items="${listaEntradaItem}" var="item">
 				<option value="${item.entradaItemId}" ${item.entradaItemId == objeto.entradaItem.entradaItemId ? 'selected' : ''}>${item.entradaItemId} - ${item.produto.produtoId} - ${item.produto.descricao}</option>
 			</c:forEach>	
 		</select>
@@ -128,6 +140,10 @@
 			placeholder: "Selecione um Produto"
 		});
 		
+		$(".cmbEntradaItem").select2({
+			placeholder: "Selecione uma Entrada"
+		});
+		
 		$(".cmbUnidadeDeMedida").select2({
 			placeholder: "Selecione uma Unidade de Medida"
 		});
@@ -140,7 +156,7 @@
 		$.ajax({
             method : "get",
             dataType : "json",
-            url : "/GestorEstoque/produto/"+sel.value+"/unidadesdaentrada",
+            url : "/GestorEstoque/produto/"+sel.value+"/unidades",
             statusCode : {
                 200 : function(data){
                     
@@ -160,6 +176,39 @@
                     	var option = document.createElement("option");
                     	option.value = data.lista[i].unidadeDeMedidaId;
                         option.text = data.lista[i].sigla + " - " + data.lista[i].descricao;
+                        comboBox.add(option);
+                    }
+                    
+                },
+				404 : function(){
+		            alert("Deu Erro");
+		        }
+            }
+        });
+		
+		$.ajax({
+            method : "get",
+            dataType : "json",
+            url : "/GestorEstoque/produto/"+sel.value+"/entradas",
+            statusCode : {
+                200 : function(data){
+                    
+                    var comboBox = document.getElementById("cmbEntradaItem");
+                    
+                    while (comboBox.options.length > 0) {                
+                        comboBox.remove(0);
+                    }
+                    
+                   	var option = document.createElement("option");
+                   	option.value = null;
+					option.text = "Selecione uma Entrada";
+					option.selected = true;
+					comboBox.add(option);
+                      
+                    for (var i = 0; i < data.lista.length; i++) {
+                    	var option = document.createElement("option");
+                    	option.value = data.lista[i].entradaItemId;
+                        option.text = data.lista[i].entradaItemId + " - " + data.lista[i].produto.descricao + " - " + data.lista[i].saldo;
                         comboBox.add(option);
                     }
                     

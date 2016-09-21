@@ -4,7 +4,9 @@
 	<ol class="breadcrumb">
 		<li class="active panel-title" >${telaAcessoNome}</li>
 		<c:if test="${telaAcessoAlterar}">
-			<li><a href="${telaAcessoCaminho}/cadastro" >Cadastrar</a></li>
+			<li><a href="/GestorEstoque/${telaAcessoCaminho}/cadastro" >Cadastrar</a></li>
 		</c:if>
 	</ol>
 </div>
+
+<%@include file="../base/mensagem.jsp" %>
