@@ -16,10 +16,12 @@ import com.luciianester.gestorestoque.entidades.Produto;
 import com.luciianester.gestorestoque.entidades.Saida;
 import com.luciianester.gestorestoque.entidades.SaidaItem;
 import com.luciianester.gestorestoque.entidades.UnidadeDeMedida;
+import com.luciianester.gestorestoque.recursos.entrada.item.EntradaItemDoProduto;
 import com.luciianester.gestorestoque.recursos.entrada.item.EntradaItemRecurso;
 import com.luciianester.gestorestoque.recursos.produto.ProdutoRecurso;
 import com.luciianester.gestorestoque.recursos.saida.SaidaRecurso;
 import com.luciianester.gestorestoque.recursos.saida.item.SaidaItemRecurso;
+import com.luciianester.gestorestoque.recursos.unidadedemedida.UnidadeDeMedidaDoProduto;
 import com.luciianester.gestorestoque.recursos.unidadedemedida.UnidadeDeMedidaRecurso;
 
 @Controller
@@ -64,21 +66,32 @@ public class SaidaItemControle extends ControleCadastroFilho<SaidaItem> {
 		this.pesquisar(recurso);
 	}
 
+	@SuppressWarnings({ "resource", "unchecked" })
+	private void editar(RecursoGenerico<SaidaItem> recurso, SaidaItem saidaItem) throws Exception {
+
+		this.pesquisar(recurso);
+		
+		EntradaItem entradaItem = new EntradaItemRecurso(recurso.getDao()).listarPeloId(saidaItem.getEntradaItem().getEntradaItemId());
+		
+		saidaItem.setProdutoId(entradaItem.getProduto().getProdutoId());
+		this.setObjeto(saidaItem);
+		
+		EntradaItemDoProduto listarPeloProduto = new EntradaItemRecurso(recurso.getDao())
+				.listarPeloProduto(saidaItem.getProdutoId());
+		this.addAtributo("listaEntradaItem", listarPeloProduto.getLista());
+		
+		UnidadeDeMedidaDoProduto listarPeloItemDaEntrada = new UnidadeDeMedidaRecurso(recurso.getDao())
+				.listarPeloItemDaEntrada(saidaItem.getEntradaItem().getEntradaItemId());
+		this.addAtributo("listaUnidadeDeMedida", listarPeloItemDaEntrada.getLista());
+		
+	}
+	
 	@Override
 	public void editar(RecursoGenerico<SaidaItem> recurso, Long id) throws Exception {
 		
-		this.pesquisar(recurso);
 		
 		SaidaItem saidaItem = recurso.listarPeloId(id);
-		this.setObjeto(saidaItem);
-		
-		List<UnidadeDeMedida> listaUnidadeDeMedida = new ArrayList<>();
-		
-		if (saidaItem.getEntradaItem()!=null && saidaItem.getEntradaItem().getEntradaItemId()!=null) {
-			listaUnidadeDeMedida = new UnidadeDeMedidaRecurso(recurso.getDao()).listarPeloItemDaEntrada(saidaItem.getEntradaItem().getEntradaItemId()).getLista();
-		}
-		
-		this.addAtributo("listaUnidadeDeMedida", listaUnidadeDeMedida);
+		this.editar(recurso, saidaItem);
 		
 	}
 
@@ -87,13 +100,18 @@ public class SaidaItemControle extends ControleCadastroFilho<SaidaItem> {
 	public String salvar(RecursoGenerico<SaidaItem> recurso, SaidaItem objeto) throws Exception {
 		
 		this.saida = new SaidaRecurso(recurso.getDao()).listarPeloId(this.getPaiId());
-		
 		objeto.setSaida(this.saida);
 		
 		if (recurso.verificaNovoCadastro(objeto)) {
-			recurso.gravar(objeto);
+			if (!recurso.gravar(objeto)) {
+				this.editar(recurso, objeto);
+				return this.getCaminho()+"/cadastro";
+			}
 		} else {
-			recurso.alterar(objeto);
+			if (!recurso.alterar(objeto)) {
+				this.editar(recurso, objeto);
+				return this.getCaminho()+"/cadastro";
+			}
 		}
 		
 		return "redirect:/saida/"+this.getPaiId()+"/"+this.getCaminho();

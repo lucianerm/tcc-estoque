@@ -29,8 +29,8 @@ public class UtilidadesDoModelo {
 	}
 	
 	public void setMensagem(MensagemTipo tipo, String texto) {
-		this.getModelo().addAttribute("mensagemTipo", tipo);
-		this.getModelo().addAttribute("mensagem", texto);
+		this.addAtributo("mensagemTipo", tipo);
+		this.addAtributo("mensagem", texto);
 	}
 	
 	public void setMensagemErro(String texto) {

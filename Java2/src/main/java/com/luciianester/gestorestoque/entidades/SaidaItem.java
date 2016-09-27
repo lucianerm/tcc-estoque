@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 @Entity
 @SequenceGenerator(name="saidaitem_pk", sequenceName="saidaitem_pk", initialValue=1)
@@ -37,6 +38,10 @@ public class SaidaItem {
 	
 	@Column
 	private BigDecimal valor;
+	
+	@Transient
+	private Long produtoId;
+	
 
 	public Long getSaidaItemId() {
 		return saidaItemId;
@@ -84,6 +89,14 @@ public class SaidaItem {
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+
+	public Long getProdutoId() {
+		return produtoId;
+	}
+
+	public void setProdutoId(Long produtoId) {
+		this.produtoId = produtoId;
 	}
 	
 }

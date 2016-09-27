@@ -19,18 +19,8 @@
 		<jsp:param name="saidaId" value="${saida.saidaId}"/>
 	</jsp:include>
 	
-	<c:if test="${!empty mensagem}">
+	<%@include file="../../base/mensagem.jsp" %>
 	
-		<br/>
-		<c:if test="${mensagemTipo == 'ERRO'}">
-			<div class="alert alert-danger" role="alert">${mensagem }</div>
-		</c:if>
-		<c:if test="${mensagemTipo == 'SALVOU_SUCESSO'}">
-			<div class="alert alert-success" role="alert">${mensagem }</div>
-		</c:if>
-		
-	</c:if>
-
 	<form:form action="<%= acao%>" commandName="objeto">
 	
 		<br/>
@@ -41,11 +31,13 @@
 		
 		<label>Produto:</label>
 		<br/>
-		<select onchange="onSelectedProduto(this);" class="cmbProduto js-example-basic-single js-states form-control">
-			<option value="null">Selecione um Produto</option>
+		<select name="objeto.produtoId" onchange="onSelectedProduto(this);" class="cmbProduto js-example-basic-single js-states form-control">
+		
+			<option value="null" ${objeto.produtoId == null ? 'selected' : ''}>Selecione um Produto</option>
 			<c:forEach items="${listaProdutos}" var="item">
-				<option value="${item.produtoId}" >${item.produtoId} - ${item.descricao}</option>
-			</c:forEach>	
+				<option value="${item.produtoId}" ${item.produtoId == objeto.produtoId ? 'selected' : ''}>${item.produtoId} - ${item.descricao}</option>
+			</c:forEach>
+		
 		</select>
 		<br/>
 		<br/>
@@ -55,7 +47,7 @@
 		<select id="cmbEntradaItem" name="entradaItem.entradaItemId"  class="cmbEntradaItem js-example-basic-single js-states form-control">
 			<option value="null" ${objeto.entradaItem.entradaItemId == null ? 'selected' : ''}>Selecione uma Entrada</option>
 			<c:forEach items="${listaEntradaItem}" var="item">
-				<option value="${item.entradaItemId}" ${item.entradaItemId == objeto.entradaItem.entradaItemId ? 'selected' : ''}>${item.entradaItemId} - ${item.produto.produtoId} - ${item.produto.descricao}</option>
+				<option value="${item.entradaItemId}" ${item.entradaItemId == objeto.entradaItem.entradaItemId ? 'selected' : ''}>${item.entradaItemId} - ${item.produto.produtoId} - ${item.produto.descricao} - ${item.saldo} ${item.sigla}</option>
 			</c:forEach>	
 		</select>
 		<br/>
@@ -208,7 +200,7 @@
                     for (var i = 0; i < data.lista.length; i++) {
                     	var option = document.createElement("option");
                     	option.value = data.lista[i].entradaItemId;
-                        option.text = data.lista[i].entradaItemId + " - " + data.lista[i].produto.descricao + " - " + data.lista[i].saldo;
+                        option.text = data.lista[i].entradaItemId + " - " + data.lista[i].produto.descricao + " - " + data.lista[i].saldo + " " + data.lista[i].sigla;
                         comboBox.add(option);
                     }
                     

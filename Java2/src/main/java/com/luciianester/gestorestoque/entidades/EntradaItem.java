@@ -45,6 +45,9 @@ public class EntradaItem {
 	@Transient
 	private BigDecimal saldo = BigDecimal.ZERO;
 	
+	@Transient
+	private String sigla = "";
+	
 	public Long getEntradaItemId() {
 		return entradaItemId;
 	}
@@ -107,6 +110,14 @@ public class EntradaItem {
 
 	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
+	}
+
+	public String getSigla() {
+		return sigla;
+	}
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
 	}
 	
 }
