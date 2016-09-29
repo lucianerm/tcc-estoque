@@ -61,14 +61,18 @@ public abstract class RecursoGenerico<T> extends UtilidadesDoModelo implements A
 		
 	}
 	
-	public boolean remover(Long codigo) throws Exception {
-		
-		T objeto = this.listarPeloId(codigo);
+	public boolean remover(T objeto) throws Exception {
 		if (this.validacaoExcluir(objeto)) {
 			this.getDao().remover(objeto);
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean remover(Long codigo) throws Exception {
+		
+		T objeto = this.listarPeloId(codigo);
+		return this.remover(objeto);
 		
 	}
 	

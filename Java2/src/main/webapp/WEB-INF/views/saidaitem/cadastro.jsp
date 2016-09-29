@@ -72,7 +72,7 @@
 		
 		<label>Valor:</label>
 		<br/>
-		<form:input path="valor" /> 
+		<form:input id="txtValor" path="valor" /> 
 		<br/>
 		<br/>
 		
@@ -210,6 +210,13 @@
 		        }
             }
         });
+	}
+	
+	function onSelectedUnidade(sel) {
+		
+		var txtValor = document.getElementById("txtValor");
+		txtValor.text = sel.valorDeVenda;
+		
 	}
 
 </script>

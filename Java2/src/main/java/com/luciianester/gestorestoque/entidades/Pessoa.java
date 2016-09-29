@@ -23,11 +23,8 @@ public class Pessoa {
 	@Column(length = 400)
 	private String nome;
 
-	@Column(length = 400)
-	private String nomeFantasia;
-	
 	@Enumerated(EnumType.ORDINAL)
-	private PessoaTipo tipo;
+	private PessoaTipo tipo = PessoaTipo.FISICA;
 	
 	@Column(length = 20)
 	private String cpfoucnpj;
@@ -46,14 +43,6 @@ public class Pessoa {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getNomeFantasia() {
-		return nomeFantasia;
-	}
-
-	public void setNomeFantasia(String nomeFantasia) {
-		this.nomeFantasia = nomeFantasia;
 	}
 
 	public PessoaTipo getTipo() {

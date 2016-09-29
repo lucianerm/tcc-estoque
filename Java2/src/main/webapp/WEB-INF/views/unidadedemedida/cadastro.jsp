@@ -60,7 +60,11 @@
 		<br/>
 		<label>Quantidade:</label>
 		<br/>
-		<form:input path="quantidade" /> Informar valor 1 caso for a medida padrão 
+		<form:input path="quantidade" style="text-align:right;" /> Informar valor 1 caso for a medida padrão 
+		<br/>
+		<label>Valor de Venda:</label>
+		<br/>
+		<form:input path="valorDeVenda" data-mask="000000000.00" data-mask-reverse="true" style="text-align:right;"/>
 		<br/>
 		<br/>
 		
@@ -105,3 +109,5 @@
 </div>
 
 <%@include file="../../base/bottom.jsp" %>
+
+<script src="${pageContext.request.contextPath}/resources/js/jquery.mask.min.js"></script>

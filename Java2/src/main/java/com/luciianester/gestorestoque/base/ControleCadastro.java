@@ -25,9 +25,9 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 		
 		this.setModelo(modelo);
 		
-		try (RecursoGenerico<T> rescurso = this.criaRecurso();) {
+		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
-			this.pesquisar(rescurso);
+			this.pesquisar(recurso);
 			
 			return this.getCaminho()+"/pesquisa";
 			
@@ -45,6 +45,7 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
 			this.verificaMensagemSucesso(tipo);
+			this.pesquisar(recurso);
 			this.cadastrar(recurso);
 			
 			return this.getCaminho()+"/cadastro";
@@ -63,6 +64,7 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
 			this.verificaMensagemSucesso(tipo);
+			this.pesquisar(recurso);
 			this.editar(recurso, id);
 			
 			return this.getCaminho()+"/cadastro";
@@ -80,6 +82,7 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
+			this.pesquisar(recurso);
 			return salvar(recurso, objeto);
 			
 		} catch (Exception e) {
@@ -95,6 +98,7 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 		
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
+			this.pesquisar(recurso);
 			return this.excluir(recurso, id);
 			
 		} catch (Exception e) {

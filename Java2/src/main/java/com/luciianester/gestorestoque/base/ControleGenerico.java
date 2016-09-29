@@ -32,6 +32,12 @@ public abstract class ControleGenerico<T> extends ControleCadastro<T> {
 		
 	}
 	
+	private String retornaTela(RecursoGenerico<T> recurso, T objeto) throws Exception {
+		this.pesquisar(recurso);
+		this.setObjeto(objeto);
+		return this.getCaminho()+"/cadastro";
+	}
+	
 	@Override
 	public String salvar(RecursoGenerico<T> recurso, T objeto) throws Exception {
 		
@@ -39,11 +45,11 @@ public abstract class ControleGenerico<T> extends ControleCadastro<T> {
 		
 			if (recurso.verificaNovoCadastro(objeto)) {
 				if (!recurso.gravar(objeto)) {
-					return this.getCaminho()+"/cadastro";
+					return this.retornaTela(recurso, objeto);
 				}
 			} else {
 				if (!recurso.alterar(objeto)) {
-					return this.getCaminho()+"/cadastro";
+					return this.retornaTela(recurso, objeto);
 				}
 			}
 			

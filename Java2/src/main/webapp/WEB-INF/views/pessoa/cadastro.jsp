@@ -34,7 +34,6 @@
 		<label>Tipo:</label>
 		<br/>
 		<select name="tipo" class="cmbTipo js-example-basic-single js-states form-control">
-			<option value="null" ${objeto.tipo == null ? 'selected' : ''}>Selecione um Tipo</option>
 			<c:forEach items="${tipos}" var="item">
 				<option value="${item}" ${item == objeto.tipo ? 'selected' : ''}>${item.nome}</option>
 			</c:forEach>	

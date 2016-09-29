@@ -33,14 +33,8 @@ public class PessoaControle extends ControleGenerico<Pessoa> {
 	}
 	
 	@Override
-	public void cadastrar(RecursoGenerico<Pessoa> recurso) throws Exception {
-		super.cadastrar(recurso);
-		this.setTipos();
-	}
-	
-	@Override
-	public void editar(RecursoGenerico<Pessoa> recurso, Long id) throws Exception {
-		super.editar(recurso, id);
+	public void pesquisar(RecursoGenerico<Pessoa> recurso) throws Exception {
+		super.pesquisar(recurso);
 		this.setTipos();
 	}
 	
