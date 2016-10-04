@@ -54,18 +54,16 @@ public class TelefoneControle extends ControleCadastroFilho<Telefone> {
 		this.setObjeto(recurso.listarPeloId(id));
 	}
 
-	@SuppressWarnings("resource")
 	@Override
 	public String salvar(RecursoGenerico<Telefone> recurso, Telefone objeto) throws Exception {
 		
-		this.pessoa = new PessoaRecurso(recurso.getDao()).listarPeloId(this.getPaiId());
-		
+		this.pesquisar(recurso);
 		objeto.setPessoa(this.pessoa);
 		
-		if (recurso.verificaNovoCadastro(objeto)) {
-			recurso.gravar(objeto);
-		} else {
-			recurso.alterar(objeto);
+		this.setObjeto(objeto);
+		
+		if (!this.salvarOuAlterar(recurso, objeto)) {
+			return this.getCaminho()+"/cadastro";
 		}
 		
 		return "redirect:/pessoa/"+this.getPaiId()+"/"+this.getCaminho();

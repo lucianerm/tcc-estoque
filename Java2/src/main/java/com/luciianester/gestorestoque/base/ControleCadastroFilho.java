@@ -113,5 +113,21 @@ public abstract class ControleCadastroFilho<T> extends ControleBase<T> {
 		}
 		
 	}
+	
+	public Boolean salvarOuAlterar(RecursoGenerico<T> recurso, T objeto) throws Exception {
+		
+		if (recurso.verificaNovoCadastro(objeto)) {
+			if (!recurso.gravar(objeto)) {
+				return false;
+			}
+		} else {
+			if (!recurso.alterar(objeto)) {
+				return false;
+			}
+		}
+		
+		return true;
+		
+	}
 		
 }

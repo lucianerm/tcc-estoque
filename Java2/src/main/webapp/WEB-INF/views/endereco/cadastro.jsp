@@ -14,24 +14,14 @@
   
   <div class="panel-body">
    
-	 <jsp:include page="../pessoa/menu.jsp">
+	<jsp:include page="../pessoa/menu.jsp">
 		<jsp:param name="endereco" value="active"/>
 		<jsp:param name="pessoaId" value="${pessoa.pessoaId}"/>
 	</jsp:include>
 	
-	<c:if test="${!empty mensagem}">
-	
-		<br/>
-		<c:if test="${mensagemTipo == 'ERRO'}">
-			<div class="alert alert-danger" role="alert">${mensagem }</div>
-		</c:if>
-		<c:if test="${mensagemTipo == 'SALVOU_SUCESSO'}">
-			<div class="alert alert-success" role="alert">${mensagem }</div>
-		</c:if>
-		
-	</c:if>
+	<%@include file="../../base/mensagem.jsp" %>
 
-	<form:form action="<%= acao%>" commandName="objeto">
+	<form:form action="<%= acao%>" commandName="objeto" autocomplete="off">
 		
 		<form:hidden path="enderecoId" />
 		<br/>

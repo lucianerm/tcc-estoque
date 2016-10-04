@@ -22,12 +22,29 @@ public class TelefoneRecurso extends RecursoGenerico<Telefone> {
 
 	@Override
 	public boolean validacaoGravar(Telefone objeto) {
+		
+		if (objeto.getDescricao()==null || objeto.getDescricao().length()<3) {
+			this.setMensagemObrigatorio("Descrição");
+			return false;
+		}
+		
+		if (objeto.getNumero()==null || objeto.getNumero().length()<3) {
+			this.setMensagemObrigatorio("Número");
+			return false;
+		}
+		
+		if (objeto.getNumero().length()!=12) {
+			this.setMensagemErro("Número Inválido");
+			return false;
+		}
+		
 		return true;
+		
 	}
 
 	@Override
 	public boolean validacaoAlterar(Telefone objeto) {
-		return true;
+		return this.validacaoGravar(objeto);
 	}
 
 	@Override

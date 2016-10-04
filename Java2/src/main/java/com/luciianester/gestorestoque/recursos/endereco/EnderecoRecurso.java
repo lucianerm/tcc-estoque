@@ -22,12 +22,43 @@ public class EnderecoRecurso extends RecursoGenerico<Endereco> {
 
 	@Override
 	public boolean validacaoGravar(Endereco objeto) {
+		
+		if (objeto.getCep()==null || objeto.getCep().length()<3) {
+			this.setMensagemObrigatorio("CEP");
+			return false;
+		}
+		
+		if (objeto.getEstado()==null || objeto.getEstado().length()<3) {
+			this.setMensagemObrigatorio("Estado");
+			return false;
+		}
+		
+		if (objeto.getMunicipio()==null || objeto.getMunicipio().length()<3) {
+			this.setMensagemObrigatorio("Município");
+			return false;
+		}
+
+		if (objeto.getBairro()==null || objeto.getBairro().length()<3) {
+			this.setMensagemObrigatorio("Bairro");
+			return false;
+		}
+
+		if (objeto.getRua()==null || objeto.getRua().length()<3) {
+			this.setMensagemObrigatorio("Rua");
+			return false;
+		}
+
+		if (objeto.getNumero()==null || objeto.getNumero().length()<3) {
+			this.setMensagemObrigatorio("Número");
+			return false;
+		}
+		
 		return true;
 	}
 
 	@Override
 	public boolean validacaoAlterar(Endereco objeto) {
-		return true;
+		return this.validacaoGravar(objeto);
 	}
 
 	@Override

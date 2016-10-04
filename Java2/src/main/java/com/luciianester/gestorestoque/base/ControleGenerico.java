@@ -72,7 +72,7 @@ public abstract class ControleGenerico<T> extends ControleCadastro<T> {
 	public String excluir(RecursoGenerico<T> recurso, Long id) throws Exception {
 		
 		if (recurso.remover(id)) {
-			return "redirect:/"+this.getCaminho()+"/pesquisa";
+			return "redirect:/"+this.getCaminho();
 		} else {
 			this.pesquisar(recurso);
 			return this.getCaminho()+"/pesquisa";

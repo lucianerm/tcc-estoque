@@ -54,18 +54,16 @@ public class EnderecoControle extends ControleCadastroFilho<Endereco> {
 		this.setObjeto(recurso.listarPeloId(id));
 	}
 
-	@SuppressWarnings("resource")
 	@Override
 	public String salvar(RecursoGenerico<Endereco> recurso, Endereco objeto) throws Exception {
 		
-		this.pessoa = new PessoaRecurso(recurso.getDao()).listarPeloId(this.getPaiId());
+		this.pesquisar(recurso);
 		
 		objeto.setPessoa(this.pessoa);
+		this.setObjeto(objeto);
 		
-		if (recurso.verificaNovoCadastro(objeto)) {
-			recurso.gravar(objeto);
-		} else {
-			recurso.alterar(objeto);
+		if (!this.salvarOuAlterar(recurso, objeto)) {
+			return this.getCaminho()+"/cadastro";
 		}
 		
 		return "redirect:/pessoa/"+this.getPaiId()+"/"+this.getCaminho();
