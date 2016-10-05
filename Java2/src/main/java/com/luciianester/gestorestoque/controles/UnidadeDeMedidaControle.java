@@ -1,12 +1,17 @@
 package com.luciianester.gestorestoque.controles;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.luciianester.gestorestoque.base.ControleCadastroFilho;
 import com.luciianester.gestorestoque.base.MensagemTipo;
@@ -146,4 +151,10 @@ public class UnidadeDeMedidaControle extends ControleCadastroFilho<UnidadeDeMedi
 		return new UnidadeDeMedidaRecurso(new DAO());
 	}
 	
+	@RequestMapping(value="/{id}/valor", method = RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public @ResponseBody BigDecimal buscaValor(@PathVariable("id") Long id) throws Exception {
+		
+		return this.criaRecurso().listarPeloId(id).getValorDeVenda();
+		 	
+	}
 }

@@ -66,23 +66,28 @@ public class SaidaItemControle extends ControleCadastroFilho<SaidaItem> {
 		this.pesquisar(recurso);
 	}
 
-	@SuppressWarnings({ "resource", "unchecked" })
+	@SuppressWarnings("resource")
 	private void editar(RecursoGenerico<SaidaItem> recurso, SaidaItem saidaItem) throws Exception {
 
 		this.pesquisar(recurso);
 		
 		EntradaItem entradaItem = new EntradaItemRecurso(recurso.getDao()).listarPeloId(saidaItem.getEntradaItem().getEntradaItemId());
 		
-		saidaItem.setProdutoId(entradaItem.getProduto().getProdutoId());
+		if (entradaItem!=null) {
+			saidaItem.setProdutoId(entradaItem.getProduto().getProdutoId());
+		}
 		this.setObjeto(saidaItem);
 		
 		EntradaItemDoProduto listarPeloProduto = new EntradaItemRecurso(recurso.getDao())
 				.listarPeloProduto(saidaItem.getProdutoId());
 		this.addAtributo("listaEntradaItem", listarPeloProduto.getLista());
 		
-		UnidadeDeMedidaDoProduto listarPeloItemDaEntrada = new UnidadeDeMedidaRecurso(recurso.getDao())
+		if (saidaItem.getEntradaItem()!=null && saidaItem.getEntradaItem().getEntradaItemId()!=null && saidaItem.getEntradaItem().getEntradaItemId()>0) {
+			UnidadeDeMedidaDoProduto listarPeloItemDaEntrada = new UnidadeDeMedidaRecurso(recurso.getDao())
 				.listarPeloItemDaEntrada(saidaItem.getEntradaItem().getEntradaItemId());
-		this.addAtributo("listaUnidadeDeMedida", listarPeloItemDaEntrada.getLista());
+			this.addAtributo("listaUnidadeDeMedida", listarPeloItemDaEntrada.getLista());
+		}
+		
 		
 	}
 	
@@ -95,23 +100,14 @@ public class SaidaItemControle extends ControleCadastroFilho<SaidaItem> {
 		
 	}
 
-	@SuppressWarnings("resource")
 	@Override
 	public String salvar(RecursoGenerico<SaidaItem> recurso, SaidaItem objeto) throws Exception {
 		
-		this.saida = new SaidaRecurso(recurso.getDao()).listarPeloId(this.getPaiId());
+		this.editar(recurso, objeto);
 		objeto.setSaida(this.saida);
 		
-		if (recurso.verificaNovoCadastro(objeto)) {
-			if (!recurso.gravar(objeto)) {
-				this.editar(recurso, objeto);
-				return this.getCaminho()+"/cadastro";
-			}
-		} else {
-			if (!recurso.alterar(objeto)) {
-				this.editar(recurso, objeto);
-				return this.getCaminho()+"/cadastro";
-			}
+		if (!this.salvarOuAlterar(recurso, objeto)) {
+			return this.getCaminho()+"/cadastro";
 		}
 		
 		return "redirect:/saida/"+this.getPaiId()+"/"+this.getCaminho();

@@ -21,7 +21,7 @@
 	
 	<%@include file="../../base/mensagem.jsp" %>
 	
-	<form:form action="<%= acao%>" commandName="objeto">
+	<form:form action="<%= acao%>" commandName="objeto" autocomplete="off">
 	
 		<br/>
 		<form:input path="saidaItemId" readonly="true" size="8"  disabled="true" />
@@ -32,12 +32,10 @@
 		<label>Produto:</label>
 		<br/>
 		<select name="objeto.produtoId" onchange="onSelectedProduto(this);" class="cmbProduto js-example-basic-single js-states form-control">
-		
-			<option value="null" ${objeto.produtoId == null ? 'selected' : ''}>Selecione um Produto</option>
+			<option value="0" ${objeto.produtoId == null ? 'selected' : ''}>Selecione um Produto</option>
 			<c:forEach items="${listaProdutos}" var="item">
 				<option value="${item.produtoId}" ${item.produtoId == objeto.produtoId ? 'selected' : ''}>${item.produtoId} - ${item.descricao}</option>
 			</c:forEach>
-		
 		</select>
 		<br/>
 		<br/>
@@ -45,7 +43,7 @@
 		<label>Entradas:</label>
 		<br/>
 		<select id="cmbEntradaItem" name="entradaItem.entradaItemId"  class="cmbEntradaItem js-example-basic-single js-states form-control">
-			<option value="null" ${objeto.entradaItem.entradaItemId == null ? 'selected' : ''}>Selecione uma Entrada</option>
+			<option value="0" ${objeto.entradaItem.entradaItemId == null ? 'selected' : ''}>Selecione uma Entrada</option>
 			<c:forEach items="${listaEntradaItem}" var="item">
 				<option value="${item.entradaItemId}" ${item.entradaItemId == objeto.entradaItem.entradaItemId ? 'selected' : ''}>${item.entradaItemId} - ${item.produto.produtoId} - ${item.produto.descricao} - ${item.saldo} ${item.sigla}</option>
 			</c:forEach>	
@@ -55,10 +53,10 @@
 		
 		<label>Unidade de Medida:</label>
 		<br/>
-		<select id="cmbUnidadeDeMedida" name="unidadeDeMedida.unidadeDeMedidaId" class="cmbUnidadeDeMedida js-example-basic-single js-states form-control">
-			<option value="null" ${objeto.unidadeDeMedida.unidadeDeMedidaId == null ? 'selected' : ''}>Selecione uma Unidade de Medida</option>
+		<select id="cmbUnidadeDeMedida" onchange="onSelectedUnidade(this);" name="unidadeDeMedida.unidadeDeMedidaId" class="cmbUnidadeDeMedida js-example-basic-single js-states form-control">
+			<option value="0" ${objeto.unidadeDeMedida.unidadeDeMedidaId == null ? 'selected' : ''}>Selecione uma Unidade de Medida</option>
 			<c:forEach items="${listaUnidadeDeMedida}" var="item">
-				<option value="${item.unidadeDeMedidaId}" ${item.unidadeDeMedidaId == objeto.unidadeDeMedida.unidadeDeMedidaId ? 'selected' : ''}>${item.sigla} - ${item.descricao}</option>
+				<option value="${item.unidadeDeMedidaId}" ${item.unidadeDeMedidaId == objeto.unidadeDeMedida.unidadeDeMedidaId ? 'selected' : ''}>${item.sigla} - ${item.descricao} - R$ ${item.valorDeVenda}</option>
 			</c:forEach>	
 		</select>
 		
@@ -72,7 +70,8 @@
 		
 		<label>Valor:</label>
 		<br/>
-		<form:input id="txtValor" path="valor" /> 
+		<form:input id="txtValor" path="valor" readonly="true" size="8"  disabled="true" />
+		<form:hidden path="valor" />
 		<br/>
 		<br/>
 		
@@ -159,7 +158,7 @@
                     }
                     
                    	var option = document.createElement("option");
-                   	option.value = null;
+                   	option.value = 0;
 					option.text = "Selecione uma Unidade de Medida";
 					option.selected = true;
 					comboBox.add(option);
@@ -167,7 +166,7 @@
                     for (var i = 0; i < data.lista.length; i++) {
                     	var option = document.createElement("option");
                     	option.value = data.lista[i].unidadeDeMedidaId;
-                        option.text = data.lista[i].sigla + " - " + data.lista[i].descricao;
+                        option.text = data.lista[i].sigla + " - " + data.lista[i].descricao + " - R$ " + data.lista[i].valorDeVenda;
                         comboBox.add(option);
                     }
                     
@@ -192,7 +191,7 @@
                     }
                     
                    	var option = document.createElement("option");
-                   	option.value = null;
+                   	option.value = 0;
 					option.text = "Selecione uma Entrada";
 					option.selected = true;
 					comboBox.add(option);
@@ -214,8 +213,22 @@
 	
 	function onSelectedUnidade(sel) {
 		
-		var txtValor = document.getElementById("txtValor");
-		txtValor.text = sel.valorDeVenda;
+		$.ajax({
+            method : "get",
+            dataType : "json",
+            url : "/GestorEstoque/produto/0/unidadedemedida/"+sel.value+"/valor",
+            statusCode : {
+                200 : function(data){
+                    
+                	var txtValor = document.getElementById("txtValor");
+            		txtValor.value = ""+data;
+            		
+                },
+				404 : function(){
+		            alert("Deu Erro");
+		        }
+            }
+        });
 		
 	}
 

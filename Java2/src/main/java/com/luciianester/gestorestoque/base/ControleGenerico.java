@@ -57,9 +57,7 @@ public abstract class ControleGenerico<T> extends ControleCadastro<T> {
 			
 		} catch (Exception e) {
 			
-			this.addAtributo("tipo", MensagemTipo.ERRO);
-			this.addAtributo("mensagem", e.getMessage());
-			
+			this.setMensagemErro(e.getMessage());
 			this.setObjeto(objeto);
 			
 			return this.getCaminho()+"/cadastro";
