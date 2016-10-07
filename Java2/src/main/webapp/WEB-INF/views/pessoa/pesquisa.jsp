@@ -1,12 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
 
 <%@include file="../../base/top.jsp" %>
 
 <div class="panel panel-default">
-
+	
 	<%@include file="../../base/cabecalhopesquisa.jsp" %>
 
 	<table class="table">
@@ -14,7 +11,6 @@
 		<th width="80">Código</th>
 		<th width="200">Nome</th>
 		<th width="80">Tipo</th>
-		<th width="80">Ações</th>
 	</tr>
 	<c:if test="${!empty lista}">
 		<c:forEach items="${lista}" var="objeto">

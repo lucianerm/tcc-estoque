@@ -100,4 +100,24 @@ public abstract class RecursoGenerico<T> extends UtilidadesDoModelo implements A
 		this.getDao().fechar();
 	}
 	
+	public boolean validaTexto(String nome, String valor) {
+		
+		if (valor==null) {
+			this.setMensagemObrigatorio(nome);
+			return false;
+		}
+		
+		if (valor.equals("")) {
+			this.setMensagemObrigatorio(nome);
+			return false;
+		}
+		
+		if (valor.length()<=3) {
+			this.setMensagemErro(nome+" deve ser maior que três");
+			return false;
+		}
+		return true;
+		
+	}
+	
 }
