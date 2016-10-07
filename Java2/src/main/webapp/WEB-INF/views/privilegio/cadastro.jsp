@@ -22,7 +22,7 @@
 	
 	<%@include file="../../base/mensagem.jsp" %>
 
-	<form:form action="<%= acao%>" commandName="objeto">
+	<form:form action="<%= acao%>" commandName="objeto"  autocomplete="off">
 		
 		<form:hidden path="privilegioId" />
 		<br/>

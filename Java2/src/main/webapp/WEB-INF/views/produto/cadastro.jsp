@@ -31,19 +31,9 @@
 	  </c:if>
 	</ul>
 	
-	<c:if test="${!empty mensagem}">
+	<%@include file="../../base/mensagem.jsp" %>
 	
-		<br/>
-		<c:if test="${mensagemTipo == 'ERRO'}">
-			<div class="alert alert-danger" role="alert">${mensagem }</div>
-		</c:if>
-		<c:if test="${mensagemTipo == 'SALVOU_SUCESSO'}">
-			<div class="alert alert-success" role="alert">${mensagem }</div>
-		</c:if>
-		
-	</c:if>
-	
-	<form:form action="gravar" commandName="objeto">
+	<form:form action="gravar" commandName="objeto"  autocomplete="off">
 		
 		<br/>
 		<label>Código:</label>

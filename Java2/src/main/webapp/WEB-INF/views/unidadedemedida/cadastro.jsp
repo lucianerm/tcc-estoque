@@ -30,19 +30,9 @@
 	  <li class="active"><a>Unidade de Medida</a></li>
 	</ul>
 	
-	<c:if test="${!empty mensagem}">
-	
-		<br/>
-		<c:if test="${mensagemTipo == 'ERRO'}">
-			<div class="alert alert-danger" role="alert">${mensagem }</div>
-		</c:if>
-		<c:if test="${mensagemTipo == 'SALVOU_SUCESSO'}">
-			<div class="alert alert-success" role="alert">${mensagem }</div>
-		</c:if>
-		
-	</c:if>
+	<%@include file="../../base/mensagem.jsp" %>
 
-	<form:form action="<%= acao%>" commandName="objeto">
+	<form:form action="<%= acao%>" commandName="objeto"  autocomplete="off">
 		
 		<br/>
 		<label>Código:</label>
