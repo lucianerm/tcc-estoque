@@ -11,7 +11,7 @@ import com.luciianester.gestorestoque.recursos.marca.MarcaRecurso;
 
 @Controller
 @RequestMapping("/marca")
-public class MarcaControle extends ControleGenerico<Marca>{
+public class MarcaControle extends ControleGenerico<Marca> {
 
 	public MarcaControle() {
 		super("marca");

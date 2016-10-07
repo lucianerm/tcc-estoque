@@ -34,7 +34,7 @@
 		<label>Cliente:</label>
 		<br/>
 		<select id="cmbCliente" name="cliente.pessoaId" class="cmbCliente js-example-basic-single js-states form-control">
-			<option value="0" ${objeto.cliente.pessoaId == null ? 'selected' : ''}>Selecione um Cliente</option>
+			<option value="0" ${objeto.cliente.pessoaId == null ? 'selected' : ''}>Nenhum Cliente</option>
 			<c:forEach items="${listaClientes}" var="item">
 				<option value="${item.pessoaId}" ${item.pessoaId == objeto.cliente.pessoaId ? 'selected' : ''}>${item.pessoaId} - ${item.nome}</option>
 			</c:forEach>	
@@ -65,7 +65,7 @@
 	$(document).ready(function() {
 		
 		$(".cmbCliente").select2({
-			placeholder: "Selecione um Clente"
+			placeholder: "Nenhum Cliente"
 		});
 		
 	});

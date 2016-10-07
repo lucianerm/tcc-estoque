@@ -42,7 +42,7 @@ public class UtilidadesDoModelo {
 	}
 	
 	public void setMensagemSalvouSucesso() {
-		this.setMensagem(MensagemTipo.SALVOU_SUCESSO, "Resgistro gravado com sucesso.");
+		this.setMensagem(MensagemTipo.SALVOU_SUCESSO, "Registro gravado com sucesso.");
 	}
 
 }

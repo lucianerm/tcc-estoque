@@ -3,10 +3,12 @@ package com.luciianester.gestorestoque.recursos.entrada.item;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.luciianester.gestorestoque.base.RecursoGenerico;
 import com.luciianester.gestorestoque.base.dao.DAO;
+import com.luciianester.gestorestoque.entidades.Entrada;
 import com.luciianester.gestorestoque.entidades.EntradaItem;
 import com.luciianester.gestorestoque.entidades.Produto;
 import com.luciianester.gestorestoque.entidades.SaidaItem;
@@ -94,6 +96,18 @@ public class EntradaItemRecurso extends RecursoGenerico<EntradaItem> {
 		}
 		
 		return doProduto;
+		
+	}
+	
+	public List<EntradaItem> listarPelaEntrada(Entrada entrada) throws Exception {
+		
+		@SuppressWarnings("unchecked")
+		List<EntradaItem> lista = (List<EntradaItem>) this.getDao().createCriteria(EntradaItem.class)
+				.add(Restrictions.eq("entrada", entrada))
+				.addOrder(Order.asc("entradaItemId"))
+				.list();
+		
+		return lista;
 		
 	}
 
