@@ -1,5 +1,7 @@
 package com.luciianester.gestorestoque.controles;
 
+import java.util.List;
+
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,9 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.luciianester.gestorestoque.base.ControleGenerico;
 import com.luciianester.gestorestoque.base.RecursoGenerico;
 import com.luciianester.gestorestoque.base.dao.DAO;
+import com.luciianester.gestorestoque.entidades.Categoria;
+import com.luciianester.gestorestoque.entidades.Marca;
 import com.luciianester.gestorestoque.entidades.Produto;
+import com.luciianester.gestorestoque.recursos.categoria.CategoriaRecurso;
 import com.luciianester.gestorestoque.recursos.entrada.item.EntradaItemDoProduto;
 import com.luciianester.gestorestoque.recursos.entrada.item.EntradaItemRecurso;
+import com.luciianester.gestorestoque.recursos.marca.MarcaRecurso;
 import com.luciianester.gestorestoque.recursos.produto.ProdutoRecurso;
 import com.luciianester.gestorestoque.recursos.unidadedemedida.UnidadeDeMedidaDoProduto;
 import com.luciianester.gestorestoque.recursos.unidadedemedida.UnidadeDeMedidaRecurso;
@@ -28,6 +34,20 @@ public class ProdutoControle extends ControleGenerico<Produto>{
 	@Override
 	public RecursoGenerico<Produto> novoRecurso() {
 		return new ProdutoRecurso(new DAO());
+	}
+	
+	@Override
+	public void pesquisar(RecursoGenerico<Produto> recurso) throws Exception {
+		
+		@SuppressWarnings("resource")
+		List<Marca> listaMarcas = new MarcaRecurso(recurso.getDao()).listarTodos();
+		this.addAtributo("listaMarcas", listaMarcas);
+		
+		@SuppressWarnings("resource")
+		List<Categoria> listaCategorias = new CategoriaRecurso(recurso.getDao()).listarTodos();
+		this.addAtributo("listaCategorias", listaCategorias);
+		
+		super.pesquisar(recurso);
 	}
 	
 	@SuppressWarnings("resource")

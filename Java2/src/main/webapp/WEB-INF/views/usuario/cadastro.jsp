@@ -51,7 +51,7 @@
 			</select>
 			<br/>
 			<br/>
-			<label>Produto:</label>
+			<label>Perfil:</label>
 			<br/>
 			<select name="perfil.perfilId" class="cmbPerfil js-example-basic-single js-states form-control">
 				<option value="null" ${objeto.perfil.perfilId == null ? 'selected' : ''}>Selecione um Perfil</option>

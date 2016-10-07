@@ -47,7 +47,26 @@
 		<form:input path="descricao" size="50"/>
 		<br/>
 		<br/>
-		
+		<label>Marca:</label>
+		<br/>
+		<select name="marca.marcaId" class="cmbMarca js-example-basic-single js-states form-control">
+			<option value="null" ${objeto.marca.marcaId == null ? 'selected' : ''}>Selecione uma Marca</option>
+			<c:forEach items="${listaMarcas}" var="item">
+				<option value="${item.marcaId}" ${item.marcaId == objeto.marca.marcaId ? 'selected' : ''}>${item.marcaId} - ${item.descricao}</option>
+			</c:forEach>	
+		</select>
+		<br/>
+		<br/>
+		<label>Categoria:</label>
+		<br/>
+		<select name="categoria.categoriaId" class="cmbCategoria js-example-basic-single js-states form-control">
+			<option value="null" ${objeto.categoria.categoriaId == null ? 'selected' : ''}>Selecione uma Categoria</option>
+			<c:forEach items="${listaCategorias}" var="item">
+				<option value="${item.categoriaId}" ${item.categoriaId == objeto.categoria.categoriaId ? 'selected' : ''}>${item.categoriaId} - ${item.descricao}</option>
+			</c:forEach>	
+		</select>
+		<br/>
+		<br/>
 		
 		<input type="submit" value="Salvar" class="btn btn-success" />
 		<c:if test="${!empty objeto.produtoId}">
@@ -61,3 +80,24 @@
 </div>
 
 <%@include file="../../base/bottom.jsp" %>
+
+<link href="${pageContext.request.contextPath}/resources/css/select2.min.css" rel="stylesheet"/>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.1.10.2.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/select2.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.mask.min.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		
+		$(".cmbMarca").select2({
+			placeholder: "Selecione uma Marca"
+		});
+		
+		$(".cmbCategoria").select2({
+			placeholder: "Selecione uma Categoria"
+		});
+		
+	});
+
+</script>
