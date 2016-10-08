@@ -24,19 +24,19 @@ public abstract class ControleBase<T> extends UtilidadesDoModelo {
 	}
 
 	abstract 
-	public void pesquisar(RecursoGenerico<T> resource) throws Exception;
+	public void pesquisar(RecursoGenerico<T> recurso) throws Exception;
 	
 	abstract 
-	public void cadastrar(RecursoGenerico<T> resource) throws Exception;
+	public void cadastrar(RecursoGenerico<T> recurso) throws Exception;
 	
 	abstract 
-	public void editar(RecursoGenerico<T> resource, Long id) throws Exception;
+	public void editar(RecursoGenerico<T> recurso, Long id) throws Exception;
 	
 	abstract 
-	public String salvar(RecursoGenerico<T> resource, T objeto) throws Exception;
+	public String salvar(RecursoGenerico<T> recurso, T objeto) throws Exception;
 	
 	abstract 
-	public String excluir(RecursoGenerico<T> resource, Long id) throws Exception;
+	public String excluir(RecursoGenerico<T> recurso, Long id) throws Exception;
 	
 	abstract
 	public RecursoGenerico<T> novoRecurso();

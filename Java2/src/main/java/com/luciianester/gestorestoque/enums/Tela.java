@@ -3,7 +3,7 @@ package com.luciianester.gestorestoque.enums;
 public enum Tela {
 
 	PESSOA("Pessoa", "pessoa"),
-	SAIDA("Venda", "saida"),
+	SAIDA("Saída", "saida"),
 	ENTRADA("Entrada", "entrada"),
 	PRODUTO("Produto", "produto"),
 	MARCA("Marca", "marca"),
