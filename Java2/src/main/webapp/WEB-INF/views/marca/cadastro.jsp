@@ -14,7 +14,17 @@
   
 	<div class="panel-body">
 	
-		<%@include file="../../base/mensagem.jsp" %>
+		<c:if test="${!empty mensagem}">
+		
+			<br/>
+			<c:if test="${mensagemTipo == 'ERRO'}">
+				<div class="alert alert-danger" role="alert">${mensagem }</div>
+			</c:if>
+			<c:if test="${mensagemTipo == 'SALVOU_SUCESSO'}">
+				<div class="alert alert-success" role="alert">${mensagem }</div>
+			</c:if>
+			
+		</c:if>
 		
 		<form:form action="gravar" commandName="objeto" autocomplete="off">
 			
@@ -31,10 +41,15 @@
 			<br/>
 			<br/>
 			
-			<jsp:include page="../../base/barrasalvar.jsp">
-				<jsp:param name="caminho" value="marca"/>
-				<jsp:param name="objetoId" value="${objeto.marcaId}"/>
-			</jsp:include>
+			<c:if test="${telaAcessoAlterar}">
+				<input type="submit" value="Salvar" class="btn btn-success" />
+			</c:if>
+			<c:if test="${!empty objeto.marcaId}">
+				<c:if test="${telaAcessoAlterar}">
+					<td><a href="<c:url value='/marca/cadastro'/>" class="btn btn-default" >Novo</a></td>
+					<td><a href="<c:url value='/marca/${objeto.marcaId}'/>" class="btn btn-default" >Cancelar</a></td>
+				</c:if>
+			</c:if>
 			
 		</form:form>
 
