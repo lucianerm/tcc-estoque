@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public abstract class ControleCadastro<T> extends ControleBase<T> {
 
+	private String campoPesquisa = null;
+	
 	public ControleCadastro(String caminho) {
 		super(caminho);
 	}
@@ -21,9 +23,11 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 	}
 	
 	@RequestMapping("")
-	public String pesquisa(Model modelo) throws Exception {
+	public String pesquisa(Model modelo, @RequestParam(required=false) String campoPesquisa) throws Exception {
 		
 		this.setModelo(modelo);
+		
+		this.setCampoPesquisa(campoPesquisa);
 		
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
@@ -105,6 +109,18 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 		}
 		
 		
+	}
+
+	public String getCampoPesquisa() {
+		return campoPesquisa;
+	}
+
+	public void setCampoPesquisa(String campoPesquisa) {
+		if (campoPesquisa==null) {
+			campoPesquisa = "";
+		}
+		this.addAtributo("campoPesquisa", campoPesquisa);
+		this.campoPesquisa = campoPesquisa;
 	}
 	
 }

@@ -34,6 +34,15 @@ public abstract class RecursoGenerico<T> extends UtilidadesDoModelo implements A
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<T> listarTodos(String campoPesquisa) throws Exception {
+		
+		List<T> list = this.getDao().createCriteria(classe).list();
+		System.out.println("criar override para public List<T> listarTodos(String campoPesquisa) campo : " + campoPesquisa);
+		return list;
+		
+	}
+	
+	@SuppressWarnings("unchecked")
 	public T listarPeloId(Long codigo) throws Exception {
 		
 		T objeto = (T) this.getDao().createCriteria(classe).add(Restrictions.idEq(codigo)).uniqueResult();

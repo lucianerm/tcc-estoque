@@ -5,7 +5,15 @@
 <div class="panel panel-default">
 	
 	<%@include file="../../base/cabecalhopesquisa.jsp" %>
+	
+	<br/>
+	
+	<label> </label>
+	<input id="campoPesquisa" value="${campoPesquisa}" />
+	<button onclick="myFunction()">Pesquisar</button>
 
+	<br/>
+	
 	<table class="table">
 	<tr>
 		<th width="80">Código</th>
@@ -27,3 +35,9 @@
 </div>
 	
 <%@include file="../../base/bottom.jsp" %>
+
+<script>
+	function myFunction() {
+	    window.open("/GestorEstoque/marca?campoPesquisa="+document.getElementById("campoPesquisa").value,"_self")
+	}
+</script>

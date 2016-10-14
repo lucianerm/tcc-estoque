@@ -11,7 +11,13 @@ public abstract class ControleGenerico<T> extends ControleCadastro<T> {
 	@Override
 	public void pesquisar(RecursoGenerico<T> recurso) throws Exception {
 
-		List<T> lista = recurso.listarTodos();
+		List<T> lista = null;
+		
+		if (this.getCampoPesquisa()!=null) {
+			lista = recurso.listarTodos(this.getCampoPesquisa());
+		} else {
+			lista = recurso.listarTodos();
+		}
 		this.setLista(lista);
 		
 	}

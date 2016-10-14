@@ -108,4 +108,23 @@ public class MarcaRecurso extends RecursoGenerico<Marca> {
 		
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Marca> listarTodos(String campoPesquisa) throws Exception {
+		
+		if (campoPesquisa==null || campoPesquisa.equals("")) {
+			return super.listarTodos();
+		} else {
+			
+			List<Marca> lista = (List<Marca>) this.getDao()
+					.createCriteria(Marca.class)
+					.add(Restrictions.ilike("descricao", "%"+campoPesquisa+"%"))
+					.list();
+			
+			return lista;
+			
+		}
+		
+	}
+	
 }
