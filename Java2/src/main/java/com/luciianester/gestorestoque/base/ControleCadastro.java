@@ -38,13 +38,12 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 	}
 	
 	@RequestMapping("/cadastro")
-	public String cadastro(@RequestParam(required=false) String tipo, Model modelo) throws Exception {
+	public String cadastro(Model modelo) throws Exception {
 		
 		this.setModelo(modelo);
 		
 		try (RecursoGenerico<T> recurso = this.criaRecurso();) {
 			
-			this.verificaMensagemSucesso(tipo);
 			this.pesquisar(recurso);
 			this.cadastrar(recurso);
 			

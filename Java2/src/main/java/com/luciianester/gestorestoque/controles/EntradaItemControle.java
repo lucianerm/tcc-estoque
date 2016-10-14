@@ -56,6 +56,8 @@ public class EntradaItemControle extends ControleCadastroFilho<EntradaItem>{
 		
 		List<UnidadeDeMedida> listaUnidadeDeMedida = new ArrayList<>();
 		this.addAtributo("listaUnidadeDeMedida", listaUnidadeDeMedida);
+
+		this.addAtributo("totalEntrada", new EntradaRecurso(recurso.getDao()).calcularTotal(this.getPaiId()));
 		
 	}
 

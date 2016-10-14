@@ -35,5 +35,11 @@ public class EntradaControle extends ControleGenerico<Entrada>{
 		
 		super.pesquisar(recurso);
 	}
+	
+	@Override
+	public void editar(RecursoGenerico<Entrada> recurso, Long id) throws Exception {
+		super.editar(recurso, id);
+		this.addAtributo("totalEntrada", ((EntradaRecurso)recurso).calcularTotal(id));
+	}
 
 }

@@ -9,13 +9,15 @@
 	<table class="table">
 	<tr>
 		<th width="80">Código</th>
-		<th width="200">Data</th>
+		<th width="80">Fornecedor</th>
+		<th width="80">Data</th>
 		<th width="80">Ações</th>
 	</tr>
 	<c:if test="${!empty lista}">
 		<c:forEach items="${lista}" var="objeto">
 			<tr>
 				<td>${objeto.entradaId}</td>
+				<td>${objeto.fornecedor.nome}</td>
 				<td data-mask="0000/00/00 00:00:00">${objeto.data}</td>
 				<jsp:include page="../../base/barraacoes.jsp">
 					<jsp:param name="caminho" value="entrada"/>

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	Entrada entrada = (Entrada) request.getAttribute("entrada");
 	String acao = "/GestorEstoque/entrada/"+entrada.getEntradaId()+"/entradaitem/gravar";
@@ -88,18 +89,23 @@
 		  <table  class="table">
 			<tr>
 				<th width="80">Código</th>
-				<th width="200">Produto</th>
-				<th width="80">Quantidade</th>
-				<th width="80">UM</th>
-				<th width="100">Ações</th>
+				<th width="150">Produto</th>
+				<th width="70">Quantidade</th>
+				<th width="50">UM</th>
+				<th width="70">Valor</th>
+				<th width="70">Total</th>
+				<th width="150">Ações</th>
 			</tr>
 				<c:forEach items="${lista}" var="item">
 				<tr>
 					<td>${item.entradaItemId}</td>
 					<td>${item.produto.descricao}</td>
-					<td>${item.quantidade}</td>
+					<td><fmt:formatNumber value="${item.quantidade}" minFractionDigits="2"/></td>
 					<td>${item.unidadeDeMedida.sigla}</td>
+					<td><fmt:formatNumber value="${item.valor}" minFractionDigits="2"/></td>
+					<td><fmt:formatNumber value="${item.total}" minFractionDigits="2"/></td>
 					<td><a href="<c:url value='/entrada/${entrada.entradaId}/entradaitem/${item.entradaItemId}' />" class="btn btn-primary" >Editar</a> <a href="<c:url value='/entrada/${entrada.entradaId}/entradaitem/excluir/${item.entradaItemId}' />" class="btn btn-danger" >Excluir</a></td>
+					
 				</tr>
 			</c:forEach>
 			</table>

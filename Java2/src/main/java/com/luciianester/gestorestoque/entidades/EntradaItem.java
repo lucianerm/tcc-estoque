@@ -43,6 +43,9 @@ public class EntradaItem {
 	private BigDecimal valor;
 	
 	@Transient
+	private BigDecimal total;
+	
+	@Transient
 	private BigDecimal saldo = BigDecimal.ZERO;
 	
 	@Transient
@@ -86,6 +89,7 @@ public class EntradaItem {
 
 	public void setQuantidade(BigDecimal quantidade) {
 		this.quantidade = quantidade;
+		this.calculaTotal();
 	}
 
 	public BigDecimal getValor() {
@@ -94,6 +98,7 @@ public class EntradaItem {
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+		this.calculaTotal();
 	}
 
 	public String getLoteFabricante() {
@@ -118,6 +123,23 @@ public class EntradaItem {
 
 	public void setSigla(String sigla) {
 		this.sigla = sigla;
+	}
+
+	public BigDecimal getTotal() {
+		this.calculaTotal();
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+	
+	private void calculaTotal() {
+		if (this.valor!=null && this.quantidade!=null) {
+			this.total = this.valor.multiply(this.quantidade);
+		} else {
+			this.total = BigDecimal.ZERO;
+		}
 	}
 	
 }
