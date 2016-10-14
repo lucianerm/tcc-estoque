@@ -59,6 +59,8 @@ public class SaidaItemControle extends ControleCadastroFilho<SaidaItem> {
 		List<UnidadeDeMedida> listaUnidadeDeMedida = new ArrayList<>();
 		this.addAtributo("listaUnidadeDeMedida", listaUnidadeDeMedida);
 		
+		this.addAtributo("totalSaida", new SaidaRecurso(recurso.getDao()).calcularTotal(this.getPaiId()));
+		
 	}
 
 	@Override

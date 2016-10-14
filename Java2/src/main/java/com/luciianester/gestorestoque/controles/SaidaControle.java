@@ -36,4 +36,10 @@ public class SaidaControle extends ControleGenerico<Saida>{
 		super.pesquisar(recurso);
 	}
 	
+	@Override
+	public void editar(RecursoGenerico<Saida> recurso, Long id) throws Exception {
+		super.editar(recurso, id);
+		this.addAtributo("totalSaida", ((SaidaRecurso)recurso).calcularTotal(id));
+	}
+	
 }

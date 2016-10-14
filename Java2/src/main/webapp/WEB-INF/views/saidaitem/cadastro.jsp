@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	Saida saida = (Saida) request.getAttribute("saida");
 	String acao = "/GestorEstoque/saida/"+saida.getSaidaId()+"/saidaitem/gravar";
@@ -102,8 +103,10 @@
 				<tr>
 					<td>${item.saidaItemId}</td>
 					<td>${item.entradaItem.produto.descricao}</td>
-					<td>${item.quantidade}</td>
+					<td><fmt:formatNumber value="${item.quantidade}" minFractionDigits="2"/></td>
 					<td>${item.unidadeDeMedida.sigla}</td>
+					<td><fmt:formatNumber value="${item.valor}" minFractionDigits="2"/></td>
+					<td><fmt:formatNumber value="${item.total}" minFractionDigits="2"/></td>
 					<td><a href="<c:url value='/saida/${saida.saidaId}/saidaitem/${item.saidaItemId}' />" class="btn btn-primary" >Editar</a> <a href="<c:url value='/saida/${saida.saidaId}/saidaitem/excluir/${item.saidaItemId}' />" class="btn btn-danger" >Excluir</a></td>
 				</tr>
 			</c:forEach>

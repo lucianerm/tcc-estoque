@@ -1,5 +1,6 @@
 package com.luciianester.gestorestoque.recursos.saida;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.luciianester.gestorestoque.base.RecursoGenerico;
@@ -62,5 +63,19 @@ public class SaidaRecurso extends RecursoGenerico<Saida> {
 		return super.remover(saida);
 		
 	}
-	
+
+	@SuppressWarnings("resource")
+	public BigDecimal calcularTotal(Long codigo) throws Exception {
+		
+		BigDecimal total = BigDecimal.ZERO;
+		
+		List<SaidaItem> listarPelaSaida = new SaidaItemRecurso(this.getDao()).listarPelaSaida(this.listarPeloId(codigo));
+		for (SaidaItem saidaItem : listarPelaSaida) {
+			total = total.add(saidaItem.getTotal());
+		}
+		
+		return total;
+		
+	}
+
 }

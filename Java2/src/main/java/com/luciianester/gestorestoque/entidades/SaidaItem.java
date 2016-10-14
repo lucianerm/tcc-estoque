@@ -38,6 +38,9 @@ public class SaidaItem {
 	
 	@Column
 	private BigDecimal valor;
+
+	@Transient
+	private BigDecimal total;
 	
 	@Transient
 	private Long produtoId;
@@ -81,6 +84,7 @@ public class SaidaItem {
 
 	public void setQuantidade(BigDecimal quantidade) {
 		this.quantidade = quantidade;
+		this.calculaTotal();
 	}
 
 	public BigDecimal getValor() {
@@ -89,6 +93,7 @@ public class SaidaItem {
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+		this.calculaTotal();
 	}
 
 	public Long getProdutoId() {
@@ -98,5 +103,21 @@ public class SaidaItem {
 	public void setProdutoId(Long produtoId) {
 		this.produtoId = produtoId;
 	}
+
+	public BigDecimal getTotal() {
+		this.calculaTotal();
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
 	
+	private void calculaTotal() {
+		if (this.valor!=null && this.quantidade!=null) {
+			this.total = this.valor.multiply(this.quantidade);
+		} else {
+			this.total = BigDecimal.ZERO;
+		}
+	}
 }
