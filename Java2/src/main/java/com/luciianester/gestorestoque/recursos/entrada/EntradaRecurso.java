@@ -1,7 +1,10 @@
 package com.luciianester.gestorestoque.recursos.entrada;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.List;
+
+import org.hibernate.criterion.Restrictions;
 
 import com.luciianester.gestorestoque.base.RecursoGenerico;
 import com.luciianester.gestorestoque.base.dao.DAO;
@@ -74,6 +77,17 @@ public class EntradaRecurso extends RecursoGenerico<Entrada> {
 		}
 		
 		return total;
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Entrada> listarPelaData(Date data) throws Exception {
+		
+		List<Entrada> lista = this.getDao().createCriteria(Entrada.class)
+			.add(Restrictions.le("data", data))
+			.list();
+		
+		return lista;
 		
 	}
 

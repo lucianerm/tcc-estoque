@@ -9,7 +9,8 @@ public enum Tela {
 	MARCA("Marca", "marca"),
 	CATEGORIA("Categoria", "categoria"),
 	PERFIL("Perfil", "perfil"),
-	USUARIO("Usuário", "usuario");
+	USUARIO("Usuário", "usuario"),
+	SALDOS("Saldos", "saldos");
 	
 	private String nome;
 	private String caminho;

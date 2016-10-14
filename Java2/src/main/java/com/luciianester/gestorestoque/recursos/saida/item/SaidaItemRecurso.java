@@ -86,12 +86,12 @@ public class SaidaItemRecurso extends RecursoGenerico<SaidaItem> {
 	public List<SaidaItem> listarPelaEntrada(EntradaItem entradaItem) throws Exception {
 		
 		@SuppressWarnings("unchecked")
-		List<SaidaItem> list = this.getDao()
+		List<SaidaItem> lista = this.getDao()
 				.createCriteria(SaidaItem.class)
 				.add(Restrictions.eq("entradaItem", entradaItem))
 				.list();
 		
-		return list;
+		return lista;
 		
 	}
 	
@@ -117,6 +117,20 @@ public class SaidaItemRecurso extends RecursoGenerico<SaidaItem> {
 		List<SaidaItem> lista = (List<SaidaItem>) this.getDao().createCriteria(SaidaItem.class)
 				.add(Restrictions.eq("saida", saida))
 				.addOrder(Order.asc("saidaItemId"))
+				.list();
+		
+		return lista;
+		
+	}
+
+	public List<SaidaItem> listarPelaEntrada(EntradaItem entradaItem, java.sql.Date data) throws Exception {
+
+		@SuppressWarnings("unchecked")
+		List<SaidaItem> lista = this.getDao()
+				.createCriteria(SaidaItem.class)
+				.createAlias("saida", "s")
+				.add(Restrictions.eq("entradaItem", entradaItem))
+				.add(Restrictions.le("s.data", data))
 				.list();
 		
 		return lista;

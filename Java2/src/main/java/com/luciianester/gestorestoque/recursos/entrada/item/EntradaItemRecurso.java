@@ -70,7 +70,7 @@ public class EntradaItemRecurso extends RecursoGenerico<EntradaItem> {
 		}
 		
 	}
-
+	
 	public EntradaItemDoProduto listarPeloProduto(Long id) {
 		
 		EntradaItemDoProduto doProduto = new EntradaItemDoProduto();
