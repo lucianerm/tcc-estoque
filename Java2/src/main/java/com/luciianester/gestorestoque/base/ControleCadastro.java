@@ -119,6 +119,7 @@ public abstract class ControleCadastro<T> extends ControleBase<T> {
 		if (campoPesquisa==null) {
 			campoPesquisa = "";
 		}
+		campoPesquisa = campoPesquisa.replace("%", "");
 		this.addAtributo("campoPesquisa", campoPesquisa);
 		this.campoPesquisa = campoPesquisa;
 	}

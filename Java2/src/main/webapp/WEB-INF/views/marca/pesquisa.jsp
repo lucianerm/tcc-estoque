@@ -10,8 +10,10 @@
 	
 	<label> </label>
 	<input id="campoPesquisa" value="${campoPesquisa}" />
-	<button onclick="myFunction()">Pesquisar</button>
+	<button onclick="pesquisar()" class="btn btn-primary">Pesquisar</button>
+	<button onclick="limpar()" class="btn btn-primary">Limpar</button>
 
+	<br/>
 	<br/>
 	
 	<table class="table">
@@ -37,7 +39,10 @@
 <%@include file="../../base/bottom.jsp" %>
 
 <script>
-	function myFunction() {
+	function pesquisar() {
 	    window.open("/GestorEstoque/marca?campoPesquisa="+document.getElementById("campoPesquisa").value,"_self")
+	}
+	function limpar() {
+	    window.open("/GestorEstoque/marca","_self")
 	}
 </script>
