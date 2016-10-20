@@ -2,6 +2,8 @@ package com.luciianester.gestorestoque.recursos.pessoa;
 
 import java.util.List;
 
+import org.hibernate.criterion.Restrictions;
+
 import com.luciianester.gestorestoque.base.RecursoGenerico;
 import com.luciianester.gestorestoque.base.dao.DAO;
 import com.luciianester.gestorestoque.entidades.Endereco;
@@ -72,6 +74,25 @@ public class PessoaRecurso extends RecursoGenerico<Pessoa>{
 		}
 		
 		return super.remover(pessoa);
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Pessoa> listarTodos(String campoPesquisa) throws Exception {
+		
+		if (campoPesquisa==null || campoPesquisa.equals("")) {
+			return super.listarTodos();
+		} else {
+			
+			List<Pessoa> lista = (List<Pessoa>) this.getDao()
+					.createCriteria(Pessoa.class)
+					.add(Restrictions.ilike("nome", "%"+campoPesquisa+"%"))
+					.list();
+			
+			return lista;
+			
+		}
 		
 	}
 	

@@ -90,5 +90,25 @@ public class EntradaRecurso extends RecursoGenerico<Entrada> {
 		return lista;
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Entrada> listarTodos(String campoPesquisa) throws Exception {
+		
+		if (campoPesquisa==null || campoPesquisa.equals("")) {
+			return super.listarTodos();
+		} else {
+			
+			List<Entrada> lista = (List<Entrada>) this.getDao()
+					.createCriteria(Entrada.class)
+					.createAlias("fornecedor", "c")
+					.add(Restrictions.ilike("c.nome", "%"+campoPesquisa+"%"))
+					.list();
+			
+			return lista;
+			
+		}
+		
+	}
 
 }

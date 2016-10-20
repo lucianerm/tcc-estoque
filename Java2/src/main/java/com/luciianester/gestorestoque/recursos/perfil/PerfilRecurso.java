@@ -52,4 +52,23 @@ public class PerfilRecurso extends RecursoGenerico<Perfil> {
 		
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Perfil> listarTodos(String campoPesquisa) throws Exception {
+		
+		if (campoPesquisa==null || campoPesquisa.equals("")) {
+			return super.listarTodos();
+		} else {
+			
+			List<Perfil> lista = (List<Perfil>) this.getDao()
+					.createCriteria(Perfil.class)
+					.add(Restrictions.ilike("descricao", "%"+campoPesquisa+"%"))
+					.list();
+			
+			return lista;
+			
+		}
+		
+	}
+	
 }

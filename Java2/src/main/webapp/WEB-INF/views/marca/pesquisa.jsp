@@ -11,7 +11,7 @@
 	<label> </label>
 	<input id="campoPesquisa" value="${campoPesquisa}" />
 	<button onclick="pesquisar()" class="btn btn-primary">Pesquisar</button>
-	<button onclick="limpar()" class="btn btn-primary">Limpar</button>
+	<button onclick="limpar()" class="btn btn-default">Limpar</button>
 
 	<br/>
 	<br/>

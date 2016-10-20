@@ -67,5 +67,24 @@ public class CategoriaRecurso extends RecursoGenerico<Categoria> {
 		
 		return true;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Categoria> listarTodos(String campoPesquisa) throws Exception {
+		
+		if (campoPesquisa==null || campoPesquisa.equals("")) {
+			return super.listarTodos();
+		} else {
+			
+			List<Categoria> lista = (List<Categoria>) this.getDao()
+					.createCriteria(Categoria.class)
+					.add(Restrictions.ilike("descricao", "%"+campoPesquisa+"%"))
+					.list();
+			
+			return lista;
+			
+		}
+		
+	}
+	
 }

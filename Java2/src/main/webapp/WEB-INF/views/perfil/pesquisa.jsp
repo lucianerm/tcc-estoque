@@ -5,6 +5,8 @@
 <div class="panel panel-default">
 	
 	<%@include file="../../base/cabecalhopesquisa.jsp" %>
+	
+	<%@include file="../../base/pesquisatela.jsp" %>
 
 	<table class="table">
 	<tr>

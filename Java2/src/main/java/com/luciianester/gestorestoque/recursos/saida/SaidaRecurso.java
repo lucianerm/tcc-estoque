@@ -3,6 +3,8 @@ package com.luciianester.gestorestoque.recursos.saida;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.hibernate.criterion.Restrictions;
+
 import com.luciianester.gestorestoque.base.RecursoGenerico;
 import com.luciianester.gestorestoque.base.dao.DAO;
 import com.luciianester.gestorestoque.entidades.Saida;
@@ -78,4 +80,24 @@ public class SaidaRecurso extends RecursoGenerico<Saida> {
 		
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Saida> listarTodos(String campoPesquisa) throws Exception {
+		
+		if (campoPesquisa==null || campoPesquisa.equals("")) {
+			return super.listarTodos();
+		} else {
+			
+			List<Saida> lista = (List<Saida>) this.getDao()
+					.createCriteria(Saida.class)
+					.createAlias("cliente", "c")
+					.add(Restrictions.ilike("c.nome", "%"+campoPesquisa+"%"))
+					.list();
+			
+			return lista;
+			
+		}
+		
+	}
+	
 }

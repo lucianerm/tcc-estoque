@@ -1,5 +1,9 @@
 package com.luciianester.gestorestoque.recursos.produto;
 
+import java.util.List;
+
+import org.hibernate.criterion.Restrictions;
+
 import com.luciianester.gestorestoque.base.RecursoGenerico;
 import com.luciianester.gestorestoque.base.dao.DAO;
 import com.luciianester.gestorestoque.entidades.Produto;
@@ -39,6 +43,25 @@ public class ProdutoRecurso extends RecursoGenerico<Produto> {
 	@Override
 	public boolean validacaoExcluir(Produto objeto) {
 		return true;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Produto> listarTodos(String campoPesquisa) throws Exception {
+		
+		if (campoPesquisa==null || campoPesquisa.equals("")) {
+			return super.listarTodos();
+		} else {
+			
+			List<Produto> lista = (List<Produto>) this.getDao()
+					.createCriteria(Produto.class)
+					.add(Restrictions.ilike("descricao", "%"+campoPesquisa+"%"))
+					.list();
+			
+			return lista;
+			
+		}
+		
 	}
 	
 }

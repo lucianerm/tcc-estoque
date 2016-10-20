@@ -6,16 +6,22 @@
 	
 	<%@include file="../../base/cabecalhopesquisa.jsp" %>
 
+	<%@include file="../../base/pesquisatela.jsp" %>
+
 	<table class="table">
 	<tr>
 		<th width="80">Código</th>
 		<th width="200">Descrição</th>
+		<th width="200">Marca</th>
+		<th width="200">Categoria</th>
 	</tr>
 	<c:if test="${!empty lista}">
 		<c:forEach items="${lista}" var="objeto">
 			<tr>
 				<td>${objeto.produtoId}</td>
 				<td>${objeto.descricao}</td>
+				<td>${objeto.marca.descricao}</td>
+				<td>${objeto.categoria.descricao}</td>
 				<jsp:include page="../../base/barraacoes.jsp">
 					<jsp:param name="caminho" value="produto"/>
 					<jsp:param name="objetoId" value="${objeto.produtoId}"/>
