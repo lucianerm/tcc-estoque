@@ -132,6 +132,8 @@
 				
 			<form:form action="/GestorEstoque/login/logar" commandName="objeto">
 			
+				<%@include file="../../base/mensagem.jsp" %>
+				
 				<input type="text" name="nomeAcesso" placeholder="Usuário" autofocus>
 				<input type="password" name="senha" placeholder="Senha">
 				<input type="submit" class="login loginmodal-submit" value="Logar">

@@ -75,10 +75,11 @@
 		  <div class="panel-heading">Todas as Unidades</div>
 		  <table  class="table">
 			<tr>
-				<th width="80">Código</th>
-				<th width="80">Sigla</th>
+				<th width="60">Código</th>
+				<th width="60">Sigla</th>
 				<th width="200">Descrição</th>
-				<th width="80">Quantidade</th>
+				<th width="60">Quantidade</th>
+				<th width="60">Valor</th>
 				<th width="100">Ações</th>
 			</tr>
 			<c:forEach items="${lista}" var="item">
@@ -87,6 +88,7 @@
 					<td>${item.sigla}</td>
 					<td>${item.descricao}</td>
 					<td>${item.quantidade}</td>
+					<td>${item.valorDeVenda}</td>
 					<td><a href="<c:url value='/produto/${produto.produtoId}/unidadedemedida/${item.unidadeDeMedidaId}' />" class="btn btn-primary" >Editar</a> <a href="<c:url value='/produto/${produto.produtoId}/unidadedemedida/excluir/${item.unidadeDeMedidaId}' />" class="btn btn-danger" >Excluir</a></td>
 				</tr>
 			</c:forEach>

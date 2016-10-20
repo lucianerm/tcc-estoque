@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.luciianester.gestorestoque.base.MensagemTipo;
 import com.luciianester.gestorestoque.base.RecursoGenerico;
 import com.luciianester.gestorestoque.base.dao.DAO;
 import com.luciianester.gestorestoque.entidades.Perfil;
@@ -81,6 +82,8 @@ public class LoginControle {
 			} else {
 				objeto.setSenha(null);
 				modelo.addAttribute("objeto", objeto);
+				modelo.addAttribute("mensagemTipo", MensagemTipo.ERRO);
+				modelo.addAttribute("mensagem", "Usuário ou Senha inválido");
 				return "/login/login";
 			}
 			

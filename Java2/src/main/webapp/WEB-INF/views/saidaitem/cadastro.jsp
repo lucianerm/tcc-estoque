@@ -46,7 +46,7 @@
 		<select id="cmbEntradaItem" name="entradaItem.entradaItemId"  class="cmbEntradaItem js-example-basic-single js-states form-control">
 			<option value="0" ${objeto.entradaItem.entradaItemId == null ? 'selected' : ''}>Selecione uma Entrada</option>
 			<c:forEach items="${listaEntradaItem}" var="item">
-				<option value="${item.entradaItemId}" ${item.entradaItemId == objeto.entradaItem.entradaItemId ? 'selected' : ''}>${item.entradaItemId} - ${item.produto.produtoId} - ${item.produto.descricao} - ${item.saldo} ${item.sigla}</option>
+				<option value="${item.entradaItemId}" ${item.entradaItemId == objeto.entradaItem.entradaItemId ? 'selected' : ''}>${item.entradaItemId} - ${item.produto.produtoId} - ${item.produto.descricao} - Saldo: ${item.saldo} ${item.sigla}</option>
 			</c:forEach>	
 		</select>
 		<br/>
@@ -202,7 +202,7 @@
                     for (var i = 0; i < data.lista.length; i++) {
                     	var option = document.createElement("option");
                     	option.value = data.lista[i].entradaItemId;
-                        option.text = data.lista[i].entradaItemId + " - " + data.lista[i].produto.descricao + " - " + data.lista[i].saldo + " " + data.lista[i].sigla;
+                        option.text = data.lista[i].entradaItemId + " - " + data.lista[i].produto.descricao + " - Saldo: " + data.lista[i].saldo + " " + data.lista[i].sigla;
                         comboBox.add(option);
                     }
                     
