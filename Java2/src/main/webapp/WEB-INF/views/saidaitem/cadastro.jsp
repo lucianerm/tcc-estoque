@@ -38,6 +38,7 @@
 				<option value="${item.produtoId}" ${item.produtoId == objeto.produtoId ? 'selected' : ''}>${item.produtoId} - ${item.descricao}</option>
 			</c:forEach>
 		</select>
+		<a href="<c:url value='/produto/cadastro'/>" class="btn btn-primary" >Novo Produto</a>
 		<br/>
 		<br/>
 		

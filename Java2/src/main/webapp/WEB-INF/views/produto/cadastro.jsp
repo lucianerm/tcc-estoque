@@ -55,6 +55,7 @@
 				<option value="${item.marcaId}" ${item.marcaId == objeto.marca.marcaId ? 'selected' : ''}>${item.marcaId} - ${item.descricao}</option>
 			</c:forEach>	
 		</select>
+		<a href="<c:url value='/produto/cadastro'/>" class="btn btn-primary" >Nova Marca</a>
 		<br/>
 		<br/>
 		<label>Categoria:</label>
@@ -65,6 +66,7 @@
 				<option value="${item.categoriaId}" ${item.categoriaId == objeto.categoria.categoriaId ? 'selected' : ''}>${item.categoriaId} - ${item.descricao}</option>
 			</c:forEach>	
 		</select>
+		<a href="<c:url value='/produto/cadastro'/>" class="btn btn-primary" >Nova Categoria</a>
 		<br/>
 		<br/>
 		

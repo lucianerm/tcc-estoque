@@ -44,6 +44,8 @@
 		  <!-- option value="AL">Alabama</option>
 		  <option value="WY">Wyoming</option-->
 		</select>
+		<a href="<c:url value='/produto/cadastro'/>" class="btn btn-primary" >Novo Produto</a>
+		
 		<br/>
 		<br/>
 		
@@ -57,7 +59,6 @@
 		  <!-- option value="AL">Alabama</option>
 		  <option value="WY">Wyoming</option-->
 		</select>
-		
 		<br/>
 		<br/>
 		<label>Quantidade:</label>
@@ -68,6 +69,11 @@
 		<label>Valor:</label>
 		<br/>
 		<form:input path="valor" /> 
+		<br/>
+		<br/>
+		<label>Valor Imposto:</label>
+		<br/>
+		<form:input path="valorImposto" /> 
 		<br/>
 		<br/>
 		
@@ -93,6 +99,7 @@
 				<th width="70">Quantidade</th>
 				<th width="50">UM</th>
 				<th width="70">Valor</th>
+				<th width="70">Imposto</th>
 				<th width="70">Total</th>
 				<th width="150">Ações</th>
 			</tr>
@@ -103,6 +110,7 @@
 					<td><fmt:formatNumber value="${item.quantidade}" minFractionDigits="2"/></td>
 					<td>${item.unidadeDeMedida.sigla}</td>
 					<td><fmt:formatNumber value="${item.valor}" minFractionDigits="2"/></td>
+					<td><fmt:formatNumber value="${item.valorImposto}" minFractionDigits="2"/></td>
 					<td><fmt:formatNumber value="${item.total}" minFractionDigits="2"/></td>
 					<td><a href="<c:url value='/entrada/${entrada.entradaId}/entradaitem/${item.entradaItemId}' />" class="btn btn-primary" >Editar</a> <a href="<c:url value='/entrada/${entrada.entradaId}/entradaitem/excluir/${item.entradaItemId}' />" class="btn btn-danger" >Excluir</a></td>
 					

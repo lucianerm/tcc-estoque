@@ -42,6 +42,9 @@ public class EntradaItem {
 	@Column
 	private BigDecimal valor;
 	
+	@Column
+	private BigDecimal valorImposto;
+	
 	@Transient
 	private BigDecimal total;
 	
@@ -137,9 +140,21 @@ public class EntradaItem {
 	private void calculaTotal() {
 		if (this.valor!=null && this.quantidade!=null) {
 			this.total = this.valor.multiply(this.quantidade);
+			if (this.valorImposto!=null) {
+				this.total = this.total.add(this.valorImposto);
+			}
 		} else {
 			this.total = BigDecimal.ZERO;
 		}
+	}
+
+	public BigDecimal getValorImposto() {
+		return valorImposto;
+	}
+
+	public void setValorImposto(BigDecimal valorImposto) {
+		this.valorImposto = valorImposto;
+		this.calculaTotal();
 	}
 	
 }

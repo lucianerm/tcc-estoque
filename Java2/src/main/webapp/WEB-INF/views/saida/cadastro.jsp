@@ -39,6 +39,7 @@
 				<option value="${item.pessoaId}" ${item.pessoaId == objeto.cliente.pessoaId ? 'selected' : ''}>${item.pessoaId} - ${item.nome}</option>
 			</c:forEach>	
 		</select>
+		<a href="<c:url value='/produto/cadastro'/>" class="btn btn-primary" >Novo Cliente</a>
 		<br/>
 		<br/>
 		
