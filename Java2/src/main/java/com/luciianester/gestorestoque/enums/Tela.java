@@ -10,7 +10,8 @@ public enum Tela {
 	CATEGORIA("Categoria", "categoria"),
 	PERFIL("Perfil", "perfil"),
 	USUARIO("Usuário", "usuario"),
-	SALDOS("Saldos", "saldos");
+	SALDOS("Saldos", "saldos"),
+	SALDOSVALOR("Histórico Entradas", "saldovalor");
 	
 	private String nome;
 	private String caminho;

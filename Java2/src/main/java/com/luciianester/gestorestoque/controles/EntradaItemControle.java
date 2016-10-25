@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.luciianester.gestorestoque.base.ControleCadastroFilho;
@@ -118,6 +119,14 @@ public class EntradaItemControle extends ControleCadastroFilho<EntradaItem>{
 	@Override
 	public RecursoGenerico<EntradaItem> novoRecurso() {
 		return new EntradaItemRecurso(new DAO());
+	}
+	
+	@RequestMapping("/novoproduto/{id}")
+	public String novoProduto(@PathVariable("id") Long id) {
+		
+		System.out.println("novoproduto");
+		return "redirect:/produto/cadastrar";
+		
 	}
 	
 }

@@ -3,6 +3,7 @@ package com.luciianester.gestorestoque.recursos.entrada.item;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -73,6 +74,13 @@ public class EntradaItemRecurso extends RecursoGenerico<EntradaItem> {
 	
 	public EntradaItemDoProduto listarPeloProduto(Long id) {
 		
+		return listarPeloProdutoOrdenandoPelaData(id, false);
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public EntradaItemDoProduto listarPeloProdutoOrdenandoPelaData(Long id, boolean ordenar) {
+		
 		EntradaItemDoProduto doProduto = new EntradaItemDoProduto();
 		
 		try {
@@ -80,10 +88,17 @@ public class EntradaItemRecurso extends RecursoGenerico<EntradaItem> {
 			@SuppressWarnings("resource")
 			Produto produto = new ProdutoRecurso(this.getDao()).listarPeloId(id);
 			
-			@SuppressWarnings("unchecked")
-			List<EntradaItem> listaEntradaItem = (List<EntradaItem>) this.getDao().createCriteria(EntradaItem.class)
-				.add(Restrictions.eq("produto", produto))
-				.list();
+			Criteria criteriaListar = this.getDao()
+					.createCriteria(EntradaItem.class)
+					.createAlias("entrada", "e")
+					.add(Restrictions.eq("produto", produto));
+			
+			if (ordenar) {
+				criteriaListar.addOrder(Order.asc("e.data"));
+				criteriaListar.addOrder(Order.asc("entradaItemId"));
+			}
+			
+			List<EntradaItem> listaEntradaItem = (List<EntradaItem>) criteriaListar.list();
 			
 			for (EntradaItem entradaItem : listaEntradaItem) {
 				this.calculaSaldo(entradaItem);
