@@ -31,6 +31,11 @@
 		<form:input path="data" data-mask="00/00/0000 00:00:00" />
 		<br/>
 		<br/>
+		<label>Número:</label>
+		<br/>
+		<form:input path="numero" />
+		<br/>
+		<br/>
 		<label>Fornecedor:</label>
 		<br/>
 		<select id="cmbFornecedor" name="fornecedor.pessoaId" class="cmbFornecedor js-example-basic-single js-states form-control">

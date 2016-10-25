@@ -26,9 +26,14 @@ public class EntradaRecurso extends RecursoGenerico<Entrada> {
 
 	@Override
 	public boolean validacaoGravar(Entrada objeto) {
-
+		
 		if (objeto.getData()==null) {
 			this.setMensagemObrigatorio("Data");
+			return false;
+		}
+		
+		if (objeto.getNumero()==null) {
+			this.setMensagemObrigatorio("Número");
 			return false;
 		}
 		

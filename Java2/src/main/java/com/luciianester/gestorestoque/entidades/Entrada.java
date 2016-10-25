@@ -29,6 +29,9 @@ public class Entrada {
 	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm:ss")
 	private Date data;
 	
+	@Column
+	private Long numero;
+	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="fornecedorId")
 	private Pessoa fornecedor;
@@ -72,6 +75,14 @@ public class Entrada {
 	
 	public Entrada() {
 		this.data = new Date();
+	}
+
+	public Long getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Long numero) {
+		this.numero = numero;
 	}
 	
 }
