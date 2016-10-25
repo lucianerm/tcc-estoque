@@ -121,11 +121,13 @@ public class EntradaItemControle extends ControleCadastroFilho<EntradaItem>{
 		return new EntradaItemRecurso(new DAO());
 	}
 	
-	@RequestMapping("/novoproduto/{id}")
-	public String novoProduto(@PathVariable("id") Long id) {
+	@RequestMapping("/novoproduto/{entradaItemId}")
+	public String novoProduto(@PathVariable("entradaItemId") Long entradaItemId) {
+		
+		this.addAtributo("voltarTela", "entradaitem");
 		
 		System.out.println("novoproduto");
-		return "redirect:/produto/cadastrar";
+		return "redirect:/produto/cadastro";
 		
 	}
 	

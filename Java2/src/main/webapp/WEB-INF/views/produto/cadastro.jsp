@@ -47,6 +47,11 @@
 		<form:input path="descricao" size="50"/>
 		<br/>
 		<br/>
+		<label>Saldo Mínimo:</label>
+		<br/>
+		<form:input path="saldoMinimo" />
+		<br/>
+		<br/>
 		<label>Marca:</label>
 		<br/>
 		<select name="marca.marcaId" class="cmbMarca js-example-basic-single js-states form-control">

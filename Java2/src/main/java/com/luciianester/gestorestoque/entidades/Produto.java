@@ -1,5 +1,7 @@
 package com.luciianester.gestorestoque.entidades;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,6 +32,9 @@ public class Produto {
 	@JoinColumn(name="marcaId")
 	private Marca marca;
 	
+	@Column
+	private BigDecimal saldoMinimo;
+	
 	public Long getProdutoId() {
 		return produtoId;
 	}
@@ -54,6 +59,12 @@ public class Produto {
 	}
 	public void setMarca(Marca marca) {
 		this.marca = marca;
+	}
+	public BigDecimal getSaldoMinimo() {
+		return saldoMinimo;
+	}
+	public void setSaldoMinimo(BigDecimal saldoMinimo) {
+		this.saldoMinimo = saldoMinimo;
 	}
 	
 }

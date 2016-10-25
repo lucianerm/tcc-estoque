@@ -6,7 +6,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	Entrada entrada = (Entrada) request.getAttribute("entrada");
+	EntradaItem entradaItem = (EntradaItem) request.getAttribute("objeto");
 	String acao = "/GestorEstoque/entrada/"+entrada.getEntradaId()+"/entradaitem/gravar";
+	String acaoNovoProduto = "/entrada/"+entrada.getEntradaId()+"/entradaitem/novoproduto/"+entradaItem.getEntradaItemId();
+	if (entradaItem.getEntradaItemId()==null) {
+		acaoNovoProduto = "/entrada/"+entrada.getEntradaId()+"/entradaitem/novoproduto/0";
+	}
 	
 %>
 <%@include file="../../base/top.jsp" %>
@@ -41,10 +46,8 @@
 			<c:forEach items="${listaProdutos}" var="item">
 				<option value="${item.produtoId}" ${item.produtoId == objeto.produto.produtoId ? 'selected' : ''}>${item.produtoId} - ${item.descricao}</option>
 			</c:forEach>	
-		  <!-- option value="AL">Alabama</option>
-		  <option value="WY">Wyoming</option-->
 		</select>
-		<a href="<c:url value='/produto/cadastro'/>" class="btn btn-primary" >Novo Produto</a>
+		<a href="<c:url value='<%= acaoNovoProduto%>'/>" class="btn btn-primary" >Novo Produto</a>
 		
 		<br/>
 		<br/>
