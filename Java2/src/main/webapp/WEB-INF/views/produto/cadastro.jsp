@@ -80,6 +80,9 @@
 			<td><a href="<c:url value='/produto/cadastro'/>" class="btn btn-default" >Novo</a></td>
 			<td><a href="<c:url value='/produto/${objeto.produtoId}'/>" class="btn btn-default" >Cancelar</a></td>
 		</c:if>
+		<c:if test="${!empty voltarTelaEntradaitem}">
+			<td><a href="<c:url value='/produto/voltar'/>" class="btn btn-default" >Voltar Entrada</a></td>
+		</c:if>
 		
 	</form:form>
 

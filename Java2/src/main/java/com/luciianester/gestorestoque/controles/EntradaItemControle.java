@@ -3,6 +3,8 @@ package com.luciianester.gestorestoque.controles;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Controller;
@@ -122,11 +124,12 @@ public class EntradaItemControle extends ControleCadastroFilho<EntradaItem>{
 	}
 	
 	@RequestMapping("/novoproduto/{entradaItemId}")
-	public String novoProduto(@PathVariable("entradaItemId") Long entradaItemId) {
+	public String novoProduto(@PathVariable("paiId") Long paiId, @PathVariable("entradaItemId") Long entradaItemId, HttpSession sessao) {
 		
-		this.addAtributo("voltarTela", "entradaitem");
+		sessao.setAttribute("voltarTelaEntradaitem", "entradaitem");
+		sessao.setAttribute("entradaitemPaiId", paiId);
+		sessao.setAttribute("entradaitemId", entradaItemId);
 		
-		System.out.println("novoproduto");
 		return "redirect:/produto/cadastro";
 		
 	}

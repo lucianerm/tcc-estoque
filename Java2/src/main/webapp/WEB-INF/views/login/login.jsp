@@ -14,6 +14,8 @@
     <meta name="author" content="">
 
     <title>Gestor Estoque</title>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/logo.png" />
 
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">

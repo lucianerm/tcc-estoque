@@ -2,6 +2,8 @@ package com.luciianester.gestorestoque.controles;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +36,31 @@ public class ProdutoControle extends ControleGenerico<Produto>{
 	@Override
 	public RecursoGenerico<Produto> novoRecurso() {
 		return new ProdutoRecurso(new DAO());
+	}
+	
+	@RequestMapping("/voltar")
+	public String voltarProduto(HttpSession sessao) {
+		
+		String redirecionar = "/entrada/1/entradaitem/1";
+		
+		try {
+			if ("entradaitem".equals(sessao.getAttribute("voltarTelaEntradaitem"))) {
+				Long entradaId = Long.valueOf(""+sessao.getAttribute("entradaitemPaiId"));
+				Long entradaItemId = Long.valueOf(""+sessao.getAttribute("entradaitemId"));
+				
+				redirecionar = "/entrada/"+entradaId+"/entradaitem";
+				if (entradaItemId>0) {
+					redirecionar += "/"+entradaItemId;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		sessao.setAttribute("voltarTela", null);
+		
+		return "redirect:"+redirecionar;
+		
 	}
 	
 	@Override

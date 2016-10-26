@@ -13,6 +13,8 @@
     <meta name="author" content="">
 
     <title>Gestor Estoque</title>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/logo.png" />
 
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -33,20 +35,27 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    	
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
+        	
+    		<div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <div>
                 <a class="navbar-brand" href="/GestorEstoque">Gestor Estoque</a>
+                <img src="${pageContext.request.contextPath}/resources/img/logo.png" style="width:50px;height:50px;" />
+                </div>
+                
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                	
                     <li>
                         <a href="#"> ${usuario.nome}</a>
                     </li>

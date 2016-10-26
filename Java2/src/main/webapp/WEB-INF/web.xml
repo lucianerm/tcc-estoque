@@ -5,7 +5,7 @@
          version="2.5">
 
     <display-name>Spring MVC Static Resources</display-name>
-
+	
     <!-- For web context -->
     <servlet>
         <servlet-name>gestor-dispatcher</servlet-name>
