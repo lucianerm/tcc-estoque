@@ -46,10 +46,10 @@ public class SaidaControle extends ControleGenerico<Saida>{
 	}
 	
 	@RequestMapping("/novocliente/{saidaId}")
-	public String novaCategoria(@PathVariable("saidaId") Long entradaId, HttpSession sessao) {
+	public String novaCategoria(@PathVariable("saidaId") Long saidaId, HttpSession sessao) {
 		
 		sessao.setAttribute("voltarTelaSaida", "pessoa");
-		sessao.setAttribute("pessoaSaidaIdId", entradaId);
+		sessao.setAttribute("pessoaSaidaId", saidaId);
 		
 		return "redirect:/pessoa/cadastro";
 		

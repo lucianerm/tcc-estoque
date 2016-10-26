@@ -1,6 +1,17 @@
+<%@page import="com.luciianester.gestorestoque.enums.PessoaTipo"%>
+<%@page import="com.luciianester.gestorestoque.entidades.Pessoa"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%
+		
+	Pessoa pessoa = (Pessoa) request.getAttribute("objeto");
+	String mascara = "00.000.000/0000-00";
+	if (pessoa.getTipo().equals(PessoaTipo.FISICA)) {
+		mascara = "000.000.000-00";
+	}
+	
+%>
 
 <%@include file="../../base/top.jsp" %>
 
@@ -33,7 +44,7 @@
 		<br/>
 		<label>Tipo:</label>
 		<br/>
-		<select name="tipo" class="cmbTipo js-example-basic-single js-states form-control">
+		<select name="tipo" onchange="onChangeTipo(this);" class="cmbTipo js-example-basic-single js-states form-control">
 			<c:forEach items="${tipos}" var="item">
 				<option value="${item}" ${item == objeto.tipo ? 'selected' : ''}>${item.nome}</option>
 			</c:forEach>	
@@ -42,7 +53,7 @@
 		<br/>
 		<label>CPF/CNPJ:</label>
 		<br/>
-		<form:input path="cpfoucnpj" size="15" class="txtCpf" data-mask="000.000.000-00" data-mask-reverse="true"/>
+		<form:input path="cpfoucnpj" size="15" class="txtCpf" data-mask="${mascara}" data-mask-reverse="true"/>
 		<br/>
 		<br/>
 		
@@ -51,7 +62,10 @@
 			<jsp:param name="objetoId" value="${objeto.pessoaId}"/>
 		</jsp:include>
 		<c:if test="${!empty voltarTelaSaida}">
-			<td><a href="<c:url value='/pessoa/voltar'/>" class="btn btn-default" >Voltar Saída</a></td>
+			<td><a href="<c:url value='/pessoa/voltarsaida'/>" class="btn btn-default" >Voltar Saída</a></td>
+		</c:if>
+		<c:if test="${!empty voltarTelaEntrada}">
+			<td><a href="<c:url value='/pessoa/voltarentrada'/>" class="btn btn-default" >Voltar Entrada</a></td>
 		</c:if>
 		
 	</form:form>
@@ -69,6 +83,16 @@
 
 <script type="text/javascript">
 
+	function onChangeTipo(sel) {
+		
+		if (sel.value=='FISICA') {
+			$('.txtCpf').mask('000.000.000-00', {reverse: true});
+		} else {
+			$('.txtCpf').mask('00.000.000/0000-00', {reverse: true});
+		}
+		
+	}
+
 	$(document).ready(function() {
 		
 		$(".cmbTipo").select2({
@@ -76,5 +100,6 @@
 		});
 		
 	});
+	
 
 </script>

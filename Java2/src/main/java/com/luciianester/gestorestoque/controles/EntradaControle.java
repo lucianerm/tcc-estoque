@@ -2,7 +2,10 @@ package com.luciianester.gestorestoque.controles;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.luciianester.gestorestoque.base.ControleGenerico;
@@ -42,4 +45,14 @@ public class EntradaControle extends ControleGenerico<Entrada>{
 		this.addAtributo("totalEntrada", ((EntradaRecurso)recurso).calcularTotal(id));
 	}
 
+	@RequestMapping("/novofornecedor/{entradaId}")
+	public String novaCategoria(@PathVariable("entradaId") Long entradaId, HttpSession sessao) {
+		
+		sessao.setAttribute("voltarTelaEntrada", "pessoa");
+		sessao.setAttribute("pessoaEntradaId", entradaId);
+		
+		return "redirect:/pessoa/cadastro";
+		
+	}
+	
 }

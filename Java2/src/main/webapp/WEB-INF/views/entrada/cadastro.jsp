@@ -1,7 +1,16 @@
+<%@page import="com.luciianester.gestorestoque.entidades.Entrada"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
+<%
+	
+	Entrada entrada = (Entrada) request.getAttribute("objeto");
+	String acaoNovoFornecedor = "/entrada/novofornecedor/"+entrada.getEntradaId();
+	if (entrada.getEntradaId()==null) {
+		acaoNovoFornecedor = "/entrada/novofornecedor/0";
+	}
+	
+%>
 <%@include file="../../base/top.jsp" %>
 
 <div class="panel panel-default">
@@ -44,7 +53,7 @@
 				<option value="${item.pessoaId}" ${item.pessoaId == objeto.fornecedor.pessoaId ? 'selected' : ''}>${item.pessoaId} - ${item.nome}</option>
 			</c:forEach>	
 		</select>
-		<a href="<c:url value='/produto/cadastro'/>" class="btn btn-primary" >Novo Fornecedor</a>
+		<a href="<c:url value='<%= acaoNovoFornecedor%>'/>" class="btn btn-primary" >Novo Fornecedor</a>
 		<br/>
 		<br/>
 		

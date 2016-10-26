@@ -40,14 +40,14 @@ public class PessoaControle extends ControleGenerico<Pessoa> {
 		this.setTipos();
 	}
 	
-	@RequestMapping("/voltar")
-	public String voltarProduto(HttpSession sessao) {
+	@RequestMapping("/voltarsaida")
+	public String voltarSaida(HttpSession sessao) {
 		
 		String redirecionar = "";
 		
 		try {
 			if ("pessoa".equals(sessao.getAttribute("voltarTelaSaida"))) {
-				Long saidaId = Long.valueOf(""+sessao.getAttribute("pessoaSaidaIdId"));
+				Long saidaId = Long.valueOf(""+sessao.getAttribute("pessoaSaidaId"));
 				
 				
 				if (saidaId>0) {
@@ -62,6 +62,33 @@ public class PessoaControle extends ControleGenerico<Pessoa> {
 		}
 		
 		sessao.setAttribute("voltarTelaSaida", null);
+		
+		return "redirect:"+redirecionar;
+		
+	}
+	
+	@RequestMapping("/voltarentrada")
+	public String voltarEntrada(HttpSession sessao) {
+		
+		String redirecionar = "";
+		
+		try {
+			if ("pessoa".equals(sessao.getAttribute("voltarTelaEntrada"))) {
+				Long entradaId = Long.valueOf(""+sessao.getAttribute("pessoaEntradaId"));
+				
+				
+				if (entradaId>0) {
+					redirecionar = "/entrada/"+entradaId;
+				} else {
+					redirecionar = "/entrada/cadastro";
+				}
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		sessao.setAttribute("voltarTelaEntrada", null);
 		
 		return "redirect:"+redirecionar;
 		
