@@ -18,7 +18,9 @@
 		
 			<br/>
 			<label>Data:</label>
-			<form:input path="data" data-mask="00/00/0000" />
+			<form:input path="data" data-mask="00/00/0000" /> <form:checkbox path="filtraSaldoMinimo" /> Filtrar por Saldo Mínimo
+			<br/>
+			<br/>
 			<input type="submit" value="Pesquisar" class="btn btn-success" />
 		
 		</div>
@@ -40,6 +42,7 @@
 					<th width="80">UM</th>
 					<th width="80">Entradas</th>
 					<th width="80">Saidas</th>
+					<th width="80">Saldo Mínimo</th>
 					<th width="80">Saldo</th>
 				</tr>
 				<c:forEach items="${objeto.listaProdutos}" var="item">
@@ -49,6 +52,7 @@
 						<td>${item.sigla}</td>
 						<td>${item.entradas}</td>
 						<td>${item.saidas}</td>
+						<td>${item.saldoMinimo}</td>
 						<td>${item.saldo}</td>
 					</tr>
 				</c:forEach>

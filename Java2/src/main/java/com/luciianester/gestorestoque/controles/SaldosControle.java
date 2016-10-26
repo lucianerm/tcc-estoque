@@ -74,6 +74,7 @@ public class SaldosControle {
 						saldo = new Saldo();
 						saldo.setProdutoId(entradaItem.getProduto().getProdutoId());
 						saldo.setDescricao(entradaItem.getProduto().getDescricao());
+						saldo.setSaldoMinimo(entradaItem.getProduto().getSaldoMinimo());
 						saldo.setEntradas(BigDecimal.ZERO);
 						saldo.setSaidas(BigDecimal.ZERO);
 						saldo.setSaldo(BigDecimal.ZERO);

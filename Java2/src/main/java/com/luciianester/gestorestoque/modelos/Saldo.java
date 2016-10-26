@@ -9,6 +9,7 @@ public class Saldo {
 	private String sigla;
 	private BigDecimal entradas;
 	private BigDecimal saidas;
+	private BigDecimal saldoMinimo;
 	private BigDecimal saldo;
 	public Long getProdutoId() {
 		return produtoId;
@@ -45,6 +46,12 @@ public class Saldo {
 	}
 	public void setEntradas(BigDecimal entradas) {
 		this.entradas = entradas;
+	}
+	public BigDecimal getSaldoMinimo() {
+		return saldoMinimo;
+	}
+	public void setSaldoMinimo(BigDecimal saldoMinimo) {
+		this.saldoMinimo = saldoMinimo;
 	}
 	
 }
