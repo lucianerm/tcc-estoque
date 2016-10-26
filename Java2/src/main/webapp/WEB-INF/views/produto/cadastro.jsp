@@ -5,6 +5,12 @@
 <%
 	
 	Produto produto = (Produto) request.getAttribute("objeto");
+	String acaoNovaMarca = "/produto/novamarca/"+produto.getProdutoId();
+	String acaoNovaCategoria = "/produto/novacategoria/"+produto.getProdutoId();
+	if (produto.getProdutoId()==null) {
+		acaoNovaMarca = "/produto/novamarca/0";
+		acaoNovaCategoria = "/produto/novacategoria/0";
+	}
 	
 %>
 <%@include file="../../base/top.jsp" %>
@@ -60,7 +66,7 @@
 				<option value="${item.marcaId}" ${item.marcaId == objeto.marca.marcaId ? 'selected' : ''}>${item.marcaId} - ${item.descricao}</option>
 			</c:forEach>	
 		</select>
-		<a href="<c:url value='/produto/cadastro'/>" class="btn btn-primary" >Nova Marca</a>
+		<a href="<c:url value='<%= acaoNovaMarca%>'/>" class="btn btn-primary" >Nova Marca</a>
 		<br/>
 		<br/>
 		<label>Categoria:</label>
@@ -71,7 +77,7 @@
 				<option value="${item.categoriaId}" ${item.categoriaId == objeto.categoria.categoriaId ? 'selected' : ''}>${item.categoriaId} - ${item.descricao}</option>
 			</c:forEach>	
 		</select>
-		<a href="<c:url value='/produto/cadastro'/>" class="btn btn-primary" >Nova Categoria</a>
+		<a href="<c:url value='<%= acaoNovaCategoria%>'/>" class="btn btn-primary" >Nova Categoria</a>
 		<br/>
 		<br/>
 		

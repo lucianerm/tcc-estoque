@@ -57,7 +57,7 @@ public class ProdutoControle extends ControleGenerico<Produto>{
 			e.printStackTrace();
 		}
 		
-		sessao.setAttribute("voltarTela", null);
+		sessao.setAttribute("voltarTelaEntradaitem", null);
 		
 		return "redirect:"+redirecionar;
 		
@@ -99,6 +99,26 @@ public class ProdutoControle extends ControleGenerico<Produto>{
 		
 		return new EntradaItemRecurso(this.criaRecurso().getDao()).listarPeloProduto(id);
 		 	
+	}
+	
+	@RequestMapping("/novamarca/{produtoId}")
+	public String novaMarca(@PathVariable("produtoId") Long produtoId, HttpSession sessao) {
+		
+		sessao.setAttribute("voltarTelaProduto", "marca");
+		sessao.setAttribute("marcaProdutoId", produtoId);
+		
+		return "redirect:/marca/cadastro";
+		
+	}
+	
+	@RequestMapping("/novacategoria/{produtoId}")
+	public String novaCategoria(@PathVariable("produtoId") Long produtoId, HttpSession sessao) {
+		
+		sessao.setAttribute("voltarTelaProduto", "categoria");
+		sessao.setAttribute("categoriaProdutoId", produtoId);
+		
+		return "redirect:/categoria/cadastro";
+		
 	}
 
 }

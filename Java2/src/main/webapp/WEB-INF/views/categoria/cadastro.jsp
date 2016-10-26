@@ -18,7 +18,7 @@
 	
 		<%@include file="../../base/mensagem.jsp" %>
 		
-		<form:form action="gravar" commandName="objeto" autocomplete="off">
+		<form:form action="gravar2" commandName="objeto" autocomplete="off">
 			
 			<br/>
 			<label>Código:</label>
