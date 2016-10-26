@@ -99,6 +99,12 @@
 			placeholder: "Selecione um Tipo"
 		});
 		
+		if ($(".cmbTipo").val()=='FISICA') {
+			$('.txtCpf').mask('000.000.000-00', {reverse: true});
+		} else {
+			$('.txtCpf').mask('00.000.000/0000-00', {reverse: true});
+		}
+		
 	});
 	
 
