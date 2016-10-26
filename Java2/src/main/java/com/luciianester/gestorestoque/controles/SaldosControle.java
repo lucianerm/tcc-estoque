@@ -115,7 +115,13 @@ public class SaldosControle {
 			for (Map.Entry<Long, Saldo> entry : mapSaldos.entrySet()) {
 				Saldo saldo = entry.getValue();
 				saldo.setSaldo(saldo.getEntradas().subtract(saldo.getSaidas()));
-				produtos.add(saldo);
+				if (saldos.getFiltraSaldoMinimo()) {
+					if (saldo.getSaldoMinimo()!=null && saldo.getSaldoMinimo().compareTo(saldo.getSaldo())>0) {
+						produtos.add(saldo);
+					}
+				} else {
+					produtos.add(saldo);
+				}
 			}
 			saldos.setListaProdutos(produtos);
 			
