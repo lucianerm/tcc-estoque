@@ -98,7 +98,9 @@
 				<th width="200">Produto</th>
 				<th width="80">Quantidade</th>
 				<th width="80">UM</th>
-				<th width="100">Ações</th>
+				<th width="80">Unitário</th>
+				<th width="80">Total</th>
+				<th width="150">Ações</th>
 			</tr>
 			<c:forEach items="${lista}" var="item">
 				<tr>

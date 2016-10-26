@@ -9,7 +9,7 @@
 	
 	<div class="panel-heading">
 		<ol class="breadcrumb">
-			<li class="active panel-title" >Pesquisa Saldos</li>
+			<li class="active panel-title" >Histórico de Entradas</li>
 		</ol>
 	</div>
   

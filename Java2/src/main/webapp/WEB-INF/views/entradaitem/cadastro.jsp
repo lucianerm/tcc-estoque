@@ -101,7 +101,7 @@
 				<th width="150">Produto</th>
 				<th width="70">Quantidade</th>
 				<th width="50">UM</th>
-				<th width="70">Valor</th>
+				<th width="70">Unitário</th>
 				<th width="70">Imposto</th>
 				<th width="70">Total</th>
 				<th width="150">Ações</th>
