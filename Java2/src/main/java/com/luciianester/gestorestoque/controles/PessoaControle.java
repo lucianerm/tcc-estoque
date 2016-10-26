@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -36,6 +38,33 @@ public class PessoaControle extends ControleGenerico<Pessoa> {
 	public void pesquisar(RecursoGenerico<Pessoa> recurso) throws Exception {
 		super.pesquisar(recurso);
 		this.setTipos();
+	}
+	
+	@RequestMapping("/voltar")
+	public String voltarProduto(HttpSession sessao) {
+		
+		String redirecionar = "";
+		
+		try {
+			if ("pessoa".equals(sessao.getAttribute("voltarTelaSaida"))) {
+				Long saidaId = Long.valueOf(""+sessao.getAttribute("pessoaSaidaIdId"));
+				
+				
+				if (saidaId>0) {
+					redirecionar = "/saida/"+saidaId;
+				} else {
+					redirecionar = "/saida/cadastro";
+				}
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		sessao.setAttribute("voltarTelaSaida", null);
+		
+		return "redirect:"+redirecionar;
+		
 	}
 	
 }

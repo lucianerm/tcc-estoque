@@ -1,6 +1,16 @@
+<%@page import="com.luciianester.gestorestoque.entidades.Saida"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%
+	
+	Saida saida = (Saida) request.getAttribute("objeto");
+	String acaoNovoCliente = "/saida/novocliente/"+saida.getSaidaId();
+	if (saida.getSaidaId()==null) {
+		acaoNovoCliente = "/saida/novocliente/0";
+	}
+	
+%>
 
 <%@include file="../../base/top.jsp" %>
 
@@ -39,7 +49,7 @@
 				<option value="${item.pessoaId}" ${item.pessoaId == objeto.cliente.pessoaId ? 'selected' : ''}>${item.pessoaId} - ${item.nome}</option>
 			</c:forEach>	
 		</select>
-		<a href="<c:url value='/produto/cadastro'/>" class="btn btn-primary" >Novo Cliente</a>
+		<a href="<c:url value='<%= acaoNovoCliente%>'/>" class="btn btn-primary" >Novo Cliente</a>
 		<br/>
 		<br/>
 		

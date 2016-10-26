@@ -50,6 +50,9 @@
 			<jsp:param name="caminho" value="pessoa"/>
 			<jsp:param name="objetoId" value="${objeto.pessoaId}"/>
 		</jsp:include>
+		<c:if test="${!empty voltarTelaSaida}">
+			<td><a href="<c:url value='/pessoa/voltar'/>" class="btn btn-default" >Voltar Saída</a></td>
+		</c:if>
 		
 	</form:form>
 

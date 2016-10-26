@@ -2,7 +2,10 @@ package com.luciianester.gestorestoque.controles;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.luciianester.gestorestoque.base.ControleGenerico;
@@ -40,6 +43,16 @@ public class SaidaControle extends ControleGenerico<Saida>{
 	public void editar(RecursoGenerico<Saida> recurso, Long id) throws Exception {
 		super.editar(recurso, id);
 		this.addAtributo("totalSaida", ((SaidaRecurso)recurso).calcularTotal(id));
+	}
+	
+	@RequestMapping("/novocliente/{saidaId}")
+	public String novaCategoria(@PathVariable("saidaId") Long entradaId, HttpSession sessao) {
+		
+		sessao.setAttribute("voltarTelaSaida", "pessoa");
+		sessao.setAttribute("pessoaSaidaIdId", entradaId);
+		
+		return "redirect:/pessoa/cadastro";
+		
 	}
 	
 }
